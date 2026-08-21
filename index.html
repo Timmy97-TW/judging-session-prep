@@ -200,34 +200,65 @@ section{margin-top:var(--s7);scroll-margin-top:var(--s5)}
 .qnote{margin-top:var(--s3);padding:8px 11px;border-left:2px solid var(--rule-2);font-size:12.2px;color:var(--ink-3);background:var(--surface-2);border-radius:0 var(--radius) var(--radius) 0}
 
 /* wall / todo / contradictions / practice */
-.wallfig{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden}
-@media(max-width:860px){.wallfig{grid-template-columns:1fr}}
-.wall-pane{background:var(--surface);padding:var(--s4) var(--s4) var(--s3)}
-.wall-pane.cross{background:var(--surface)}
-.wall-pane .wl{font-family:var(--mono);font-size:9.6px;letter-spacing:.11em;text-transform:uppercase;font-weight:600;color:var(--ink-2)}
-.wall-pane .ws{font-size:12.4px;color:var(--ink-3);margin:3px 0 var(--s3);max-width:46ch}
-.wall-pane svg{width:100%;height:auto;display:block}
-.wallstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-top:none;border-radius:0 0 var(--radius) var(--radius);overflow:hidden}
+.wallcard{border:1px solid var(--rule);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+.w-bar{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--s4);align-items:center;padding:var(--s3) var(--s4);border-bottom:1px solid var(--rule);background:var(--surface-2)}
+@media(max-width:860px){.w-bar{grid-template-columns:1fr;gap:var(--s2)}}
+.w-steps{display:flex;gap:2px;background:var(--surface);border:1px solid var(--rule);border-radius:99px;padding:2px;flex:0 0 auto}
+.w-step{display:flex;align-items:center;gap:6px;padding:5px 13px;border-radius:99px;font-size:12.2px;color:var(--ink-3);white-space:nowrap;transition:background var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out)}
+.w-step .n{font-family:var(--mono);font-size:9px;font-weight:600;width:15px;height:15px;border-radius:99px;border:1px solid currentColor;display:flex;align-items:center;justify-content:center}
+.w-step:hover{color:var(--ink)}
+.w-step[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.w-cap{font-size:12.8px;color:var(--ink-2);max-width:74ch}
+.w-fig{padding:var(--s4) var(--s4) var(--s3)}
+.w-fig svg{width:100%;height:auto;display:block;overflow:visible}
+
+.w-chain,.w-mind,.w-wall,.w-task{transition:opacity .45s var(--ease-out),transform .5s var(--ease-out)}
+.w-col{transform-box:fill-box;transform-origin:50% 100%;transition:transform .55s var(--ease-out),opacity .4s var(--ease-out)}
+.w-base,.w-hit,.w-hitn,.w-mid{transition:opacity .35s var(--ease-out)}
+.w-hit,.w-hitn{opacity:0}
+.w-band{transition:opacity .4s var(--ease-out)}
+
+.step1 .w-chain{opacity:0}
+.step1 .w-mind{opacity:0;pointer-events:none}
+.step1 .w-col{transform:scaleY(.04)}
+.step1 .w-base,.step1 .w-mid{opacity:0}
+.step2 .w-wall,.step3 .w-wall{opacity:0;transform:translateY(16px)}
+.step2 .w-task,.step3 .w-task{opacity:0;transform:translateY(10px)}
+.step1 .w-wall,.step1 .w-task{opacity:1}
+.step3 .w-hit,.step3 .w-hitn{opacity:1}
+.step3 .w-base{opacity:.2}
+.step3 .w-base.has{opacity:0}
+.step3 .w-band{opacity:.55}
+
+.w-mind{cursor:pointer}
+.w-mind.off{opacity:.3}
+.w-mind.on .w-col{stroke-width:2.4}
+
+.w-legend{display:flex;flex-wrap:wrap;gap:var(--s1);align-items:center;padding:0 var(--s4) var(--s3);transition:opacity .4s var(--ease-out)}
+.step1 .w-legend{opacity:.32;pointer-events:none}
+.w-leg{display:flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:99px;padding:3px 11px 3px 8px;font-size:11.6px;color:var(--ink-2);transition:border-color var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out),background var(--dur-fast) var(--ease-out)}
+.w-leg i{width:8px;height:8px;border-radius:2px;flex:0 0 auto}
+.w-leg b{font-family:var(--mono);font-size:9.4px;font-weight:600}
+.w-leg:hover,.w-leg.on{color:var(--ink);border-color:var(--rule-2);background:var(--surface-2)}
+.w-leghint{font-size:11px;color:var(--ink-3);margin-left:auto}
+@media(max-width:860px){.w-leghint{margin-left:0;width:100%}}
+
+.w-qrow{display:flex;flex-wrap:wrap;gap:var(--s1);align-items:center;padding:var(--s3) var(--s4);border-top:1px solid var(--rule);background:var(--surface-2);max-height:0;opacity:0;overflow:hidden;padding-top:0;padding-bottom:0;border-top-color:transparent;transition:max-height .4s var(--ease-out),opacity .3s var(--ease-out),padding .4s var(--ease-out)}
+.step3 .w-qrow{max-height:520px;opacity:1;padding-top:var(--s3);padding-bottom:var(--s3);border-top-color:var(--rule)}
+.w-qlbl{font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin-right:var(--s1)}
+.w-q{border:1px solid var(--rule);background:var(--surface);border-radius:99px;padding:4px 11px;font-size:11.6px;color:var(--ink-2);max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:background var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out)}
+.w-q b{font-family:var(--mono);font-size:9.2px;font-weight:600;color:var(--ink-3)}
+.w-q:hover{border-color:var(--rule-2);color:var(--ink)}
+.w-q[aria-pressed="true"]{background:var(--mark);border-color:var(--mark-line);color:var(--ink)}
+.w-q[aria-pressed="true"] b{color:var(--mark-line)}
+.w-read{width:100%;font-family:var(--mono);font-size:11px;color:var(--ink-2);margin-top:var(--s1);font-variant-numeric:tabular-nums}
+.w-read b{color:var(--mark-line);font-weight:600}
+
+.wallstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border-top:1px solid var(--rule)}
 @media(max-width:640px){.wallstats{grid-template-columns:1fr}}
 .wstat{background:var(--surface);padding:var(--s3) var(--s4)}
-.wstat .v{font-family:var(--mono);font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
-.wstat .l{font-size:11.8px;color:var(--ink-3);margin-top:5px;line-height:1.35}
-.wallex{margin-top:var(--s4);border:1px solid var(--rule);border-radius:var(--radius);background:var(--surface);overflow:hidden}
-.wx-head{padding:var(--s3) var(--s4);border-bottom:1px solid var(--rule);background:var(--surface-2)}
-.wx-head h4{font-size:16px}
-.wx-head p{font-size:12.2px;color:var(--ink-3);margin-top:2px}
-.wx-rows{display:flex;flex-direction:column}
-.wx-row{display:grid;grid-template-columns:44px minmax(0,1fr) auto auto;gap:var(--s3);align-items:center;
-  padding:9px var(--s4);border-bottom:1px solid var(--rule);width:100%;transition:background var(--dur-fast) var(--ease-out)}
-.wx-row:last-child{border-bottom:none}
-.wx-row:hover{background:var(--surface-2)}
-@media(max-width:720px){.wx-row{grid-template-columns:44px minmax(0,1fr);row-gap:6px}.wx-row .wx-needs{display:none}.wx-row .wx-set{grid-column:2/-1}}
-.wx-id{font-family:var(--mono);font-size:9.4px;font-weight:600;letter-spacing:.06em;color:var(--mark-line)}
-.wx-q{font-size:13.2px;color:var(--ink)}
-.wx-needs{font-family:var(--mono);font-size:8.6px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
-.wx-set{display:flex;gap:4px;flex-wrap:wrap}
-.wx-m{font-family:var(--mono);font-size:9.4px;letter-spacing:.04em;border-radius:99px;padding:2px 8px}
-.wx-m b{font-weight:600}
+.wstat .v{font-family:var(--mono);font-size:25px;font-weight:600;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
+.wstat .l{font-size:11.6px;color:var(--ink-3);margin-top:5px;line-height:1.35}
 
 .todolist{border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
 .todo{display:grid;grid-template-columns:56px 132px minmax(0,1fr) 186px;border-bottom:1px solid var(--rule);align-items:stretch}
@@ -338,9 +369,16 @@ footer{margin-top:var(--s8);padding-top:var(--s4);border-top:1px solid var(--rul
 
   <section id="sec-wall">
     <div class="sechead"><h2 id="tWallH"></h2><p id="tWallP"></p></div>
-    <div class="wallfig" id="wallFig"></div>
-    <div class="wallstats" id="wallStats"></div>
-    <div class="wallex" id="wallEx"></div>
+    <div class="wallcard step1" id="wallCard">
+      <div class="w-bar">
+        <div class="w-steps" id="wallSteps" role="group"></div>
+        <p class="w-cap" id="wallCap"></p>
+      </div>
+      <div class="w-fig" id="wallFig"></div>
+      <div class="w-legend" id="wallLegend"></div>
+      <div class="w-qrow" id="wallQrow"></div>
+      <div class="wallstats" id="wallStats"></div>
+    </div>
   </section>
 
   <section id="sec-board">
@@ -1177,15 +1215,24 @@ var UI={
  ],
  wallH:t("The walls have to come down","牆必須拆掉"),
  wallP:t("Subteams are how the work gets scheduled. They are not how the project gets judged. A judge walks the system from stress to plant to device to market, and every question they ask cuts straight through all three subteams at once.","子團隊是安排工作的方式，不是專案被評分的方式。評審沿著系統從逆境走到植物、走到裝置、走到市場，而他們問的每一個問題，都會一刀切過三個子團隊。"),
- wallOld:t("How the work is organised","工作是這樣安排的"),
- wallOldSub:t("Three horizontal bands. A task is assigned inside one band and stops at its edge.","三條橫向帶。任務在一條帶裡被指派，到邊界就停住。"),
- wallNew:t("How the work is judged","評分是這樣進行的"),
- wallNewSub:t("Five vertical minds. The number in each cell is how many entries that mind carries from that subteam.","五顆縱向的腦袋。每一格裡的數字，是那顆腦袋要從該子團隊扛的項目數。"),
- wallChain:t("stress → molecule → cell → device → world","逆境 → 分子 → 細胞 → 裝置 → 世界"),
- wallBlocked:t("stops here","到此為止"),
- wallExH:t("One question, three minds","一題，三顆腦袋"),
- wallExP:t("Each judging question already cuts across the bands. These three show the shape.","每一道評審問題本來就切過那幾條帶。以下三題顯示了它的形狀。"),
- wallExNeeds:t("needs","需要"),
+ wSteps:[
+  {n:t("How it is scheduled","工作如何排程"),
+   cap:t("Three subteam bands with a wall between each one. A task is assigned inside a band and stops at its edge.","三條子團隊帶，每兩條之間有一道牆。任務在一條帶裡被指派，到邊界就停住。")},
+  {n:t("How it is judged","專案如何被評"),
+   cap:t("The walls are gone. Five minds run top to bottom, and the number in each cell is how many entries that mind carries from that subteam.","牆不見了。五顆腦袋由上貫穿到下，每一格的數字是那顆腦袋要從該子團隊扛的項目數。")},
+  {n:t("One question","一道問題"),
+   cap:t("Pick a judge question. The cells that answer it light up, and they never sit inside a single band.","選一道評審問題。回答它的格子會亮起來，而它們從來不會只落在同一條帶裡。")}
+ ],
+ wChain:t("stress → molecule → cell → device → world","逆境 → 分子 → 細胞 → 裝置 → 世界"),
+ wTask:t("ONE TASK","一件任務"),
+ wStops:t("stops here","到此為止"),
+ wLegend:t("Hover a mind to trace its column. Click to open its dossier.","滑過一顆腦袋可追蹤它的直欄，點擊可打開檔案。"),
+ wPickQ:t("Pick a question","選一道問題"),
+ wReadA:t("lights","亮起"),
+ wReadB:t("entries in","個項目，落在"),
+ wReadC:t("cells, across","格中，橫跨"),
+ wReadD:t("bands and","條帶與"),
+ wReadE:t("minds","顆腦袋"),
  wallStat1:t("entries on this board","這張板子上的項目"),
  wallStat2:t("of the five minds draw on all three subteams","顆腦袋同時取用三個子團隊"),
  wallStat3:t("named stakeholders whose advice changed a design","改變過設計的具名利害關係人"),
@@ -1285,97 +1332,141 @@ function renderStatic(){
   renderWall();
 }
 
-/* ── the crossing diagram ── */
-function renderWall(){
-  var host=document.getElementById("wallFig"); host.innerHTML="";
-  var rowNames=[T(UI.rowHP.n),T(UI.rowWet.n),T(UI.rowDry.n)];
-  var rowKeys=["hp","wet","dry"];
-  var W=620,H=214,padL=112,padR=12,padT=40,band=(H-padT-16)/3, colW=(W-padL-padR)/5;
+/* ── the walls: one morphing figure, three steps ── */
+var wallStep=1, wallQ="p2", wallHoverMind=null;
+var W_QS=["p2","p4","p6","hp3","ms4","hw3"];
 
-  function frame(p){
-    for(var r=0;r<3;r++){
-      var y=padT+r*band;
-      p.push('<rect x="'+padL+'" y="'+y+'" width="'+(W-padL-padR)+'" height="'+(band-6)+'" rx="2" fill="var(--surface-2)" stroke="var(--rule)" stroke-width="1"/>');
-      p.push('<text x="'+(padL-10)+'" y="'+(y+band/2-2)+'" text-anchor="end" dominant-baseline="middle" font-family="var(--mono)" font-size="8.5" fill="var(--ink-3)">'+rowNames[r]+'</text>');
-    }
-  }
-
-  /* left: sealed bands, one task blocked at the wall */
-  var a=['<svg viewBox="0 0 '+W+' '+H+'" role="img" preserveAspectRatio="xMidYMid meet">'];
-  frame(a);
-  for(var r2=0;r2<3;r2++){
-    a.push('<rect x="'+padL+'" y="'+(padT+r2*band)+'" width="'+(W-padL-padR)+'" height="'+(band-6)+'" rx="2" fill="var(--rule)" fill-opacity="0.4"/>');
-  }
-  for(var k=1;k<3;k++){
-    var wy=padT+k*band-5.5;
-    a.push('<rect x="'+(padL-5)+'" y="'+wy+'" width="'+(W-padL-padR+10)+'" height="4" fill="var(--ink-2)"/>');
-    a.push('<text x="'+(W-padR-5)+'" y="'+(wy-4)+'" text-anchor="end" font-family="var(--mono)" font-size="7.5" fill="var(--ink-3)">'+(lang==="z"?"牆":"WALL")+'</text>');
-  }
-  var tx=padL+30, ty=padT+band+ (band-6)/2 - 8;
-  a.push('<rect x="'+tx+'" y="'+ty+'" width="112" height="17" rx="2" fill="var(--surface)" stroke="var(--ink-3)" stroke-width="1"/>');
-  a.push('<text x="'+(tx+56)+'" y="'+(ty+11.5)+'" text-anchor="middle" font-family="var(--mono)" font-size="8" fill="var(--ink-2)">'+(lang==="z"?"一件任務":"ONE TASK")+'</text>');
-  a.push('<line x1="'+(tx+56)+'" y1="'+ty+'" x2="'+(tx+56)+'" y2="'+(padT+band-1)+'" stroke="var(--danger)" stroke-width="1.4"/>');
-  a.push('<line x1="'+(tx+50)+'" y1="'+(padT+band-10)+'" x2="'+(tx+62)+'" y2="'+(padT+band+2)+'" stroke="var(--danger)" stroke-width="1.5"/>');
-  a.push('<line x1="'+(tx+62)+'" y1="'+(padT+band-10)+'" x2="'+(tx+50)+'" y2="'+(padT+band+2)+'" stroke="var(--danger)" stroke-width="1.5"/>');
-  a.push('<text x="'+(tx+72)+'" y="'+(padT+band-2)+'" font-family="var(--mono)" font-size="7.5" fill="var(--danger)">'+T(UI.wallBlocked)+'</text>');
-  a.push('</svg>');
-
-  /* right: five minds cutting through, with per-cell counts */
-  var b=['<svg viewBox="0 0 '+W+' '+H+'" role="img" preserveAspectRatio="xMidYMid meet">'];
-  frame(b);
-  b.push('<text x="'+padL+'" y="12" font-family="var(--mono)" font-size="7.6" letter-spacing="0.4" fill="var(--ink-3)">'+T(UI.wallChain)+'</text>');
-  MINDS.forEach(function(m,i){
-    var x=padL+i*colW+3, w=colW-6;
-    b.push('<rect x="'+x+'" y="'+(padT-13)+'" width="'+w+'" height="'+(H-padT-2)+'" rx="2" fill="var('+m.soft+')" fill-opacity="0.9" stroke="var('+m.v+')" stroke-width="1.2"/>');
-    b.push('<text x="'+(x+w/2)+'" y="'+(padT-18)+'" text-anchor="middle" font-family="var(--mono)" font-size="8.6" font-weight="600" fill="var('+m.v+')">'+m.n+'</text>');
-    rowKeys.forEach(function(rk,ri){
-      var cy=padT+ri*band+(band-6)/2;
-      b.push('<text x="'+(x+w/2)+'" y="'+cy+'" text-anchor="middle" dominant-baseline="middle" font-family="var(--mono)" font-size="11" font-weight="600" fill="var('+m.v+')">'+m[rk].length+'</text>');
+function wallCounts(qid){
+  var per={}, cells=0, bands={}, minds={};
+  MINDS.forEach(function(m){
+    ["hp","wet","dry"].forEach(function(rk){
+      var n=0; m[rk].forEach(function(i){ if(i.q.indexOf(qid)>=0) n++; });
+      per[m.n+"-"+rk]=n;
+      if(n){ cells++; bands[rk]=1; minds[m.n]=1; }
     });
   });
-  b.push('</svg>');
+  var total=0; Object.keys(per).forEach(function(k){total+=per[k];});
+  return {per:per,cells:cells,bands:Object.keys(bands).length,minds:Object.keys(minds).length,total:total};
+}
+
+function renderWall(){
+  var host=document.getElementById("wallFig"); if(!host) return;
+  var rowNames=[T(UI.rowHP.n),T(UI.rowWet.n),T(UI.rowDry.n)], rowKeys=["hp","wet","dry"];
+  var W=900,H=288,padL=118,padR=14,padT=48,slot=(H-padT-16)/3,bh=slot-10,colW=(W-padL-padR)/5;
+  var p=['<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+T(UI.wallH)+'" preserveAspectRatio="xMidYMid meet">'];
+
+  p.push('<text class="w-chain" x="'+padL+'" y="11" font-family="var(--mono)" font-size="9" letter-spacing="0.5" fill="var(--ink-3)">'+T(UI.wChain)+'</text>');
+
+  for(var r=0;r<3;r++){
+    var y=padT+r*slot;
+    p.push('<rect class="w-band" x="'+padL+'" y="'+y+'" width="'+(W-padL-padR)+'" height="'+bh+'" rx="3" fill="var(--surface-2)" stroke="var(--rule)"/>');
+    p.push('<text class="w-rowlab" x="'+(padL-14)+'" y="'+(y+bh/2)+'" text-anchor="end" dominant-baseline="middle" font-family="var(--mono)" font-size="10" fill="var(--ink-3)">'+rowNames[r]+'</text>');
+  }
+
+  /* walls, task, block marker: step 1 */
+  for(var k=1;k<3;k++){
+    var wy=padT+k*slot-9;
+    p.push('<rect class="w-wall" x="'+(padL-6)+'" y="'+wy+'" width="'+(W-padL-padR+12)+'" height="5" rx="1" fill="var(--ink-2)"/>');
+    p.push('<text class="w-wall w-walltx" x="'+(W-padR-6)+'" y="'+(wy-5)+'" text-anchor="end" font-family="var(--mono)" font-size="8.5" fill="var(--ink-3)">'+(lang==="z"?"牆":"WALL")+'</text>');
+  }
+  var tx=padL+40, ty=padT+slot+bh/2-11;
+  p.push('<g class="w-task">');
+  p.push('<rect x="'+tx+'" y="'+ty+'" width="132" height="22" rx="3" fill="var(--surface)" stroke="var(--ink-3)"/>');
+  p.push('<text x="'+(tx+66)+'" y="'+(ty+14.5)+'" text-anchor="middle" font-family="var(--mono)" font-size="9" fill="var(--ink-2)">'+T(UI.wTask)+'</text>');
+  p.push('<line x1="'+(tx+66)+'" y1="'+ty+'" x2="'+(tx+66)+'" y2="'+(padT+slot-2)+'" stroke="var(--danger)" stroke-width="1.6"/>');
+  p.push('<line x1="'+(tx+58)+'" y1="'+(padT+slot-13)+'" x2="'+(tx+74)+'" y2="'+(padT+slot+1)+'" stroke="var(--danger)" stroke-width="1.8"/>');
+  p.push('<line x1="'+(tx+74)+'" y1="'+(padT+slot-13)+'" x2="'+(tx+58)+'" y2="'+(padT+slot+1)+'" stroke="var(--danger)" stroke-width="1.8"/>');
+  p.push('<text x="'+(tx+90)+'" y="'+(padT+slot-14)+'" font-family="var(--mono)" font-size="8.5" fill="var(--danger)">'+T(UI.wStops)+'</text>');
+  p.push('</g>');
+
+  /* mind columns: step 2 and 3 */
+  var q=wallCounts(wallQ);
+  MINDS.forEach(function(m,i){
+    var x=padL+i*colW+4, w=colW-8;
+    p.push('<g class="w-mind" data-mind="'+m.n+'" style="transition-delay:'+(i*55)+'ms">');
+    p.push('<rect class="w-col" x="'+x+'" y="'+(padT-16)+'" width="'+w+'" height="'+(H-padT+2)+'" rx="3" fill="var('+m.soft+')" stroke="var('+m.v+')" stroke-width="1.3"/>');
+    p.push('<text class="w-mid" x="'+(x+w/2)+'" y="'+(padT-22)+'" text-anchor="middle" font-family="var(--mono)" font-size="10" font-weight="600" fill="var('+m.v+')">'+m.n+'</text>');
+    rowKeys.forEach(function(rk,ri){
+      var cy=padT+ri*slot+bh/2, hits=q.per[m.n+"-"+rk];
+      if(hits) p.push('<rect class="w-hit" x="'+(x+5)+'" y="'+(padT+ri*slot+4)+'" width="'+(w-10)+'" height="'+(bh-8)+'" rx="2" fill="var(--mark)" stroke="var(--mark-line)" stroke-width="1.2"/>');
+      p.push('<text class="w-base'+(hits?' has':'')+'" x="'+(x+w/2)+'" y="'+cy+'" text-anchor="middle" dominant-baseline="middle" font-family="var(--mono)" font-size="13" font-weight="600" fill="var('+m.v+')">'+m[rk].length+'</text>');
+      if(hits) p.push('<text class="w-hitn" x="'+(x+w/2)+'" y="'+cy+'" text-anchor="middle" dominant-baseline="middle" font-family="var(--mono)" font-size="13" font-weight="600" fill="var(--mark-line)">'+hits+'</text>');
+    });
+    p.push('</g>');
+  });
+  p.push('</svg>');
+  host.innerHTML=p.join("");
+
+  host.querySelectorAll(".w-mind").forEach(function(g){
+    g.addEventListener("mouseenter",function(){setWallHover(g.dataset.mind);});
+    g.addEventListener("mouseleave",function(){setWallHover(null);});
+  });
+
+  renderWallChrome();
+}
+
+function renderWallChrome(){
+  var card=document.getElementById("wallCard"); if(!card) return;
+  card.className="wallcard step"+wallStep;
+
+  var sw=document.getElementById("wallSteps"); sw.innerHTML="";
+  UI.wSteps.forEach(function(st,i){
+    var b=el("button","w-step",'<span class="n">'+(i+1)+'</span>'+T(st.n));
+    b.setAttribute("aria-pressed",String(wallStep===i+1));
+    b.addEventListener("click",function(){setWallStep(i+1);});
+    sw.appendChild(b);
+  });
+  document.getElementById("wallCap").textContent=T(UI.wSteps[wallStep-1].cap);
+
+  var lg=document.getElementById("wallLegend"); lg.innerHTML="";
+  MINDS.forEach(function(m){
+    var b=el("button","w-leg",'<i style="background:var('+m.v+')"></i><b>'+m.n+'</b> '+T(m.nm));
+    b.dataset.mind=m.n;
+    b.addEventListener("mouseenter",function(){setWallHover(m.n);});
+    b.addEventListener("mouseleave",function(){setWallHover(null);});
+    b.addEventListener("focus",function(){setWallHover(m.n);});
+    b.addEventListener("blur",function(){setWallHover(null);});
+    b.addEventListener("click",function(){openDossier(m);});
+    lg.appendChild(b);
+  });
+  lg.appendChild(el("span","w-leghint",T(UI.wLegend)));
+
+  var qr=document.getElementById("wallQrow"); qr.innerHTML="";
+  qr.appendChild(el("span","w-qlbl",T(UI.wPickQ)));
+  W_QS.forEach(function(id){
+    var b=el("button","w-q",'<b>'+id.toUpperCase()+'</b> '+T(QMETA[id].t));
+    b.setAttribute("aria-pressed",String(wallQ===id));
+    b.addEventListener("click",function(){ wallQ=id; renderWall(); });
+    qr.appendChild(b);
+  });
+  var c=wallCounts(wallQ);
+  qr.appendChild(el("span","w-read",
+    '<b>'+wallQ.toUpperCase()+'</b> '+T(UI.wReadA)+' '+c.total+' '+T(UI.wReadB)+' '+c.cells+' '+
+    T(UI.wReadC)+' '+c.bands+' '+T(UI.wReadD)+' '+c.minds+' '+T(UI.wReadE)));
 
   var total=0, crossing=0, people={};
   MINDS.forEach(function(m){
     var f=0;
-    rowKeys.forEach(function(r){ total+=m[r].length; if(m[r].length>0) f++; });
+    ["hp","wet","dry"].forEach(function(r){ total+=m[r].length; if(m[r].length>0) f++; });
     if(f===3) crossing++;
     m.hp.forEach(function(i){ people[T(i.k).split(" · ")[0]]=1; });
   });
-
-  host.appendChild(el("div","wall-pane",'<div class="wl">'+T(UI.wallOld)+'</div><div class="ws">'+T(UI.wallOldSub)+'</div>'+a.join("")));
-  host.appendChild(el("div","wall-pane cross",'<div class="wl">'+T(UI.wallNew)+'</div><div class="ws">'+T(UI.wallNewSub)+'</div>'+b.join("")));
-
   var st=document.getElementById("wallStats"); st.innerHTML="";
   [[total,UI.wallStat1],[crossing+" / 5",UI.wallStat2],[Object.keys(people).length,UI.wallStat3]].forEach(function(pair){
     st.appendChild(el("div","wstat",'<div class="v">'+pair[0]+'</div><div class="l">'+T(pair[1])+'</div>'));
   });
-  renderWallEx();
 }
 
-/* three worked examples, computed from the board */
-function renderWallEx(){
-  var host=document.getElementById("wallEx"); if(!host) return;
-  host.innerHTML='<div class="wx-head"><h4>'+T(UI.wallExH)+'</h4><p>'+T(UI.wallExP)+'</p></div>';
-  var picks=["p2","hp3","p4"];
-  var wrap=el("div","wx-rows");
-  picks.forEach(function(id){
-    var meta=QMETA[id], per={};
-    MINDS.forEach(function(m){
-      var n=0;
-      ["hp","wet","dry"].forEach(function(r){ m[r].forEach(function(i){ if(i.q.indexOf(id)>=0) n++; }); });
-      if(n) per[m.n]=n;
-    });
-    var chips=MINDS.filter(function(m){return per[m.n];}).map(function(m){
-      return '<span class="wx-m" style="color:var('+m.v+');background:var('+m.soft+')">'+m.n+' <b>'+per[m.n]+'</b></span>';
-    }).join("");
-    var row=el("button","wx-row",'<span class="wx-id">'+id.toUpperCase()+'</span>'+
-      '<span class="wx-q">'+T(meta.t)+'</span>'+
-      '<span class="wx-needs">'+T(UI.wallExNeeds)+'</span><span class="wx-set">'+chips+'</span>');
-    row.addEventListener("click",function(){ setQuestion(id); });
-    wrap.appendChild(row);
+function setWallStep(n){ wallStep=n; renderWallChrome(); }
+function setWallHover(id){
+  wallHoverMind=id;
+  document.querySelectorAll(".w-mind").forEach(function(g){
+    g.classList.toggle("on", !!id && g.dataset.mind===id);
+    g.classList.toggle("off", !!id && g.dataset.mind!==id);
   });
-  host.appendChild(wrap);
+  document.querySelectorAll(".w-leg").forEach(function(b){
+    b.classList.toggle("on", !!id && b.dataset.mind===id);
+  });
 }
 
 function renderRubric(){
