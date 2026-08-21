@@ -106,10 +106,9 @@ section{margin-top:var(--s7);scroll-margin-top:var(--s5)}
 .board-shell{border:1px solid var(--rule);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);display:flex;flex-direction:column;height:min(1000px,calc(100vh - 96px));min-height:520px;overflow:hidden}
 .board-shell:fullscreen{height:100vh;min-height:0;border:none;border-radius:0}
 .board-bar{display:flex;align-items:center;gap:var(--s2);flex-wrap:nowrap;padding:6px var(--s3);border-bottom:1px solid var(--rule);background:var(--surface-2);flex:0 0 auto}
-..board-bar .lbl{flex:0 0 auto}
 .board-bar .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
-.board-bar .grow{flex:1 1 auto;min-width:var(--s2)}
-.rubricwrap{flex-wrap:nowrap!important;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;padding-bottom:1px;min-width:0;flex:1 1 auto}
+.board-bar .lbl{flex:0 0 auto}
+.rubricwrap{display:flex;align-items:center;gap:4px;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;min-width:0;flex:1 1 auto;padding-bottom:1px}
 .rubricwrap::-webkit-scrollbar{height:3px}
 .rubricwrap > *{flex:0 0 auto}
 .qbanner{display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap;padding:8px var(--s3);border-bottom:1px solid var(--mark-line);background:var(--mark);flex:0 0 auto;font-size:12.6px}
@@ -148,6 +147,11 @@ section{margin-top:var(--s7);scroll-margin-top:var(--s5)}
 .b-cell:nth-child(6n+6){border-right:none}
 .b-cell.last{border-bottom:none}
 .b-cell.dim{opacity:.2}
+.b-cell.colhot{background:var(--mcs)}
+.b-head.colhot{background:var(--mcs)}
+.b-head.lead{box-shadow:inset 0 -3px 0 var(--mark-line)}
+.b-head .cnt{font-family:var(--mono);font-size:8.2px;letter-spacing:.05em;color:var(--ink-3);margin-top:4px}
+.b-head .cnt b{color:var(--ink-2);font-weight:600}
 
 .chip{position:relative;border:none;background:transparent;border-radius:var(--radius);padding:2px 6px 2px 13px;font-size:11.8px;line-height:1.32;color:var(--ink-2);flex:0 0 auto;transition:background var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out),opacity var(--dur-mid) var(--ease-out)}
 .chip::before{content:"";position:absolute;left:5px;top:.62em;width:3px;height:3px;border-radius:50%;background:var(--rule-2);transition:background var(--dur-fast) var(--ease-out)}
@@ -195,30 +199,40 @@ section{margin-top:var(--s7);scroll-margin-top:var(--s5)}
 .qbtn[aria-pressed="true"] .qid,.qbtn[aria-pressed="true"] .qn{color:var(--mark-line)}
 .qnote{margin-top:var(--s3);padding:8px 11px;border-left:2px solid var(--rule-2);font-size:12.2px;color:var(--ink-3);background:var(--surface-2);border-radius:0 var(--radius) var(--radius) 0}
 
-/* seams / gaps / contradictions / practice */
-.seams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden}
-@media(max-width:820px){.seams{grid-template-columns:1fr}}
-.seam{background:var(--surface);padding:var(--s4)}
-.seam .pair{font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;font-weight:600;display:flex;gap:6px}
-.seam .pair .a{color:var(--pa)} .seam .pair .b{color:var(--pb)} .seam .pair .j{color:var(--ink-3)}
-.seam h4{font-size:16.5px;margin-top:var(--s1)}
-.seam p{font-size:12.8px;color:var(--ink-2);margin-top:6px}
-.seam .unit{margin-top:8px;font-family:var(--mono);font-size:10.6px;color:var(--ink);background:var(--surface-2);border:1px solid var(--rule);border-radius:var(--radius);padding:5px 9px;display:inline-block;overflow-wrap:anywhere}
+/* wall / todo / contradictions / practice */
+.wallfig{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden}
+@media(max-width:860px){.wallfig{grid-template-columns:1fr}}
+.wall-pane{background:var(--surface);padding:var(--s4) var(--s4) var(--s3)}
+.wall-pane.cross{background:var(--surface)}
+.wall-pane .wl{font-family:var(--mono);font-size:9.6px;letter-spacing:.11em;text-transform:uppercase;font-weight:600;color:var(--ink-2)}
+.wall-pane .ws{font-size:12.4px;color:var(--ink-3);margin:3px 0 var(--s3);max-width:46ch}
+.wall-pane svg{width:100%;height:auto;display:block}
+.wallstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-top:none;border-radius:0 0 var(--radius) var(--radius);overflow:hidden}
+@media(max-width:640px){.wallstats{grid-template-columns:1fr}}
+.wstat{background:var(--surface);padding:var(--s3) var(--s4)}
+.wstat .v{font-family:var(--mono);font-size:26px;font-weight:600;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
+.wstat .l{font-size:11.8px;color:var(--ink-3);margin-top:5px;line-height:1.35}
+.wallclose{margin-top:var(--s4);font-size:14.2px;color:var(--ink-2);max-width:78ch;border-left:2px solid var(--accent);padding-left:var(--s3)}
 
-.gaptable{border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
-.gap{display:grid;grid-template-columns:72px minmax(0,1fr) 150px;border-bottom:1px solid var(--rule)}
-.gap:last-child{border-bottom:none}
-@media(max-width:760px){.gap{grid-template-columns:62px minmax(0,1fr)}.gap .owner{grid-column:1/-1;border-left:none;border-top:1px solid var(--rule);flex-direction:row;gap:var(--s3)}}
-.gap .sev{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.06em;border-right:1px solid var(--rule);padding:6px;text-align:center}
-.sev-critical{background:var(--danger-soft);color:var(--danger)}
-.sev-high{background:var(--warn-soft);color:var(--warn)}
-.sev-medium{background:var(--surface-2);color:var(--ink-3)}
-.gap .body{padding:var(--s3) var(--s4)}
-.gap .body h4{font-size:15.2px}
-.gap .body p{font-size:12.7px;color:var(--ink-2);margin-top:3px}
-.gap .body .ev{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:6px}
-.gap .owner{border-left:1px solid var(--rule);padding:var(--s3);display:flex;flex-direction:column;justify-content:center;gap:3px}
-.gap .owner .o{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.05em}
+.todolist{border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+.todo{display:grid;grid-template-columns:64px minmax(0,1fr) 190px;border-bottom:1px solid var(--rule)}
+.todo:last-child{border-bottom:none}
+@media(max-width:820px){.todo{grid-template-columns:56px minmax(0,1fr)}.todo .owner{grid-column:1/-1;border-left:none;border-top:1px solid var(--rule)}}
+.todo .pri{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.08em;border-right:1px solid var(--rule);padding:6px;text-align:center}
+.pri-now{background:var(--danger-soft);color:var(--danger)}
+.pri-next{background:var(--warn-soft);color:var(--warn)}
+.pri-later{background:var(--surface-2);color:var(--ink-3)}
+.todo .body{padding:var(--s3) var(--s4)}
+.todo .body h4{font-size:16px}
+.todo .body p{font-size:12.7px;color:var(--ink-2);margin-top:8px}
+.todo .body p span{display:block;font-family:var(--mono);font-size:8.4px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:1px}
+.todo .body p.do{color:var(--ink)}
+.todo .body .ev{font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:8px}
+.todo .owner{border-left:1px solid var(--rule);padding:var(--s3);display:flex;flex-direction:column;justify-content:center;gap:8px}
+.todo .owner .mv{display:flex;flex-direction:column;gap:2px}
+.todo .owner .o{font-family:var(--mono);font-size:9.4px;font-weight:600;letter-spacing:.04em}
+.todo .owner .unl{font-family:var(--mono);font-size:9.6px;color:var(--ink-2);line-height:1.4}
+.todo .owner .unl span{display:block;font-size:8.6px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin-bottom:2px}
 
 .contra{display:flex;flex-direction:column;gap:var(--s3)}
 .card{border:1px solid var(--rule);border-left:3px solid var(--danger);border-radius:var(--radius);background:var(--surface);padding:var(--s4) var(--s5)}
@@ -303,12 +317,19 @@ footer{margin-top:var(--s8);padding-top:var(--s4);border-top:1px solid var(--rul
     <div class="factbox"><dl id="factList"></dl></div>
   </header>
 
+  <section id="sec-wall">
+    <div class="sechead"><h2 id="tWallH"></h2><p id="tWallP"></p></div>
+    <div class="wallfig" id="wallFig"></div>
+    <div class="wallstats" id="wallStats"></div>
+    <p class="wallclose" id="tWallClose"></p>
+  </section>
+
   <section id="sec-board">
     <div class="sechead"><h2 id="tBoardH"></h2><p id="tBoardP"></p></div>
     <div class="board-shell" id="boardShell">
       <div class="board-bar">
         <span class="lbl" id="tRubric"></span>
-        <div class="rubricwrap" id="rubricPills" style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;min-width:0"></div>
+        <div class="rubricwrap" id="rubricPills"></div>
         <button class="ctl" id="fsBtn" style="flex:0 0 auto"></button>
       </div>
       <div class="qbanner" id="qbanner" hidden></div>
@@ -322,14 +343,9 @@ footer{margin-top:var(--s8);padding-top:var(--s4);border-top:1px solid var(--rul
     <div class="qgrid" id="qgrid"></div>
   </section>
 
-  <section id="sec-seams">
-    <div class="sechead"><h2 id="tSeamH"></h2><p id="tSeamP"></p></div>
-    <div class="seams" id="seamGrid"></div>
-  </section>
-
-  <section id="sec-gaps">
-    <div class="sechead"><h2 id="tGapH"></h2><p id="tGapP"></p></div>
-    <div class="gaptable" id="gapTable"></div>
+  <section id="sec-todo">
+    <div class="sechead"><h2 id="tTodoH"></h2><p id="tTodoP"></p></div>
+    <div class="todolist" id="todoList"></div>
   </section>
 
   <section id="sec-contra">
@@ -359,61 +375,61 @@ var THREADS={
  light:{n:t("Light dose","光劑量"),d:t("535 nm green and 670 nm red are the control input and a measured quantity at once. Every mind that touches light quotes the same units.","535 nm 綠光與 670 nm 紅光既是控制輸入，也是可量測的物理量。凡碰到光的人，單位必須一致。")},
  mwco:{n:t("Weight against cut-off","分子量對膜孔徑"),d:t("The protectant must pass the membrane and the bacterium must not. If this number is wrong, nothing downstream survives.","保護劑必須穿過膜，細菌不能。這個數字錯了，後面全部站不住。")},
  threshold:{n:t("Trigger threshold","觸發閾值"),d:t("An ethical position, a forecast model, and the stress level that actually damages the plant all resolve into one number.","一個倫理立場、一個預測模型、以及真正傷害植物的逆境強度，最後全部收斂成一個數字。")},
- containment:{n:t("Containment evidence","圍阻證據"),d:t("Physical containment replaced the kill switch. The proof that it holds is also the regulatory argument.","物理圍阻取代了自殺開關。證明它有效的實驗，同時就是法規論證。")},
+ containment:{n:t("Containment evidence","圍阻證據"),d:t("Three independent layers: the genetic kill switch, the membrane, and the housing. The evidence that they hold is also the regulatory argument.","三道獨立防線：基因自殺開關、膜、外殼。證明它們有效的證據，同時就是法規論證。")},
  timing:{n:t("Priming against rescue","預先誘導 vs 事後挽救"),d:t("Protectants work best before stress arrives. A reactive device is late unless the forecast buys back the lead time.","保護劑在逆境前施用效果最好。反應式裝置一定慢半拍，除非預測補回前置時間。")},
  crop:{n:t("Crop and stress choice","作物與逆境選擇"),d:t("Arabidopsis for proof of concept, heat and drought over salinity, tomato and lettuce next. Chosen, not inherited.","阿拉伯芥做概念驗證，熱與乾旱優先於鹽害，下一步是番茄與萵苣。這是選出來的，不是撿到的。")},
  burden:{n:t("Metabolic burden","代謝負擔"),d:t("How hard you can push B. subtilis before growth, foaming and secretion start fighting each other.","在生長、起泡、分泌互相打架之前，枯草桿菌能被逼到什麼程度。")},
- claims:{n:t("What you claim it does","你宣稱它能做什麼"),d:t("An antifungal claim and a biostimulant registration cannot coexist. The wording decides the regulatory pathway.","抗真菌宣稱與生物刺激素登記無法並存。文案措辭決定走哪一條法規路徑。")},
+ claims:{n:t("What you claim it does","你宣稱它能做什麼"),d:t("Abiotic stress tolerance goes through the Fertilizer Management Act. A disease-control claim moves the same product to the Pesticide Management Act. The wording decides the pathway.","非生物逆境耐受性走肥料管理法。同一個產品只要宣稱病害防治，就落入農藥管理法。措辭決定路徑。")},
  controls:{n:t("Controls and calibration","對照與校正"),d:t("Every number the team quotes needs a control beside it and a unit under it. This is what the Measurement award is actually scored on.","團隊講的每一個數字，旁邊要有對照、底下要有單位。量測獎真正在評的就是這個。")}
 };
 
 var RUBRIC=[t("Project Description","專案論述"),t("Engineering Success","工程成果"),t("Parts","零件"),t("Measurement","量測"),t("Model","模型"),t("Hardware","硬體"),t("Integrated HP","整合式人本實踐"),t("Education","教育"),t("Sustainable Development","永續發展"),t("Entrepreneurship","創業"),t("Safety & Security","安全與生物保防"),t("Proof of Concept","概念驗證")];
 
-/* ── judging questions ───────────────────────────── */
+/* ── judging questions. lead = the minds that must carry the answer ── */
 var QSETS=[
  {id:"project",kind:"score",
   name:t("Project score","專案分數"),
   sub:t("Nine questions. Weighted with Wiki and Presentation into Grand Prize, Finalist and Village Award rankings.","九題。與 Wiki、簡報加權後決定大獎、決賽入圍與村獎排名。"),
   qs:[
-   {id:"p1",t:t("How impressive is this project?","這個專案有多令人印象深刻？")},
-   {id:"p2",t:t("Did the project work, or is it likely to work?","專案成功了嗎？或看起來會成功嗎？")},
-   {id:"p3",t:t("Is the project likely to have an impact?","這個專案可能產生影響嗎？")},
-   {id:"p4",t:t("How well were engineering principles used?","工程原則運用得如何？")},
-   {id:"p5",t:t("How thoughtful and thorough was the human practices work?","人本實踐的思考有多周延？")},
-   {id:"p6",t:t("How much of the work did the team do themselves?","有多少工作是團隊自己做的？")},
-   {id:"p7",t:t("Is the project built on synthetic biology and standard components?","專案是否建立在合成生物學與標準元件上？")},
-   {id:"p8",t:t("Are components well documented on the Wiki and Registry?","各項元件在 Wiki 與 Registry 上文件化得好嗎？")},
-   {id:"p9",t:t("How competent was the team at answering judges' questions?","團隊回答評審問題的能力如何？")}
+   {id:"p1",lead:["M4","M5"],t:t("How impressive is this project?","這個專案有多令人印象深刻？")},
+   {id:"p2",lead:["M1","M3"],t:t("Did the project work, or is it likely to work?","專案成功了嗎？或看起來會成功嗎？")},
+   {id:"p3",lead:["M5"],t:t("Is the project likely to have an impact?","這個專案可能產生影響嗎？")},
+   {id:"p4",lead:["M3","M4"],t:t("How well were engineering principles used?","工程原則運用得如何？")},
+   {id:"p5",lead:["M5"],t:t("How thoughtful and thorough was the human practices work?","人本實踐的思考有多周延？")},
+   {id:"p6",lead:["M3","M4"],t:t("How much of the work did the team do themselves?","有多少工作是團隊自己做的？")},
+   {id:"p7",lead:["M3"],t:t("Is the project built on synthetic biology and standard components?","專案是否建立在合成生物學與標準元件上？")},
+   {id:"p8",lead:["M3","M5"],t:t("Are components well documented on the Wiki and Registry?","各項元件在 Wiki 與 Registry 上文件化得好嗎？")},
+   {id:"p9",lead:["M1","M2","M3","M4","M5"],all:true,t:t("How competent was the team at answering judges' questions?","團隊回答評審問題的能力如何？")}
   ]},
  {id:"awards",kind:"award",
   name:t("Special awards","特殊獎項"),
   sub:t("Three nominations, three rubrics. Each judge's Gold vote is inferred from these scores, so a weak third choice is a Gold risk.","三個提名、三份評分表。金牌票由這些分數推得，因此第三個選得弱就是金牌風險。"),
   groups:[
    {id:"ms",name:t("Measurement","量測"),qs:[
-     {id:"ms1",t:t("Could the measurements be repeated by other iGEM teams?","其他 iGEM 團隊能重現這些量測嗎？")},
-     {id:"ms2",t:t("Is the protocol well described?","流程描述得清楚嗎？")},
-     {id:"ms3",t:t("Is it useful to other projects?","對其他專案有用嗎？")},
-     {id:"ms4",t:t("Were controls used to validate the process and calibrate units?","是否用對照驗證流程並校正單位？")}
+     {id:"ms1",lead:["M4","M1"],t:t("Could the measurements be repeated by other iGEM teams?","其他 iGEM 團隊能重現這些量測嗎？")},
+     {id:"ms2",lead:["M4","M1"],t:t("Is the protocol well described?","流程描述得清楚嗎？")},
+     {id:"ms3",lead:["M4"],t:t("Is it useful to other projects?","對其他專案有用嗎？")},
+     {id:"ms4",lead:["M1","M3"],t:t("Were controls used to validate the process and calibrate units?","是否用對照驗證流程並校正單位？")}
    ]},
    {id:"hw",name:t("Hardware","硬體"),qs:[
-     {id:"hw1",t:t("Does the hardware address a need in synthetic biology?","硬體是否解決了合成生物學的實際需求？")},
-     {id:"hw2",t:t("Did the team conduct user testing and learn from feedback?","團隊做過使用者測試並從回饋中學習嗎？")},
-     {id:"hw3",t:t("Was utility and functionality shown in a proof of concept?","概念驗證是否展示了實用性與功能？")},
-     {id:"hw4",t:t("Is documentation sufficient for other teams to reproduce it?","文件足以讓其他團隊重現嗎？")}
+     {id:"hw1",lead:["M4"],t:t("Does the hardware address a need in synthetic biology?","硬體是否解決了合成生物學的實際需求？")},
+     {id:"hw2",lead:["M4"],t:t("Did the team conduct user testing and learn from feedback?","團隊做過使用者測試並從回饋中學習嗎？")},
+     {id:"hw3",lead:["M4"],t:t("Was utility and functionality shown in a proof of concept?","概念驗證是否展示了實用性與功能？")},
+     {id:"hw4",lead:["M4"],t:t("Is documentation sufficient for other teams to reproduce it?","文件足以讓其他團隊重現嗎？")}
    ]},
    {id:"hp",name:t("Integrated Human Practices","整合式人本實踐"),qs:[
-     {id:"hp1",t:t("How well was HP work integrated throughout the project?","人本實踐在整個專案中整合得如何？")},
-     {id:"hp2",t:t("How thoughtfully implemented? Context, rationale, prior work?","執行有多細緻？脈絡、理由、既有研究？")},
-     {id:"hp3",t:t("Did HP make the project responsible and good for the world?","人本實踐是否讓專案更負責、對世界更好？")},
-     {id:"hp4",t:t("How well did it incorporate different stakeholder views?","納入不同利害關係人觀點的程度如何？")},
-     {id:"hp5",t:t("Is HP documented so that others can build on it?","人本實踐的文件是否足以讓他人接續？")},
-     {id:"hp6",t:t("How inspiring an example is it to others?","對其他人來說有多具啟發性？")}
+     {id:"hp1",lead:["M5"],t:t("How well was HP work integrated throughout the project?","人本實踐在整個專案中整合得如何？")},
+     {id:"hp2",lead:["M5"],t:t("How thoughtfully implemented? Context, rationale, prior work?","執行有多細緻？脈絡、理由、既有研究？")},
+     {id:"hp3",lead:["M5","M4"],t:t("Did HP make the project responsible and good for the world?","人本實踐是否讓專案更負責、對世界更好？")},
+     {id:"hp4",lead:["M5"],t:t("How well did it incorporate different stakeholder views?","納入不同利害關係人觀點的程度如何？")},
+     {id:"hp5",lead:["M5"],t:t("Is HP documented so that others can build on it?","人本實踐的文件是否足以讓他人接續？")},
+     {id:"hp6",lead:["M5"],t:t("How inspiring an example is it to others?","對其他人來說有多具啟發性？")}
    ]}
   ]}
 ];
-var QTEXT={}; QSETS.forEach(function(s){
-  (s.qs||[]).forEach(function(q){QTEXT[q.id]=q.t;});
-  (s.groups||[]).forEach(function(g){g.qs.forEach(function(q){QTEXT[q.id]=q.t;});});
+var QMETA={}; QSETS.forEach(function(s){
+  (s.qs||[]).forEach(function(q){QMETA[q.id]=q;});
+  (s.groups||[]).forEach(function(g){g.qs.forEach(function(q){QMETA[q.id]=q;});});
 });
 
 var MINDS=[
@@ -513,6 +529,10 @@ var MINDS=[
     "Our growth room runs 8 hours light. Commercial hydroponics runs 12. This choice affects every growth comparison the team presents, so state it and defend it.",
     "我們的生長室跑 8 小時光照，商業水耕跑 12 小時。這個選擇影響團隊端出的每一組生長比較，要主動說明並說出理由。",
     "8/11 源鮮","8/11 源鮮",[],["p4","ms4"]),
+  c("Combined heat and salinity","熱與鹽的複合逆境",
+    "Under field conditions the two stresses occur together and compound cellular damage in ways neither produces alone. A weakened plant then becomes vulnerable to pathogens, which is why a single heat event can start a disease outbreak.",
+    "在田間，兩種逆境會同時發生，並以任一種單獨都做不到的方式疊加細胞損傷。受逆境削弱的植株隨後容易被病原侵襲，這也是為什麼單一次熱事件就能引發病害爆發。",
+    "Business plan §1.1.1","商業計畫 §1.1.1",["crop"],["p1","p3","p2"]),
   c("Replicates and statistical power","重複數與統計檢定力",
     "How many biological replicates the rescue claim rests on, and what effect size the design can actually detect.",
     "挽救宣稱建立在幾個生物重複上，以及這個設計實際上偵測得到多大的效應量。",
@@ -537,7 +557,7 @@ var MINDS=[
  key:"m2",n:"M2",v:"--m2",soft:"--m2s",
  nm:t("Protectant Design","保護劑設計"),
  lk:t("Plant need → the molecule that answers it → small enough to leave the device","植物需求 → 回應它的分子 → 小到能離開裝置"),
- tags:[t("LEA14 ACCD NaD1","LEA14 ACCD NaD1"),t("Peptide design","胜肽設計"),t("MD sims","分子動力學"),t("MW cut-off","分子量門檻"),t("Secretion","分泌")],
+ tags:[t("LEA14 · ACCD","LEA14 · ACCD"),t("Peptide design","胜肽設計"),t("MD sims","分子動力學"),t("MW cut-off","分子量門檻"),t("Secretion","分泌")],
  rubric:[11,4,3,6],
  mission:t("You choose <b>what the cell makes</b> and you must defend that choice against three alternatives a judge will name. You also own the number the whole architecture rests on: the molecular weight that has to pass a membrane the bacterium cannot.","你決定<b>細胞要做什麼</b>，而且必須在評審點名的三個替代方案面前守住這個選擇。整個架構所依賴的那個數字也在你手上：必須穿過細菌過不去的那層膜的分子量。"),
  hp:[
@@ -571,10 +591,10 @@ var MINDS=[
     "Enzyme activity measured in the supernatant. No plant readout exists yet, which is the project's largest open gap.",
     "在上清液中量測酵素活性。目前尚無植物讀值，這是全案最大的缺口。",
     "Wet lab","濕實驗",[],["p2","ms4"]),
-  c("NaD1 / BoPep4: sequence only","NaD1 / BoPep4：僅有序列",
-    "Designed but not expressed and not tested. The antifungal mechanism is theoretical, and the mature form lacks the C-terminal propeptide, which carries a phytotoxicity risk.",
-    "已設計但未表現、未測試。抗真菌機制屬理論；成熟型缺少 C 端前肽，帶有藥害風險。",
-    "Business plan §2.2","商業計畫 §2.2",["claims"],["p2"]),
+  c("Membrane permeability test","膜通透性測試",
+    "Purified or tagged LEA peptide run against the CFMDI membrane before the Jamboree. If passage is too low, move to a larger cut-off while still excluding bacteria. This is the experiment that turns the architecture from an assumption into a result.",
+    "在 Jamboree 前，用純化或帶標籤的 LEA 胜肽對 CFMDI 膜做測試。若通過率太低，就改用較大的截留門檻，同時仍要排除細菌。這個實驗把整個架構從假設變成結果。",
+    "Business plan §6.1","商業計畫 §6.1",["mwco"],["p2","hw3","ms4","p4"]),
   c("Secretion check in supernatant","上清液分泌檢測",
     "Western blot or fluorescence on culture supernatant against the cell pellet, to separate what was made from what was actually exported.",
     "對培養上清液與菌體沉澱做西方墨點或螢光比對，區分「做出來的」與「真的送出去的」。",
@@ -593,10 +613,10 @@ var MINDS=[
     "Roughly 10 to 30 kDa, highly hydrophilic and natively resistant to aggregation. It acts as a physical chaperone shielding membranes and proteins, and needs only one heterologous gene rather than a complex operon.",
     "約 10 至 30 kDa，高度親水且天生抗聚集。它作為物理性分子伴護蛋白保護膜與蛋白質，且只需要一個異源基因，不需要複雜的操縱子。",
     "Business plan §2.2","商業計畫 §2.2",["mwco"],["p1","p2","p7"]),
-  c("NaD1 rationale and its risk","NaD1 的理由與風險",
-    "About 5.3 kDa. Cell wall binding, membrane permeabilisation, cytoplasmic entry, ROS induction, targeted at fungi so beneficial bacteria survive. The mature form lacks the CTPP, so a cleavage site must be engineered to keep it benign until it meets a pathogen.",
-    "約 5.3 kDa。結合細胞壁、破壞膜通透性、進入細胞質、誘導 ROS，專一針對真菌，益生菌不受影響。成熟型缺少 CTPP，必須工程化一個切位，讓它在遇到病原前保持無害。",
-    "Business plan §2.2","商業計畫 §2.2",["claims","mwco"],["p2","hp3"]),
+  c("Why on-site beats a bottle","為什麼現地生產贏過一瓶產品",
+    "Commercial biostimulant formulations such as CH Biotech's peptide products cannot adapt when a heatwave turns into an outbreak. Producing on site removes shelf-life degradation, transport delay and retail markup, and delivers fresh protein before irreversible damage.",
+    "CH Biotech 等商業生物刺激素配方，在熱浪轉為病害爆發時無法即時調整。現地生產消除了保存期衰減、運輸延遲與通路加價，並在不可逆損傷發生前送出新鮮蛋白。",
+    "Business plan §1.1.2","商業計畫 §1.1.2",[],["p1","p3","p7"]),
   c("ACCD rationale","ACCD 的選擇理由",
     "Lowers ethylene stress signalling by consuming its precursor, which is a different mechanism from LEA 14 and therefore a different chamber in the reactor.",
     "藉由消耗乙烯前驅物降低乙烯逆境訊號，機制與 LEA 14 不同，因此在反應器中占不同的腔室。",
@@ -634,8 +654,8 @@ var MINDS=[
   t("How long does the protectant last in the medium?","保護劑在介質中能撐多久？")
  ],
  kill:[
-  {q:t("NaD1 is antifungal and untested. Why is it in your product description?","NaD1 是抗真菌且未經測試的。為什麼它會出現在你的產品說明裡？"),
-   a:t("Because it was a design direction, not a result. Say that, then hand to M5: an antifungal claim moves the product from the Fertilizer Management Act to the Pesticide Management Act, which is years instead of thirty days.","因為它是設計方向，不是結果。這樣講，然後交給 M5：抗真菌宣稱會把產品從肥料管理法移到農藥管理法，從 30 天變成好幾年。")},
+  {q:t("Your protein has to cross a membrane you also use to trap bacteria. Have you measured that it does?","你的蛋白必須穿過一層你同時用來攔住細菌的膜。你量過它真的過得去嗎？"),
+   a:t("Give the permeability result with purified tagged LEA, not the sequence-predicted weight. If the run has not happened, say so and give the date it is scheduled, plus the fallback of a larger cut-off that still excludes B. subtilis.","給出用純化帶標籤 LEA 做的通透性結果，不要用序列推算的分子量。如果還沒跑，就說沒跑、給出排定日期，並說明備案是改用仍能排除枯草桿菌的較大截留門檻。")},
   {q:t("Verslue told you not to supply the osmoprotectant directly. You are still supplying a protein directly.","Verslue 叫你不要直接給滲透保護劑，你還是在直接給一個蛋白。"),
    a:t("His argument was specific to proline and the P5CS1 feedback loop, not to chaperone proteins, which have no equivalent biosynthetic loop to suppress. Say that distinction out loud; it shows you understood the mechanism rather than the instruction.","他的論點針對的是脯胺酸與 P5CS1 回饋迴路，不是分子伴護蛋白，後者沒有可被抑制的等價生合成迴路。把這個區別講出來，這顯示你理解的是機制，不是指令。")}
  ],
@@ -649,10 +669,10 @@ var MINDS=[
  rubric:[1,2,3,0],
  mission:t("You own <b>Engineering Success and Parts</b>: design rationale through to a characterised, documented, reusable part. You also own the best answer in the project, which is why the input is light at all.","你擁有<b>工程成果與零件</b>：從設計理由一路到完成特性分析、有文件、可被重用的零件。整個專案最漂亮的那個答案也在你手上：為什麼輸入是光。"),
  hp:[
-  c("Dr. Brophy · no promoter, no kill switch","Brophy · 沒有啟動子、不用自殺開關",
-    "Cello could not find a promoter responsive to the stress we care about, so sensing moved to electronics and actuation to light. Separately, kill switches mutate easily: either adopt an already-developed one or prove physical containment instead. Both of these decisions came from one conversation.",
-    "Cello 找不到能對我們在意的逆境反應的啟動子，因此感測交給電子元件、致動交給光。另外，自殺開關容易突變：要嘛沿用已開發成熟的，要嘛改為證明物理圍阻。這兩個決定都出自同一場對話。",
-    "4/18 Stanford","4/18 史丹佛",["light","containment"],["p5","hp1","hp2","p4"]),
+  c("Dr. Brophy · light in, containment first","Brophy · 用光當輸入、圍阻優先",
+    "Cello could not find a promoter responsive to the stress we care about, so sensing moved to electronics and actuation to light. Kill switches also mutate easily, so containment should not rest on one: adopt a developed switch and prove physical containment alongside it. Both decisions came from one conversation.",
+    "Cello 找不到能對我們在意的逆境反應的啟動子，因此感測交給電子元件、致動交給光。自殺開關也容易突變，圍阻不該只靠它一層：沿用成熟的開關，同時證明物理圍阻。這兩個決定都出自同一場對話。",
+    "4/18 Stanford","4/18 史丹佛",["light","containment"],["p5","hp1","hp2","p4","hp3"]),
   c("黃介辰 · cloning troubleshooting","黃介辰 · 選殖除錯",
     "Electroporation needs very dense cell pellets and concentrated DNA, above 10k for large plasmids. Ligation is the likely reason constructs are not forming. Run a vector control and a no-plasmid control to test whether B. subtilis carries native antibiotic resistance, and verify whether the green reporter has ever been used in B. sub.",
     "電穿孔需要非常濃的菌體沉澱與高濃度 DNA，大質體要 10k 以上。構築做不出來，最可能卡在接合。要跑載體對照與無質體對照，測枯草桿菌是否帶有原生抗生素抗性；並查證綠光報導基因是否曾在枯草桿菌中使用過。",
@@ -699,6 +719,10 @@ var MINDS=[
     "Which native peptides were tried, which exported the protectant, and how export was confirmed against the cell pellet.",
     "試了哪些原生胜肽、哪些成功把保護劑送出去，以及如何相對菌體沉澱確認外送。",
     "Wet lab × 黃姿碧","濕實驗 × 黃姿碧",["burden"],["p2","p7","ms4"]),
+  c("Characterise each promoter alone","先單獨測每個啟動子",
+    "Before combining them into the AND gate, characterise each promoter separately and tune thresholds in vitro. Then test activation under simulated heat and humidity. Skipping this step is why AND gates fire early, late or inconsistently.",
+    "在合併成 AND 閘之前，先分別測定每個啟動子並在體外調整閾值，之後再在模擬的高溫高濕條件下測試啟動。跳過這一步，正是 AND 閘提早、延遲或不穩定啟動的原因。",
+    "Business plan §6.1","商業計畫 §6.1",["controls"],["p4","ms1","ms4","p2"]),
   c("AND-gate truth table","AND 閘真值表",
     "The two inputs, the four states, and what was actually measured in each rather than what the design intended.",
     "兩個輸入、四種狀態，以及每一種實際量到什麼，而不是設計上打算做什麼。",
@@ -721,6 +745,10 @@ var MINDS=[
     "For each part: annotated sequence features, topology, host organism, design rationale, experiments with controls, and characterisation data. Judges score only what is on the Registry, not the wiki.",
     "每個零件都要有：註解過的序列特徵、拓撲、宿主生物、設計理由、含對照的實驗、特性分析數據。評審只採計 Registry 上的內容，不採計 wiki。",
     "Registry","Registry",[],["p8","p7","ms2"]),
+  c("CcaS-CcaR literature basis","CcaS-CcaR 的文獻基礎",
+    "The two-component system is documented in Castillo-Hair et al. 2019. Its value here is that light decouples biomass accumulation from protein expression, so cells reach high density first and then switch to high-yield production.",
+    "這套雙組分系統記載於 Castillo-Hair 等人 2019 年的論文。它在此的價值是：光把生物量累積與蛋白表現解耦，細胞先長到高密度，再切換成高產量生產。",
+    "Business plan §1.1.2","商業計畫 §1.1.2",["light"],["p7","p8","p1","hp2"]),
   c("Assembly standard compliance","組裝標準相容性",
     "RFC 10 BioBrick or RFC 1000 iGEM Type IIS. The Registry screens this automatically and the result appears on the judging form, so a red flag is visible before you speak.",
     "RFC 10 BioBrick 或 RFC 1000 iGEM Type IIS。Registry 會自動篩檢，結果直接顯示在評分表上，所以紅燈在你開口前就被看到了。",
@@ -791,6 +819,14 @@ var MINDS=[
     "Fouling inside the chambers and on the fibre, and the effect on protein yield and system lifespan.",
     "腔體內部與纖維上的積垢，及其對蛋白產量與系統壽命的影響。",
     "Business plan §3.2","商業計畫 §3.2",[],["p2","hw3","p3"]),
+  c("Kill-switch escape frequency","自殺開關逃逸頻率",
+    "Test kill-switch efficacy under nutrient deprivation and temperature shifts to look for escape mutants, and report the escape frequency as a number rather than a claim. It is one of three independent layers, so a failure here is not release.",
+    "在營養剝奪與溫度變化下測試自殺開關效力，尋找逃逸突變株，並以數字而非說法報告逃逸頻率。它是三道獨立防線之一，因此這一層失效並不等於環境釋出。",
+    "Business plan §6.1","商業計畫 §6.1",["containment"],["p2","hw3","hp3","p8"]),
+  c("Housing stress test","外殼耐候測試",
+    "Stress-test the enclosure under moisture, temperature cycling and mechanical handling, and design the bacterial compartment to show evidence of tampering so a breach is visible to the farmer.",
+    "在潮濕、溫度循環與機械搬運下對外殼做耐受測試，並把菌體腔設計成具防拆痕跡，讓破損能被農民看見。",
+    "Business plan §6.1","商業計畫 §6.1",["containment"],["hw3","hw2","p2","hp3"]),
   c("Run with the 正瀚 protectant","以正瀚保護劑實測",
     "A reactor run using the protectant sample supplied by 正瀚生技, which tests the hardware independently of the team's own biology.",
     "使用正瀚生技提供的保護劑樣品進行反應器運轉，可在不依賴團隊自身生物系統的情況下測試硬體。",
@@ -829,6 +865,22 @@ var MINDS=[
     "Arduino control unit, circulation pump, temperature sensor, salinity and EC sensor, and the green and red LED optogenetic control, as one integrated loop.",
     "Arduino 控制單元、循環幫浦、溫度感測器、鹽度與 EC 感測器，以及紅綠 LED 光遺傳控制，整合成一個閉環。",
     "Business plan §2.1","商業計畫 §2.1",[],["hw3","hw4","p7"]),
+  c("Three independent containment layers","三道獨立圍阻防線",
+    "The genetic kill switch, the CFMDI membrane and the physical housing. Each is validated separately, and the argument to a regulator is that no single failure produces environmental release.",
+    "基因自殺開關、CFMDI 膜、實體外殼。三者分別驗證，向主管機關的論證是：任何單一層失效都不會造成環境釋出。",
+    "Business plan §6.1","商業計畫 §6.1",["containment"],["hp3","hw1","p1","p4"]),
+  c("Membrane wear and service schedule","膜的耗損與保養排程",
+    "Verify the cut-off experimentally against B. subtilis cell size, test degradation over repeated use and simulated field conditions, then build integrity checks into a maintenance and replacement schedule.",
+    "以實驗方式對照枯草桿菌細胞大小驗證截留門檻，測試重複使用與模擬田間條件下的劣化，再把完整性檢查寫進保養與更換排程。",
+    "Business plan §6.1","商業計畫 §6.1",["containment","mwco"],["hw3","hw4","p3","hp3"]),
+  c("Build files: BOM, firmware, enclosure","製作檔案：物料表、韌體、外殼",
+    "A bill of materials with suppliers, the Arduino firmware, the enclosure files and an assembly guide. The Hardware rubric scores whether another team could rebuild this, and this entry is the whole answer.",
+    "含供應商的物料清單、Arduino 韌體、外殼檔案與組裝說明。硬體評分表評的是「別的團隊能不能重建這台」，而這一項就是完整答案。",
+    "Hardware","硬體",[],["hw4","p8","ms2","p6"]),
+  c("What the team built against bought","自製與外購的分界",
+    "The photometer, the LPA and the reactor housing were built in-house. Plate reading, sequencing and strain supply came from outside. Being able to draw that line quickly is what the attribution question is asking for.",
+    "光度計、LPA 與反應器外殼是自製的；盤讀、定序與菌株供應來自外部。能迅速畫出這條線，正是歸屬問題在問的東西。",
+    "Attribution","貢獻歸屬",[],["p6","p8"]),
   c("Version milestones and enclosure","版本里程碑與外殼",
     "What each build fixed, plus the commercial enclosure, the mechanically keyed cartridge, and the single-button interface designed for ageing rural users.",
     "每一版修好了什麼，以及商業化外殼、機械防呆卡匣，和為高齡農村使用者設計的單鍵介面。",
@@ -889,6 +941,14 @@ var MINDS=[
     "144 students across elementary, middle and high schools, built on a six-part arc: Kahoot, vocabulary and photosynthesis, stress and experiment, synthetic biology and solution, card game, planting and summary. Middle school ran a debate format instead.",
     "橫跨國小、國中、高中共 144 名學生，採用六段式流程：Kahoot、字彙與光合作用、逆境與實驗、合成生物學與解方、卡牌遊戲、種植與總結。國中場改用辯論形式。",
     "Education log","教育活動紀錄",[],["p5","hp5","hp6"]),
+  c("Partner institutions","合作機構網絡",
+    "World Vegetable Center in Tainan, Tainan District Agricultural Research and Extension Station, Taiwan Agricultural Research Institute in Taichung, National Chung Hsing University, and Pingtung Agricultural Biotechnology Park. This is the validation and field-trial network the plan depends on.",
+    "台南的世界蔬菜中心、台南區農業改良場、台中的農業試驗所、國立中興大學，以及屏東農業生物技術園區。這是整份計畫所依賴的驗證與田間試驗網絡。",
+    "Business plan §1.3","商業計畫 §1.3",[],["p3","hp4","hp5","p6","hp2"]),
+  c("The numbers behind the problem","問題背後的數字",
+    "Abiotic stress causes roughly 50 percent of global yield loss each year. A 1 °C rise in growing-season temperature cuts rice yield 6.2 percent. Over 20 percent of irrigated farmland is salt-affected, losing 3 hectares a minute. Over 90 percent of Taiwan's holdings are under one hectare and supply more than 80 percent of domestic vegetables and fruit.",
+    "非生物逆境每年造成全球約 50% 的產量損失。生長季均溫上升 1°C，稻米減產 6.2%。超過 20% 的灌溉農地受鹽害影響，每分鐘失去 3 公頃。台灣超過 90% 的農戶面積不到一公頃，卻供應國內逾 80% 的蔬果。",
+    "Business plan §1.1.1","商業計畫 §1.1.1",[],["p1","p3","hp2","hp6"]),
   c("Biotech Expo · regulation varies","生技展 · 各國法規不同",
     "GMO regulation varies widely by country, and real soil and field-relevant conditions matter more to reviewers than controlled demonstrations. Waste-to-value framing was highlighted as compelling.",
     "各國基改法規差異極大；對審查者而言，真實土壤與貼近田間的條件比受控展示更重要。「廢棄物轉價值」的敘事被指出很有說服力。",
@@ -912,11 +972,11 @@ var MINDS=[
   c("Farm size against climate volatility","農地面積對氣候波動",
     "Parcel-level farm-size data overlaid on an interpolated climate-volatility surface built from national weather-station records, identifying where the smallest farms meet the least predictable climate.",
     "以地籍層級的農地面積資料，疊上由全國氣象站紀錄內插而成的氣候波動曲面，找出最小的農地與最難預測的氣候相遇的地方。",
-    "Geospatial","地理空間分析",[],["p1","p3","hp2","hp6"]),
+    "Geospatial","地理空間分析",[],["p1","p3","hp2","hp6","hp5"]),
   c("Interpolation method and uncertainty","內插方法與不確定度",
     "The method used, the station density behind it, and the uncertainty you are prepared to state out loud. A modelling judge will ask for all three.",
     "使用的方法、背後的測站密度，以及你願意公開講的不確定度。模型組評審這三樣都會問。",
-    "Geospatial","地理空間分析",[],["p8","hp2","ms2"]),
+    "Geospatial","地理空間分析",[],["p8","hp2","ms2","hp5"]),
   c("Fertilizer Act against Pesticide Act","肥料管理法對農藥管理法",
     "Abiotic stress falls under the Fertilizer Management Act via the Agriculture and Food Agency. Biotic stress falls under the Pesticide Management Act via APHIA, formerly BAPHIQ. The claim decides the statute.",
     "非生物逆境走肥料管理法，主管機關為農糧署。生物逆境走農藥管理法，主管機關為動植物防疫檢疫署（原防檢局）。宣稱決定適用哪一部法。",
@@ -941,6 +1001,22 @@ var MINDS=[
     "One season of cartridges must cost no more than a farmer's current seasonal fungicide spend. The financial model runs a sensitivity analysis at plus or minus 20 percent on cost and on price.",
     "一季的卡匣費用不能高於農民目前一季的殺菌劑支出。財務模型對成本與售價各做正負 20% 的敏感度分析。",
     "Business plan §6.1","商業計畫 §6.1",[],["p3","hp3"]),
+  c("Attribution: students against collaborators","歸屬：學生與外部協助的分界",
+    "The Attributions form must separate project idea, design and execution, and name what each collaborator did. Judges check whether every field including specific tasks is filled and whether it matches what the team achieved.",
+    "貢獻歸屬表必須把專案構想、設計、執行分開列出，並具名說明每位協助者做了什麼。評審會檢查是否每個欄位（含具體任務）都填了，以及是否與團隊的實際成果相符。",
+    "Handbook p.25","評審手冊 p.25",[],["p6","p8"]),
+  c("Standard pages, one per award","每個獎項一個標準頁面",
+    "Each medal criterion and each Special Award has a fixed wiki URL. Judges are directed there from the ballot and are not required to hunt elsewhere, and content on external sites cannot be judged at all.",
+    "每一項獎牌條件與每一個特殊獎項都有固定的 wiki 網址。評審由選票直接連過去，沒有義務到別處找；放在 iGEM 伺服器以外的內容完全不能被評分。",
+    "Handbook p.29","評審手冊 p.29",[],["p8","hp5"]),
+  c("Pilot success metrics","試點成功指標",
+    "20 to 30 percent fewer fungicide applications per season, 10 to 15 percent crop-loss reduction under climate stress, across 20 to 50 devices and 20 to 70 farmers. Name these as targets rather than results.",
+    "每季殺菌劑施用次數減少 20 至 30%，氣候逆境下作物損失減少 10 至 15%，涵蓋 20 至 50 台裝置、20 至 70 位農民。要把這些講成目標，不是結果。",
+    "Business plan §3.4","商業計畫 §3.4",[],["p3","hp2","hp3"]),
+  c("Written guidance from BAPHIQ","向防檢署取得書面意見",
+    "Seek written guidance before any field or greenhouse deployment, because the agency may still classify secreted compounds from engineered bacteria as requiring GMO approval. Until that is clarified, all testing stays contained and lab-based.",
+    "在任何田間或溫室部署前先取得書面意見，因為主管機關仍可能把改造細菌分泌的化合物歸類為需要基改核准。在釐清之前，所有測試都維持在封閉的實驗室內。",
+    "Business plan §6.1","商業計畫 §6.1",["containment","claims"],["hp3","p3","hp2"]),
   c("Deployment ramp","部署擴張路徑",
     "20 to 50 pilot units reaching 20 to 70 farmers, then 150 to 400 across cooperatives, then 500 to 1500 across two to three countries. Bundle A is hardware with cartridges; Bundle B is hardware with an API and universal media.",
     "先 20 至 50 台試點、觸及 20 至 70 位農民，再擴到合作社的 150 至 400 台，最後在兩到三個國家達到 500 至 1500 台。方案 A 是硬體加卡匣，方案 B 是硬體加 API 與通用培養基。",
@@ -954,8 +1030,8 @@ var MINDS=[
   t("What happens to the timeline if a regulator rejects contained use?","如果主管機關不接受封閉使用，時程會怎樣？")
  ],
  kill:[
-  {q:t("Your business plan sells an antifungal peptide. Your regulatory strategy forbids any disease claim. Pick one.","你的商業計畫在賣抗真菌胜肽，你的法規策略禁止任何病害宣稱。選一個。"),
-   a:t("The contradiction is live in the document right now. The defensible answer: NaD1 is a research direction, the launch claim is abiotic stress tolerance only, and every piece of marketing copy has to be scrubbed of pesticidal implication. Say it before they find it.","這個矛盾此刻就在文件裡。站得住的答案是：NaD1 是研究方向，上市宣稱只講非生物逆境耐受性，而且所有行銷文案都要清掉農藥暗示。在他們找到之前先講。")},
+  {q:t("Your product description still promises disease protection. Your regulatory strategy forbids that claim.","你的產品說明仍承諾病害防治，你的法規策略卻禁止這個宣稱。"),
+   a:t("The antifungal module was dropped, and the wording survived it. Say that plainly: the launch claim is abiotic stress tolerance only, and the copy is being scrubbed. Under the Fertilizer Management Act the wording is the legal exposure, not the biology.","抗真菌模組已經拿掉了，措辭卻留了下來。直接講清楚：上市宣稱只有非生物逆境耐受性，文案正在清理。在肥料管理法之下，有法律風險的是措辭，不是生物學。")},
   {q:t("iGEM requires open publication. Your IP plan says disclosure before filing destroys European patentability.","iGEM 要求公開發表。你的智財計畫說申請前的公開會摧毀歐洲專利性。"),
    a:t("Name the tension honestly. Either file provisionally before the wiki freeze, or accept open science and compete on manufacturing, distribution and trust. Judges respect a stated position far more than an unexamined one.","誠實把這個張力講出來。要嘛在 wiki 凍結前送臨時申請，要嘛接受開放科學、改以製造、通路與信任競爭。評審對「有立場」的尊重遠高於「沒想過」。")}
  ],
@@ -963,70 +1039,68 @@ var MINDS=[
 }
 ];
 
-var SEAMS=[
- {a:"M1",b:"M2",av:"--m1",bv:"--m2",
-  t:t("The dose the plant needs","植物需要的劑量"),
-  d:t("M1 measures the concentration that rescues a plant and the concentration that damages it. M2 designs a molecule to hit the first without reaching the second. If these two never compare numbers, the protectant is optimised for the wrong target.","M1 量出能挽救植物的濃度，以及會傷害植物的濃度。M2 設計分子去打中前者、不碰到後者。這兩人如果從不對數字，保護劑就是為錯的目標最佳化的。"),
-  u:t("Shared number: working dose as a fraction of the phytotoxicity ceiling","共同數字：工作劑量佔藥害上限的比例")},
- {a:"M2",b:"M3",av:"--m2",bv:"--m3",
-  t:t("One sequence, one file","一條序列、一個檔案"),
-  d:t("Codon optimisation and the secretion tag sit in both minds. Two owners of one sequence is how a team arrives at the Jamboree with two different constructs and no way to tell which produced the data.","密碼子最佳化與分泌標籤同時落在兩個腦袋裡。一條序列有兩個負責人，團隊就會帶著兩個不同的構築抵達 Jamboree，而且分不出數據是哪一個做出來的。"),
-  u:t("Shared object: the codon-optimised construct and its signal peptide","共同物件：密碼子最佳化後的構築與其訊號胜肽")},
- {a:"M3",b:"M4",av:"--m3",bv:"--m4",
-  t:t("Light in the same units","光要用同一組單位"),
-  d:t("The LPA produces a dose to response curve; the circuit produces a fold-change curve. If one reports intensity and the other reports high or low, the Measurement nomination has no calibrated backbone.","LPA 產生劑量反應曲線，迴路產生誘導倍數曲線。如果一邊報強度、一邊報「高／低」，量測提名就沒有經過校正的骨幹。"),
-  u:t("Shared units: nm · µmol·m⁻²·s⁻¹ · duration","共同單位：nm · µmol·m⁻²·s⁻¹ · 時間")},
- {a:"M4",b:"M5",av:"--m4",bv:"--m5",
-  t:t("Containment evidence is the legal argument","圍阻證據就是法規論證"),
-  d:t("No colonies outside the membrane is not only a safety result. It is the basis for contained-use classification, which is the basis for the biostimulant pathway, which is the difference between thirty days and several years.","膜外沒有菌落，不只是一個安全結果。它是「封閉使用」分類的依據，那是生物刺激素路徑的依據，而那是 30 天與好幾年的差別。"),
-  u:t("Shared claim: cell-free discharge equals contained use","共同主張：無細胞排出＝封閉使用")},
- {a:"M2",b:"M4",av:"--m2",bv:"--m4",
-  t:t("The number the product rests on","產品所依賴的那個數字"),
-  d:t("LEA 14 at roughly 10 to 30 kDa must pass the cut-off. NaD1 at about 5.3 kDa passes comfortably. B. subtilis must not pass at all. Both minds must quote the same measured weight and the same measured cut-off.","LEA 14 約 10 至 30 kDa，必須過得了截留門檻。NaD1 約 5.3 kDa，輕鬆通過。枯草桿菌完全不能過。兩顆腦袋引用的實測分子量與實測截留門檻必須一致。"),
-  u:t("Shared number: measured MW against 0.22 µm and CFMDI MWCO","共同數字：實測分子量 對 0.22 µm 與 CFMDI 截留分子量")},
- {a:"M1",b:"M5",av:"--m1",bv:"--m5",
-  t:t("The ethical ceiling is a threshold value","倫理上限是一個閾值")
-  ,d:t("陳惠雯 argued against over-protection. M1 turns that into the stress level at which the device intervenes. If M5 tells the ethics story and M1 cannot state the number, the human practices work reads as decoration.","陳惠雯反對過度保護。M1 把這個論點變成裝置介入的逆境強度。如果 M5 講倫理故事、M1 卻說不出那個數字，人本實踐就會被讀成裝飾。"),
-  u:t("Shared value: the intervention threshold, and why it is set high","共同數值：介入閾值，以及它為何設得高")}
-];
-
-var GAPS=[
- {sev:"critical",own:["M1","M5"],ev:"Business plan §3.2, §3.4",
-  t:t("No ACC deaminase plant data","缺少 ACC 去氨酶的植物數據"),
-  d:t("LEA 14 has a salinity rescue result. ACCD has enzyme activity but no plant readout, yet it appears in the SWOT, the product description and the development plan as a delivered protectant.","LEA 14 有鹽逆境挽救結果。ACCD 有酵素活性但沒有植物讀值，卻在 SWOT、產品說明與開發計畫裡以「已交付的保護劑」出現。")},
- {sev:"critical",own:["M2","M5"],ev:"Business plan §2.2, §6.2.1",
-  t:t("NaD1 is untested and off-pathway","NaD1 未測試，且與法規路徑衝突"),
-  d:t("Your own text says the antifungal mechanism can only be theoretical, not tested. An antifungal claim also moves the product from the Fertilizer Management Act to the Pesticide Management Act: years instead of thirty days.","你們自己的文字寫著抗真菌機制只能是理論、未經測試。抗真菌宣稱還會把產品從肥料管理法移到農藥管理法：從 30 天變成好幾年。")},
- {sev:"high",own:["M4","M5"],ev:"2026 Judging Form",
-  t:t("Model was dropped from the three nominations","模型獎已從三個提名中移除"),
-  d:t("Measurement, Hardware and Integrated HP are the three selections, so the modelling work now has to earn its score inside Project question 4 rather than through its own rubric. Make sure the model is presented as engineering evidence, not as a separate deliverable.","三個選擇是量測、硬體、整合式人本實踐，因此模型工作現在必須在專案第 4 題裡拿分，而不是靠自己的評分表。要把模型當成工程證據呈現，而不是獨立的交付物。")},
- {sev:"high",own:["M5"],ev:"Business plan §7.1",
-  t:t("Financial tables are empty","財務表格是空的"),
-  d:t("Fixed cost, variable cost, selling price, break-even point and break-even sales are all blank in the current draft. An entrepreneurship-minded judge opens at the number.","固定成本、變動成本、售價、損益兩平點、損益兩平銷售額，在目前草稿裡全是空白。有創業背景的評審一開口就是問數字。")},
- {sev:"high",own:["M2","M5"],ev:"Business plan §2.1",
-  t:t("Product specification table is empty","產品規格表是空的"),
-  d:t("Name, form, volume, price, tag, molecular construction, molecular weight, structure and storage are all unfilled. This is also where the measured molecular weight and the membrane cut-off should be stated once, publicly.","名稱、劑型、容量、價格、標籤、分子構築、分子量、結構、保存條件全部沒填。實測分子量與膜截留門檻也應該在這裡公開寫一次。")},
- {sev:"high",own:["M1"],ev:"3/27, 6/18, 7/28, 8/11",
-  t:t("Conflicting advice on hydroponics, unresolved","水耕的專家意見互相衝突，尚未收斂"),
-  d:t("鄭梅君 says hydroponics is unstable for Arabidopsis. 張嘉修 and 源鮮 say focus on hydroponics. 黃介辰 says hydroponic boxes cannot simulate field stress and farmers want soil. No written resolution exists.","鄭梅君說水耕對阿拉伯芥不穩定。張嘉修與源鮮說專注水耕。黃介辰說水耕箱模擬不了田間逆境、農民要的是土壤。目前沒有任何書面收斂。")},
- {sev:"medium",own:["M4"],ev:"Hardware rubric, aspect 4",
-  t:t("Hardware documentation not reproducible yet","硬體文件尚不足以重現"),
-  d:t("The Hardware rubric scores whether another team could rebuild the device from your documentation. A bill of materials, the LPA and photometer calibration protocols, and the enclosure files all need to be on the wiki, not in a drive folder.","硬體評分表在評「別的團隊能否靠你的文件重建裝置」。物料清單、LPA 與光度計校正流程、外殼檔案，都必須放在 wiki 上，不能只留在雲端資料夾。")},
- {sev:"medium",own:["M3"],ev:"7/28 中興大學",
-  t:t("Green reporter unverified in B. subtilis","綠光報導基因在枯草桿菌未經查證"),
-  d:t("黃介辰 asked directly whether the green light reporter gene has ever been used in B. sub. If it has not, that is a contribution worth claiming. If it has, cite the source. Either way, answer it.","黃介辰直接問過綠光報導基因是否曾在枯草桿菌中使用。如果沒有，那是一項值得宣告的貢獻；如果有，就引用來源。無論如何都要回答。")},
- {sev:"medium",own:["M4"],ev:"4/18 vs. business plan §3.4",
-  t:t("Kill switch: dropped or kept","自殺開關：拿掉還是留著"),
-  d:t("Brophy advised against it and the team moved to physical containment, but Phase 2 of the development plan still lists genetic kill switches as a deliverable to regulators.","Brophy 建議不要用，團隊也轉向物理圍阻，但開發計畫第二階段仍把基因自殺開關列為交付給主管機關的項目。")},
- {sev:"medium",own:["M5"],ev:"Geospatial analysis",
-  t:t("Geospatial method not written up","地理空間方法尚未成文"),
-  d:t("The convergence claim is strong, but interpolation method, weather-station density and uncertainty are not stated anywhere. This analysis is one of the project's most distinctive assets and it is currently undocumented.","交會論證很強，但內插方法、氣象站密度與不確定度都沒有寫在任何地方。這份分析是全案最有辨識度的資產之一，目前卻沒有文件。")},
- {sev:"medium",own:["M1"],ev:"8/11 源鮮",
-  t:t("Light cycle mismatch with industry","光週期與業界不一致"),
-  d:t("The team runs 8 hours light and 16 dark. 源鮮 runs 12/12 and questioned whether ours represents a realistic environment. This affects every growth comparison presented.","團隊跑 8 小時光照、16 小時黑暗。源鮮跑 12/12，並質疑我們的條件是否代表真實環境。這會影響端出的每一組生長比較。")},
- {sev:"medium",own:["M5"],ev:"Education log",
-  t:t("Education outcomes are unmeasured","教育成效沒有量測"),
-  d:t("144 students across six sessions is real reach, but the log records attendance rather than learning. One pre and post instrument would turn a list into evidence for HP rubric aspect 5.","六場、144 名學生是實在的觸及，但紀錄只有出席人數，沒有學習成效。一份前後測就能把清單變成人本實踐評分表第 5 項的證據。")}
+/* ── what to build next ───────────────────────── */
+var TODO=[
+ {pri:"now",own:["M1","M5"],ev:"Business plan §3.2, §3.4",
+  t:t("Get ACC deaminase onto a plant","把 ACC 去氨酶做到植物上"),
+  now:t("LEA 14 has a salinity rescue result. ACCD has enzyme activity in the supernatant and nothing on a plant, yet the SWOT, the product description and the development plan all treat it as delivered.","LEA 14 有鹽逆境挽救結果。ACCD 只有上清液的酵素活性，植物端一片空白，但 SWOT、產品說明與開發計畫都當它已經交付。"),
+  next:t("Run the ACCD arm of the existing rescue assay with the four control arms already defined. One dose, one stress, one readout is enough to convert a claim into a result.","用已經定義好的四組對照，把現有挽救試驗的 ACCD 組跑起來。一個劑量、一種逆境、一個讀值，就足以把宣稱變成結果。"),
+  unlocks:t("Proof of Concept · P2 · MS4","概念驗證 · P2 · MS4")},
+ {pri:"now",own:["M2","M4"],ev:"Business plan §6.1",
+  t:t("Measure membrane passage, don't predict it","量出膜通過率，不要用預測的"),
+  now:t("The whole architecture rests on LEA 14 passing the CFMDI cut-off while B. subtilis does not. Right now that comparison uses the sequence-predicted weight rather than a measured one.","整個架構建立在 LEA 14 過得了 CFMDI 截留門檻、枯草桿菌過不了。目前這個比較用的是序列推算的分子量，不是實測值。"),
+  next:t("Run purified tagged LEA against the membrane and record the passage rate. If it is too low, move to a larger cut-off verified against B. subtilis cell size.","用純化帶標籤的 LEA 對膜做測試並記錄通過率。若太低，改用經枯草桿菌細胞大小驗證過的較大截留門檻。"),
+  unlocks:t("HW3 · P2 · MS4","HW3 · P2 · MS4")},
+ {pri:"now",own:["M4"],ev:"Hardware rubric, aspect 4",
+  t:t("Make the hardware rebuildable by strangers","讓陌生人也能重建這台硬體"),
+  now:t("The Hardware rubric scores whether another team could rebuild the device from your documentation. The BOM, the LPA and photometer calibration protocols, the firmware and the enclosure files are not yet on the wiki.","硬體評分表評的是「別的團隊能不能靠你的文件重建裝置」。物料清單、LPA 與光度計校正流程、韌體與外殼檔案都還沒放上 wiki。"),
+  next:t("Publish a bill of materials with suppliers and prices, the Arduino sketch, the enclosure files, and a step-by-step assembly guide with photographs.","發布含供應商與價格的物料清單、Arduino 程式、外殼檔案，以及附照片的逐步組裝說明。"),
+  unlocks:t("HW4 · P8 · MS2","HW4 · P8 · MS2")},
+ {pri:"now",own:["M5"],ev:"Business plan §7.1, §2.1",
+  t:t("Fill the empty tables","把空表格填起來"),
+  now:t("Fixed cost, variable cost, selling price, break-even point and break-even sales are blank. So are name, form, volume, price, molecular weight, structure and storage in the product table.","固定成本、變動成本、售價、損益兩平點與損益兩平銷售額全是空白。產品表的名稱、劑型、容量、價格、分子量、結構與保存條件也是。"),
+  next:t("Cost the current build from the BOM, price one season of cartridges against a farmer's fungicide spend, and state the measured molecular weight and membrane cut-off once, publicly, in the product table.","用物料清單計算現有版本的成本，把一季卡匣價格對上農民的殺菌劑支出，並在產品表公開寫下一次實測分子量與膜截留門檻。"),
+  unlocks:t("P3 · Entrepreneurship · HP3","P3 · 創業 · HP3")},
+ {pri:"next",own:["M1"],ev:"3/27, 6/18, 7/28, 8/11",
+  t:t("Write down how you resolved the hydroponics conflict","把水耕爭議的裁決寫下來"),
+  now:t("鄭梅君 called hydroponics unstable for Arabidopsis, 張嘉修 and 源鮮 said focus on hydroponics, and 黃介辰 said hydroponic boxes cannot simulate field stress. No written resolution exists.","鄭梅君說水耕對阿拉伯芥不穩定，張嘉修與源鮮說專注水耕，黃介辰說水耕箱模擬不了田間逆境。目前沒有任何書面裁決。"),
+  next:t("One paragraph on the wiki separating the three layers: plant assay, reactor, deployment. Different layers, different answers. This turns an apparent contradiction into evidence that you can adjudicate.","在 wiki 上寫一段，把三個層次分開：植物試驗、反應器、部署。不同層次、不同答案。這會把看似矛盾的東西變成「你能裁決」的證據。"),
+  unlocks:t("HP1 · HP2 · P5","HP1 · HP2 · P5")},
+ {pri:"next",own:["M5"],ev:"Geospatial analysis",
+  t:t("Document the geospatial method","把地理分析方法寫成文件"),
+  now:t("The convergence claim is one of the project's most distinctive assets, and the interpolation method, weather-station density and uncertainty are stated nowhere.","交會論證是全案最有辨識度的資產之一，而內插方法、氣象站密度與不確定度沒有寫在任何地方。"),
+  next:t("A methods box naming the interpolation, the station count, the resolution and the uncertainty, plus which high-overlap regions you actually visited.","寫一個方法框，說明內插方式、測站數量、解析度與不確定度，以及你實際去了哪些高重疊區。"),
+  unlocks:t("HP2 · HP6 · P8","HP2 · HP6 · P8")},
+ {pri:"next",own:["M4"],ev:"Business plan §6.1",
+  t:t("Report escape frequency as a number","把逃逸頻率寫成數字"),
+  now:t("Containment rests on three independent layers, and the kill switch layer is described but not quantified. Absolute containment is a legal phrase, not an experimental result.","圍阻由三道獨立防線構成，而自殺開關這一層目前只有描述、沒有量化。「絕對圍阻」是法律用語，不是實驗結果。"),
+  next:t("Test the switch under nutrient deprivation and temperature shifts, count escape mutants, and publish the frequency with the run duration and the detection limit.","在營養剝奪與溫度變化下測試開關，計數逃逸突變株，並連同運轉時長與偵測極限一起公布頻率。"),
+  unlocks:t("HP3 · HW3 · Safety","HP3 · HW3 · 安全")},
+ {pri:"next",own:["M3"],ev:"7/28 中興大學",
+  t:t("Answer the green reporter question","回答綠光報導基因的問題"),
+  now:t("黃介辰 asked directly whether the green light reporter has ever been used in B. subtilis. The question is still open in the notes.","黃介辰直接問過綠光報導基因是否曾在枯草桿菌中使用過。這個問題在紀錄裡還沒有結論。"),
+  next:t("Search the literature and the Registry. If it has not been used, that is a Contribution worth claiming on the Registry. If it has, cite the source on the part page.","查文獻與 Registry。如果沒有被用過，那就是一項值得在 Registry 上宣告的貢獻；如果有，就在零件頁面引用來源。"),
+  unlocks:t("P7 · P8 · Parts","P7 · P8 · 零件")},
+ {pri:"next",own:["M1"],ev:"8/11 源鮮",
+  t:t("Justify or change the light cycle","為光週期辯護，或改掉它"),
+  now:t("The growth room runs 8 hours light against the 12 that commercial hydroponics uses. 源鮮 questioned whether ours represents a realistic environment, and it affects every growth comparison presented.","生長室跑 8 小時光照，商業水耕跑 12 小時。源鮮質疑我們的條件是否代表真實環境，而這會影響端出的每一組生長比較。"),
+  next:t("Either run one arm at 12/12 to show the result holds, or state on the wiki why 8/16 is the correct comparison for this species and stress.","要嘛跑一組 12/12 證明結果站得住，要嘛在 wiki 上說明為什麼對這個物種與逆境而言 8/16 才是正確的比較條件。"),
+  unlocks:t("MS4 · P2 · HP4","MS4 · P2 · HP4")},
+ {pri:"later",own:["M5"],ev:"Education log",
+  t:t("Measure what the students learned","量一下學生學到了什麼"),
+  now:t("144 students across six sessions is real reach, and the log records attendance rather than learning.","六場、144 名學生是實在的觸及，但紀錄只有出席人數，沒有學習成效。"),
+  next:t("One short pre and post instrument on the next session, five questions, same before and after. That converts a list of schools into evidence.","下一場加一份簡短的前後測，五題，前後相同。這會把學校清單轉成證據。"),
+  unlocks:t("HP5 · HP6 · Education","HP5 · HP6 · 教育")},
+ {pri:"later",own:["M5"],ev:"Business plan §6.2, EPC Art. 54",
+  t:t("Decide the open-science position","決定開放科學的立場"),
+  now:t("iGEM requires public disclosure and the IP section says disclosure before filing destroys European patentability. The team has not chosen.","iGEM 要求公開，而智財章節說申請前的公開會摧毀歐洲專利性。團隊尚未做出選擇。"),
+  next:t("File provisionally before the wiki freeze, or write one paragraph committing to open science and competing on manufacturing, distribution and trust. Either is defensible; silence is not.","要嘛在 wiki 凍結前送臨時申請，要嘛寫一段話承諾走開放科學，改以製造、通路與信任競爭。兩者都站得住，沉默不行。"),
+  unlocks:t("HP3 · P3","HP3 · P3")},
+ {pri:"later",own:["M2","M5"],ev:"Business plan §2.2, §3.2",
+  t:t("Scrub the antifungal language","清掉抗真菌的措辭"),
+  now:t("NaD1 is no longer part of the project, and the SWOT, product description and technology section still describe an antifungal module. Under the Fertilizer Management Act, disease-control wording is what moves the product to the Pesticide Management Act.","NaD1 已經不在專案裡，但 SWOT、產品說明與技術章節仍描述抗真菌模組。在肥料管理法之下，把產品推向農藥管理法的正是病害防治的措辭。"),
+  next:t("Search the business plan, wiki and video script for antifungal, fungicide, pathogen and disease. Rewrite each to abiotic stress tolerance, or delete it.","在商業計畫、wiki 與影片腳本中搜尋抗真菌、殺菌、病原、病害等字眼，逐一改為非生物逆境耐受性，或直接刪除。"),
+  unlocks:t("HP3 · P3 · Safety","HP3 · P3 · 安全")}
 ];
 
 var CONTRA=[
@@ -1034,32 +1108,32 @@ var CONTRA=[
   q:t("Three experts told you three different things about hydroponics. What did you do?","三位專家對水耕給了三種說法。你們怎麼處理？"),
   why:t("鄭梅君 on 3/27 called hydroponics unstable for Arabidopsis. 張嘉修 on 6/18 told you to focus on hydroponics. 黃介辰 on 7/28 said hydroponic boxes cannot simulate field stress and farmers want soil.","3/27 鄭梅君說水耕對阿拉伯芥不穩定。6/18 張嘉修要你們專注水耕。7/28 黃介辰說水耕箱模擬不了田間逆境，農民要的是土壤。"),
   shape:t("Judges are testing whether you can adjudicate, not whether you obeyed. Separate the domains: 鄭梅君 meant the plant assay, 張嘉修 meant the reactor, 黃介辰 meant deployment. Three layers, three answers, and no contradiction once you name which is which.","評審測的是你能不能裁決，不是你有沒有服從。把層次分開：鄭梅君講的是植物試驗，張嘉修講的是反應器，黃介辰講的是部署。三個層次、三個答案；只要你說清楚誰在講哪一層，矛盾就消失了。")},
- {minds:["M2","M5"],
-  q:t("Is this a biostimulant or a fungicide?","這到底是生物刺激素還是殺菌劑？"),
-  why:t("The SWOT and product description sell three protectants including the antifungal NaD1. The regulatory strategy explicitly requires omitting every claim of disease control.","SWOT 與產品說明在賣三種保護劑，包含抗真菌的 NaD1。法規策略明文要求刪除一切病害防治宣稱。"),
-  shape:t("One product, one claim. Abiotic stress tolerance is the commercial claim and NaD1 is research. Then scrub the wiki, the video and the business plan of pesticidal wording, because the copy is the legal exposure rather than the biology.","一個產品，一個宣稱。商業宣稱是非生物逆境耐受性，NaD1 是研究。接著把 wiki、影片與商業計畫裡的農藥性措辭清掉，因為有法律風險的是文案，不是生物學。")},
  {minds:["M1","M5"],
   q:t("You need to release protectant before stress. Your device detects stress. Explain.","保護劑必須在逆境前釋放，你的裝置卻是偵測逆境。請解釋。"),
   why:t("黃介辰 and Verslue both said protectants work as priming, applied before the event. A threshold-triggered reactor is by definition reactive.","黃介辰與 Verslue 都說保護劑是預先誘導，要在事件前施用。閾值觸發的反應器，定義上就是事後反應。"),
   shape:t("The forecast is the answer, and 黃介辰 is the reason you have one. Say what lead time the model produces and what it costs when the forecast is wrong. Naming the tension is what proves the human practices work was integrated.","答案是預測，而你會有預測正是因為黃介辰。說出模型能給多少前置時間，以及預測錯誤時的代價。把這個張力講出來，正好證明人本實踐真的被整合進去了。")},
- {minds:["M5"],
-  q:t("iGEM requires open publication. Your IP strategy requires the opposite.","iGEM 要求公開發表，你的智財策略要求相反。"),
-  why:t("The legal section notes that any public disclosure prior to formal filing establishes prior art and destroys international patent rights, particularly in the EU.","法律章節提到，正式申請前的任何公開都會構成先前技術，摧毀國際專利權，尤其在歐盟。"),
-  shape:t("Choose openly. File provisionally before the wiki freeze, or accept open science and compete on manufacturing, distribution and trust. Judges respect a stated position far more than an unexamined one.","公開地做選擇。要嘛在 wiki 凍結前送臨時申請，要嘛接受開放科學、改以製造、通路與信任競爭。評審對「有立場」的尊重遠高於「沒想過」。")},
  {minds:["M1","M5"],
   q:t("A farmer told you not to over-protect plants. Show me where that changed the engineering.","有農民叫你們不要過度保護植物。給我看這件事改了哪一段工程。"),
   why:t("陳惠雯 argued that over-protection prevents plants developing their own resilience, and that over-monitoring makes farmers dependent on sensors.","陳惠雯認為過度保護會讓植物長不出自己的韌性，過度監測會讓農民依賴感測器。"),
-  shape:t("Point at the threshold value. The reactor intervenes at acute survival crises and leaves ordinary stress alone. A specific number, set for an ethical reason, defended by a farmer's argument. This single answer is your strongest evidence for HP rubric aspects 1 and 3.","指著那個閾值。反應器只在急性存活危機時介入，一般逆境不動。一個具體數字，因為倫理理由而設定，由一位農民的論點撐著。這一個答案就是你在人本實踐評分表第 1 與第 3 項最強的證據。")},
- {minds:["M1","M5"],
+  shape:t("Point at the threshold value. The reactor intervenes at acute survival crises and leaves ordinary stress alone. A specific number, set for an ethical reason, defended by a farmer's argument. This is your strongest evidence for HP aspects 1 and 3.","指著那個閾值。反應器只在急性存活危機時介入，一般逆境不動。一個具體數字，因為倫理理由而設定，由一位農民的論點撐著。這是你在人本實踐第 1 與第 3 項最強的證據。")},
+ {minds:["M4","M5"],
+  q:t("Your device is sealed, but BAPHIQ may still call the secretions a GMO product. Then what?","你的裝置是封閉的，但防檢署仍可能把分泌物視為基改產品。那怎麼辦？"),
+  why:t("The risk register lists this as a live regulatory uncertainty, and the whole 30-day biostimulant pathway depends on the contained-use argument being accepted.","風險登錄把這列為尚未解決的法規不確定性，而整條 30 天的生物刺激素路徑，都建立在封閉使用論證被接受之上。"),
+  shape:t("Say you have not assumed the answer. All testing stays contained and lab-based until BAPHIQ gives written guidance, and the fallback is the longer pathway with a slower timeline. Showing you costed the downside is worth more than asserting the upside.","說你沒有預設答案。在防檢署給出書面意見前，所有測試都維持在封閉的實驗室內；備案是走比較長的路徑、接受較慢的時程。展示你算過壞情況，比斷言好情況更有價值。")},
+ {minds:["M2","M5"],
   q:t("Your plan projects a 10 to 15 percent yield improvement. On what data?","你的計畫推估 10 至 15% 的產量提升。根據什麼數據？"),
   why:t("Phase 2 targets 10 to 15 percent crop-loss reduction and 20 to 30 percent fewer fungicide applications. The plant evidence available is one salinity rescue with LEA 14.","第二階段的目標是減少 10 至 15% 的作物損失，並減少 20 至 30% 的殺菌劑施用次數。目前手上的植物證據是 LEA 14 的一次鹽逆境挽救。"),
-  shape:t("Call it a projection and show the assumption chain. Then name the experiment that would replace the assumption with a measurement. A projection that knows it is a projection reads as competence.","把它講成推估，並攤開假設鏈。接著點名哪一個實驗能把假設換成量測。知道自己是推估的推估，聽起來就是能力。")}
+  shape:t("Call it a projection and show the assumption chain. Then name the experiment that would replace the assumption with a measurement. A projection that knows it is a projection reads as competence.","把它講成推估，並攤開假設鏈。接著點名哪一個實驗能把假設換成量測。知道自己是推估的推估，聽起來就是能力。")},
+ {minds:["M3","M4"],
+  q:t("Who actually built the photometer, and what did you learn from the version that failed?","光度計到底是誰做的？失敗的那一版讓你們學到什麼？"),
+  why:t("Project question 6 asks how much the team did themselves, and the Hardware rubric asks for user testing and iteration. Both are answered by the same story, told badly or told well.","專案第 6 題問團隊自己做了多少，硬體評分表問使用者測試與迭代。兩者由同一個故事回答，差別只在講得好不好。"),
+  shape:t("Name the students, name the cycle that failed, and name what the next build changed. A team that can only describe the working version sounds like it inherited the device rather than made it.","講出學生的名字、講出失敗的那一輪、講出下一版改了什麼。只講得出可運作版本的團隊，聽起來像是繼承了這台裝置，不是做出來的。")}
 ];
 
 var UI={
  eyebrow:t("iGEM 2026 · Team ReLeaf · Judging session prep","iGEM 2026 · ReLeaf 團隊 · 評審場次備戰"),
  title:t("Five minds, twenty minutes","五顆腦袋，二十分鐘"),
- deck:t("The scores are already in when the session starts. These twenty minutes decide whether a judge confirms what they read or starts doubting it. The podium holds five people. This board sets out how the whole project divides across those five, and what each one carries from wet lab, dry lab and human practices at the same time.","場次開始時，分數已經打完了。這二十分鐘決定的是評審確認他讀到的東西，還是開始懷疑它。講台站得下五個人。這張板子說明整個專案怎麼分給那五顆腦袋，以及每一顆同時要扛起濕實驗、乾實驗與人本實踐的哪些部分。"),
+ deck:t("The scores are already in when the session starts. These twenty minutes decide whether a judge confirms what they read or starts doubting it, and the podium holds five people. Nobody on it gets to be a wet lab person, or a dry lab person, or an HP person. Each of the five owns one link of the system and carries all three subteams' evidence for that link.","場次開始時，分數已經打完了。這二十分鐘決定的是評審確認他讀到的東西，還是開始懷疑它，而講台只站得下五個人。站上去的人，沒有誰還能只是「濕實驗的」「乾實驗的」或「人本的」。這五顆腦袋各自負責系統的一個環節，並扛起該環節在三個子團隊裡的全部證據。"),
  facts:[
   {k:t("Format","形式"),v:t("5 min summary + 20 min Q&A","5 分鐘摘要 + 20 分鐘問答")},
   {k:t("Judges","評審"),v:t("6 per team, ballots mostly pre-filled","每隊 6 位，選票多已預填")},
@@ -1067,8 +1141,18 @@ var UI={
   {k:t("Nominations","提名"),v:t("Measurement · Hardware · IHP","量測 · 硬體 · 整合式人本實踐")},
   {k:t("Gold","金牌"),v:t("Inferred from all three award scores","由三個獎項分數推得")}
  ],
+ wallH:t("The walls have to come down","牆必須拆掉"),
+ wallP:t("Subteams are how the work gets scheduled. They are not how the project gets judged. A judge walks the system from stress to plant to device to market, and every question they ask cuts straight through all three subteams at once.","子團隊是安排工作的方式，不是專案被評分的方式。評審沿著系統從逆境走到植物、走到裝置、走到市場，而他們問的每一個問題，都會一刀切過三個子團隊。"),
+ wallOld:t("How the work is organised","工作是這樣安排的"),
+ wallOldSub:t("Three horizontal bands. A task lives in one band and stops at its edge.","三條橫向帶。一件任務住在一條帶裡，到邊界就停住。"),
+ wallNew:t("How the work is judged","評分是這樣進行的"),
+ wallNewSub:t("Five vertical minds. Each one cuts through all three bands, because the question does.","五顆縱向的腦袋。每一顆都切過三條帶，因為問題就是這樣切的。"),
+ wallStat1:t("entries on this board","這張板子上的項目"),
+ wallStat2:t("of the five minds draw on all three subteams","顆腦袋同時取用三個子團隊"),
+ wallStat3:t("named stakeholders whose advice changed a design","改變過設計的具名利害關係人"),
+ wallClose:t("Pick any column and read down it. Every one of the five needs a bench result, a calculation and a conversation with an outside expert in the same head. If you can only speak for one row, you cannot stand at the podium.","隨便挑一欄，往下讀。五顆腦袋每一顆都必須在同一個腦袋裡同時裝著一個實驗結果、一個計算、一場與外部專家的對話。如果你只能講一列，你就站不上講台。"),
  boardH:t("What each mind equips","每顆腦袋要裝的東西"),
- boardP:t("Rows are the three subteams, columns are the five minds. Every column is filled in all three rows, which is the test of whether the split holds. Hover or click an entry to read it in full below. Click a judging question further down the page to light up the entries that answer it.","橫列是三個子團隊，直欄是五顆腦袋。每一欄在三列都有東西，這就是檢驗這個切法成不成立的方法。滑過或點選任一項目，下方會顯示完整內容。點選頁面下方的評審問題，可以亮出回答該題的項目。"),
+ boardP:t("Rows are the three subteams, columns are the five minds. Hover a column header to see it cut through all three rows. Hover or click an entry to read it in full below. Click a judging question further down to light the entries that answer it.","橫列是三個子團隊，直欄是五顆腦袋。滑過欄位標題，可以看見它切過三列。滑過或點選任一項目，下方會顯示完整內容。點選下方的評審問題，可亮出回答它的項目。"),
  rubricLbl:t("Rubric","評分項目"),
  allAreas:t("All","全部"),
  fsOn:t("Full screen","全螢幕"),
@@ -1088,23 +1172,26 @@ var UI={
  dosCold:t("Five you answer cold, without notes","不看稿也要答得出的五題"),
  dosKill:t("The two that can hurt you","兩個會傷到你的問題"),
  qH:t("What the judges actually score","評審實際在評什麼"),
- qP:t("Nine questions build the project score that decides Grand Prize, Finalist and Village rankings. Three rubrics decide the special awards, and this year each judge's Gold vote is inferred from those same rubric scores. Click any question to light up the entries that answer it.","九題構成專案分數，決定大獎、決賽入圍與村獎排名。三份評分表決定特殊獎項，而今年每位評審的金牌票就是由這些評分表分數推得。點任一題可亮出回答它的項目。"),
- qNoteP9:t("Question 9 is the only one you cannot prepare evidence for. It is scored on the session itself, which is what the cold questions in each dossier are for.","第 9 題是唯一無法事前備妥證據的一題。它評的是現場本身，這也正是每份檔案裡那五道不看稿題目的用途。"),
+ qP:t("Nine questions build the project score that decides Grand Prize, Finalist and Village rankings. Three rubrics decide the special awards, and each judge's Gold vote is inferred from those same scores. Click a question to light the entries that answer it and see which minds have to speak.","九題構成專案分數，決定大獎、決賽入圍與村獎排名。三份評分表決定特殊獎項，而每位評審的金牌票就是由這些分數推得。點任一題，可亮出回答它的項目，並看出哪幾顆腦袋必須開口。"),
+ qNoteP9:t("Question 9 is the only one with no evidence you can file in advance. It is scored on the session itself, which is what the cold questions in each dossier are for.","第 9 題是唯一無法事前備妥證據的一題。它評的是現場本身，這也正是每份檔案裡那五道不看稿題目的用途。"),
  qNoteAward:t("A weak third nomination is a direct Gold risk this year, not only a lost award. Model was dropped from the shortlist, so modelling work now has to score inside project question 4.","今年第三個提名選得弱，就是直接的金牌風險，不只是少拿一個獎。模型獎已從入選名單移除，因此模型工作現在必須在專案第 4 題裡拿分。"),
- covLights:t("lights","亮起"),
- covEntry:t("entry across","個項目，分布於"),
- covEntries:t("entries across","個項目，分布於"),
- covMind:t("mind","顆腦袋"),
- covMinds:t("minds","顆腦袋"),
- covNone:t("No entry is tagged to this question yet. That is a gap worth closing.","目前沒有任何項目對應到這一題。這是一個值得補的缺口。"),
- covThin:t("Thin coverage:","覆蓋薄弱："),
+ qLead:t("Lead","主答"),
+ qSupport:t("Support","支援"),
+ qAll:t("Every entry on the board. There is nothing to pre-file for this one.","板子上的每一個項目。這一題沒有任何東西可以事前備妥。"),
+ covEntry:t("entry","個項目"),
+ covEntries:t("entries","個項目"),
+ covGap:t("No entry yet:","尚無項目："),
  clearQ:t("Clear","清除"),
- seamH:t("The seams","接縫"),
- seamP:t("Where two minds meet decides whether a project sounds rehearsed or sounds real. Each seam carries one shared number or fact that both people must state identically.","兩顆腦袋交會的地方，決定這個專案聽起來是背過的還是真的。每條接縫都有一個共同的數字或事實，兩個人講出來必須一模一樣。"),
- gapH:t("Known holes","已知的洞"),
- gapP:t("Pulled from your own documents. A judge who finds one of these before you name it costs more than the hole itself. Name it, own it, say what closes it.","全部出自你們自己的文件。評審比你先找到，代價比那個洞本身還大。先講出來、承認它、說怎麼補。"),
+ todoH:t("What to build next","接下來要做什麼"),
+ todoP:t("Every item is something a judge can already ask about and you cannot yet answer well. Each one names the work, who owns it, and which score it moves. Take one, finish it, and the board gets stronger in a place a judge will look.","每一項都是評審現在就能問、而你還答不好的東西。每一項都寫出要做的工作、誰負責，以及它能推動哪一項分數。挑一項做完，板子就會在評審會看的地方變強。"),
+ todoNow:t("NOW","現在"),
+ todoNext:t("NEXT","接著"),
+ todoLater:t("LATER","之後"),
+ todoState:t("Where it stands","目前狀況"),
+ todoDo:t("What to do","要做的事"),
+ todoUnlocks:t("Moves","推動"),
  conH:t("Stress tests","壓力測試"),
- conP:t("Real contradictions sitting inside the stakeholder log and the business plan right now. Each is a question a sharp judge will find. The shape of the answer matters more than the answer.","此刻就存在於利害關係人紀錄與商業計畫裡的真實矛盾。每一個都是敏銳評審會找到的問題。答案的形狀比答案本身更重要。"),
+ conP:t("Real contradictions sitting inside the stakeholder log and the business plan right now. Each is a question a sharp judge will find, and each one needs two or three minds answering together. The shape of the answer matters more than the answer.","此刻就存在於利害關係人紀錄與商業計畫裡的真實矛盾。每一個都是敏銳評審會找到的問題，而且每一個都需要兩三顆腦袋一起回答。答案的形狀比答案本身更重要。"),
  answerShape:t("Answer shape","答案的形狀"),
  praH:t("How this changes what you write","這會改變你怎麼寫"),
  praP:t("The five minds are not only a podium plan. They are the unit of work for the wiki and the video.","五顆腦袋不只是講台上的分工，也是 wiki 與影片的工作單位。"),
@@ -1113,20 +1200,20 @@ var UI={
    p:t("A mind is a thread that surfaces on several pages at once. M2's protectant thread runs through Description, Design, Results, Proof of Concept and Human Practices as one story with one set of numbers.","一顆腦袋是一條同時浮現在多個頁面上的線索。M2 的保護劑線索貫穿 Description、Design、Results、Proof of Concept 與 Human Practices，是同一個故事、同一組數字。"),
    l:[t("Before writing a page, ask which mind owns it.","動筆前先問：這一頁屬於哪顆腦袋。"),
       t("Every design claim cites the stakeholder who caused it.","每個設計主張都要引用促成它的那位利害關係人。"),
-      t("Parts documentation lives on the Registry, not the wiki. Judges score only the Registry.","零件文件放在 Registry，不是 wiki。評審只採計 Registry。")]},
+      t("Parts documentation lives on the Registry. Judges score only the Registry.","零件文件放在 Registry。評審只採計 Registry。")]},
   {n:t("Video","影片"),h:t("Five beats, one chain","五個節拍，一條鏈"),
    p:t("The presentation video walks the chain in order. Each mind gets one beat and hands the next a specific object: a dose, a molecular weight, a wavelength, a threshold. Never a topic change.","簡報影片依序走完這條鏈。每顆腦袋一個節拍，並交給下一顆一個具體物件：一個劑量、一個分子量、一個波長、一個閾值。絕不是換一個主題。"),
    l:[t("Open on the plant and the farmer, not the plasmid.","從植物與農民開場，不是質體。"),
-      t("Every transition is a seam from the section above.","每一次轉場都是上面那一節裡的一條接縫。"),
+      t("Every handover names a number both minds agree on.","每一次交棒都要講出兩顆腦袋都同意的一個數字。"),
       t("End on the regulatory pathway, because that is the so what.","收在法規路徑，因為那才是「那又如何」。")]},
   {n:t("Practice","演練"),h:t("Cross-examine each other","互相交叉詰問"),
-   p:t("Run mock sessions where a student may only ask about a mind they do not own. The failures cluster at the seams, which is exactly where the judges will find them.","跑模擬場，規定學生只能問自己不負責的那顆腦袋。失誤會集中在接縫上，剛好就是評審會找到的地方。"),
+   p:t("Run mock sessions where a student may only ask about a mind they do not own. The failures cluster where two minds meet, which is exactly where the judges will find them.","跑模擬場，規定學生只能問自己不負責的那顆腦袋。失誤會集中在兩顆腦袋交會的地方，剛好就是評審會找到的地方。"),
    l:[t("Every mind answers their five cold questions without notes.","每顆腦袋都要不看稿答完自己的五題。"),
       t("Every mind can name one thing they got wrong and changed.","每顆腦袋都要說得出一件自己弄錯後改掉的事。"),
       t("Nobody says \"that is not my part.\"","沒有人可以說「那不是我負責的」。")]}
  ],
  foot1:t("Built from the ReLeaf stakeholder engagement log, education log and business plan draft, against the iGEM 2026 Judge Handbook.","資料來源：ReLeaf 利害關係人互動紀錄、教育活動紀錄、商業計畫草稿，並對照 iGEM 2026 評審手冊。"),
- foot2:t("5 MINDS · 3 SUBTEAMS · 6 SEAMS · 20 MINUTES","5 顆腦袋 · 3 個子團隊 · 6 條接縫 · 20 分鐘"),
+ foot2:t("5 MINDS · 3 SUBTEAMS · 23 JUDGE QUESTIONS · 20 MINUTES","5 顆腦袋 · 3 個子團隊 · 23 道評審問題 · 20 分鐘"),
  threadLabel:t("Trace","追蹤"),
  clearThread:t("Clear thread","清除線索")
 };
@@ -1136,45 +1223,98 @@ var byN={}; MINDS.forEach(function(m){byN[m.n]=m;});
 function el(tag,cls,html){var e=document.createElement(tag); if(cls)e.className=cls; if(html!==undefined)e.innerHTML=html; return e;}
 function setText(id,v){var n=document.getElementById(id); if(n)n.innerHTML=T(v);}
 
-var activeThread=null, activeQ=null, activeRubric=null, selChip=null, openMind=null;
+var activeThread=null, activeQ=null, activeRubric=null, selChip=null, openMind=null, hoverMind=null;
 
 function renderStatic(){
   document.documentElement.lang = (lang==="z")?"zh-Hant":"en";
   setText("tEyebrow",UI.eyebrow); setText("tTitle",UI.title); setText("tDeck",UI.deck);
+  setText("tWallH",UI.wallH); setText("tWallP",UI.wallP);
   setText("tBoardH",UI.boardH); setText("tBoardP",UI.boardP); setText("tRubric",UI.rubricLbl);
   setText("tQH",UI.qH); setText("tQP",UI.qP);
-  setText("tSeamH",UI.seamH); setText("tSeamP",UI.seamP);
-  setText("tGapH",UI.gapH); setText("tGapP",UI.gapP);
+  setText("tTodoH",UI.todoH); setText("tTodoP",UI.todoP);
   setText("tConH",UI.conH); setText("tConP",UI.conP);
   setText("tPraH",UI.praH); setText("tPraP",UI.praP);
   setText("tFoot1",UI.foot1); setText("tFoot2",UI.foot2);
   document.getElementById("fsBtn").textContent = document.fullscreenElement?T(UI.fsOff):T(UI.fsOn);
 
   var fl=document.getElementById("factList"); fl.innerHTML="";
-  UI.facts.forEach(function(f){ fl.appendChild(el("dt",null,T(f.k))); fl.appendChild(el("dd",null,T(f.v))); });
+  UI.facts.forEach(function(f){fl.appendChild(el("dt",null,T(f.k))); fl.appendChild(el("dd",null,T(f.v)));});
 
   var pg=document.getElementById("practiceGrid"); pg.innerHTML="";
   UI.practice.forEach(function(x){
     pg.appendChild(el("div",null,'<div class="n">'+T(x.n)+'</div><h4>'+T(x.h)+'</h4><p>'+T(x.p)+'</p><ul>'+
       x.l.map(function(i){return "<li>"+T(i)+"</li>";}).join("")+'</ul>'));
   });
+  renderWall();
+}
+
+/* ── the crossing diagram ── */
+function renderWall(){
+  var host=document.getElementById("wallFig"); host.innerHTML="";
+  var rowNames=[T(UI.rowHP.n),T(UI.rowWet.n),T(UI.rowDry.n)];
+  var W=600,H=200,padL=112,padR=10,padT=28,band=(H-padT-14)/3, colW=(W-padL-padR)/5;
+
+  function svg(vertical){
+    var p=['<svg viewBox="0 0 '+W+' '+H+'" role="img" preserveAspectRatio="xMidYMid meet">'];
+    for(var r=0;r<3;r++){
+      var y=padT+r*band;
+      p.push('<rect x="'+padL+'" y="'+y+'" width="'+(W-padL-padR)+'" height="'+(band-6)+'" rx="2" fill="var(--surface-2)" stroke="var(--rule)" stroke-width="1"/>');
+      p.push('<text x="'+(padL-10)+'" y="'+(y+band/2-1)+'" text-anchor="end" dominant-baseline="middle" font-family="var(--mono)" font-size="8.5" fill="var(--ink-3)">'+rowNames[r]+'</text>');
+    }
+    if(vertical){
+      MINDS.forEach(function(m,i){
+        var x=padL+i*colW+3, w=colW-6;
+        p.push('<rect x="'+x+'" y="'+(padT-9)+'" width="'+w+'" height="'+(H-padT-4)+'" rx="2" fill="var('+m.soft+')" fill-opacity="0.85" stroke="var('+m.v+')" stroke-width="1.2"/>');
+        p.push('<text x="'+(x+w/2)+'" y="'+(padT-14)+'" text-anchor="middle" font-family="var(--mono)" font-size="9" font-weight="600" fill="var('+m.v+')">'+m.n+'</text>');
+      });
+    } else {
+      for(var r2=0;r2<3;r2++){
+        var y2=padT+r2*band;
+        p.push('<rect x="'+padL+'" y="'+y2+'" width="'+(W-padL-padR)+'" height="'+(band-6)+'" rx="2" fill="var(--rule)" fill-opacity="0.45"/>');
+      }
+      for(var k=1;k<3;k++){
+        var wy=padT+k*band-4.5;
+        p.push('<rect x="'+(padL-4)+'" y="'+(wy-1.5)+'" width="'+(W-padL-padR+8)+'" height="4" fill="var(--ink-2)"/>');
+      }
+      p.push('<text x="'+(W-padR-4)+'" y="'+(padT+band-9)+'" text-anchor="end" font-family="var(--mono)" font-size="8" fill="var(--ink-3)">'+(lang==="z"?"牆":"WALL")+'</text>');
+      p.push('<text x="'+(W-padR-4)+'" y="'+(padT+2*band-9)+'" text-anchor="end" font-family="var(--mono)" font-size="8" fill="var(--ink-3)">'+(lang==="z"?"牆":"WALL")+'</text>');
+    }
+    p.push('</svg>');
+    return p.join("");
+  }
+
+  var total=0, crossing=0, people={};
+  MINDS.forEach(function(m){
+    var f=0;
+    ["hp","wet","dry"].forEach(function(r){ total+=m[r].length; if(m[r].length>0) f++; });
+    if(f===3) crossing++;
+    m.hp.forEach(function(i){ var k=T(i.k).split(" · ")[0]; people[k]=1; });
+  });
+
+  host.appendChild(el("div","wall-pane",
+    '<div class="wl">'+T(UI.wallOld)+'</div><div class="ws">'+T(UI.wallOldSub)+'</div>'+svg(false)));
+  host.appendChild(el("div","wall-pane cross",
+    '<div class="wl">'+T(UI.wallNew)+'</div><div class="ws">'+T(UI.wallNewSub)+'</div>'+svg(true)));
+
+  var st=document.getElementById("wallStats"); st.innerHTML="";
+  [[total,UI.wallStat1],[crossing+" / 5",UI.wallStat2],[Object.keys(people).length,UI.wallStat3]].forEach(function(pair){
+    st.appendChild(el("div","wstat",'<div class="v">'+pair[0]+'</div><div class="l">'+T(pair[1])+'</div>'));
+  });
+  setText("tWallClose",UI.wallClose);
 }
 
 function renderRubric(){
   var w=document.getElementById("rubricPills"); w.innerHTML="";
-  var all=el("button","pill ghost",T(UI.allAreas));
-  all.className="ctl"; all.style.padding="3px 10px"; all.style.textTransform="none"; all.style.fontSize="11px";
-  all.setAttribute("aria-pressed",String(activeRubric===null));
-  if(activeRubric===null){all.style.background="var(--ink)";all.style.color="var(--paper)";all.style.borderColor="var(--ink)";}
-  all.addEventListener("click",function(){setRubric(null);});
-  w.appendChild(all);
+  function mk(label,on,fn){
+    var p=el("button","ctl",label);
+    p.style.padding="3px 10px"; p.style.textTransform="none"; p.style.fontSize="11px"; p.style.fontFamily="var(--sans)";
+    if(on){p.style.background="var(--ink)";p.style.color="var(--paper)";p.style.borderColor="var(--ink)";}
+    p.addEventListener("click",fn); return p;
+  }
+  w.appendChild(mk(T(UI.allAreas),activeRubric===null,function(){setRubric(null);}));
   RUBRIC.forEach(function(r,i){
     if(!MINDS.some(function(m){return m.rubric.indexOf(i)>=0;})) return;
-    var p=el("button","ctl",T(r));
-    p.style.padding="3px 10px"; p.style.textTransform="none"; p.style.fontSize="11px"; p.style.fontFamily="var(--sans)";
-    if(activeRubric===i){p.style.background="var(--ink)";p.style.color="var(--paper)";p.style.borderColor="var(--ink)";}
-    p.addEventListener("click",function(){setRubric(activeRubric===i?null:i);});
-    w.appendChild(p);
+    w.appendChild(mk(T(r),activeRubric===i,function(){setRubric(activeRubric===i?null:i);}));
   });
 }
 function setRubric(i){
@@ -1193,11 +1333,16 @@ function renderBoard(){
   MINDS.forEach(function(m){
     var h=el("button","b-head");
     h.style.setProperty("--mc","var("+m.v+")"); h.style.setProperty("--mcs","var("+m.soft+")");
-    h.style.position="sticky"; h.title=T(UI.openDossier);
+    h.style.position="sticky"; h.title=T(UI.openDossier); h.dataset.mind=m.n;
+    var counts='<span class="cnt"><b>'+m.hp.length+'</b> HP <b>'+m.wet.length+'</b> WET <b>'+m.dry.length+'</b> DRY</span>';
     h.innerHTML='<div class="rail"></div><div class="id">'+m.n+'</div><div class="nm">'+T(m.nm)+'</div>'+
       '<div class="tags">'+m.tags.slice(0,4).map(function(x){return '<span class="tg">'+T(x)+'</span>';}).join("")+'</div>'+
-      '<span class="hits" data-hits="'+m.n+'" hidden></span>';
+      counts+'<span class="hits" data-hits="'+m.n+'" hidden></span>';
     h.addEventListener("click",function(){openDossier(m);});
+    h.addEventListener("mouseenter",function(){setHover(m.n);});
+    h.addEventListener("mouseleave",function(){setHover(null);});
+    h.addEventListener("focus",function(){setHover(m.n);});
+    h.addEventListener("blur",function(){setHover(null);});
     b.appendChild(h);
   });
   ROWS.forEach(function(row,ri){
@@ -1225,6 +1370,13 @@ function renderBoard(){
   });
   applyHighlight();
   if(activeRubric!==null) setRubric(activeRubric);
+}
+
+function setHover(n){
+  hoverMind=n;
+  document.querySelectorAll(".b-cell,.b-head").forEach(function(x){
+    x.classList.toggle("colhot", !!n && x.dataset.mind===n);
+  });
 }
 
 function showIdle(){
@@ -1260,6 +1412,7 @@ function applyHighlight(){
   var banner=document.getElementById("qbanner");
   document.querySelectorAll(".chip").forEach(function(ch){ch.classList.remove("hot","cold","qhit");});
   document.querySelectorAll("[data-hits]").forEach(function(h){h.hidden=true;h.textContent="";});
+  document.querySelectorAll(".b-head").forEach(function(h){h.classList.remove("lead");});
   if(activeThread){
     document.querySelectorAll(".chip").forEach(function(ch){
       var l=(ch.dataset.th||"").split(" ");
@@ -1268,22 +1421,31 @@ function applyHighlight(){
     banner.hidden=true; return;
   }
   if(activeQ){
-    var perMind={}, total=0;
+    var meta=QMETA[activeQ], perMind={}, total=0;
     document.querySelectorAll(".chip").forEach(function(ch){
-      var l=(ch.dataset.q||"").split(" ");
-      if(l.indexOf(activeQ)>=0){ ch.classList.add("qhit"); total++; perMind[ch.dataset.mind]=(perMind[ch.dataset.mind]||0)+1; }
+      var hit = meta.all ? true : (ch.dataset.q||"").split(" ").indexOf(activeQ)>=0;
+      if(hit){ ch.classList.add("qhit"); total++; perMind[ch.dataset.mind]=(perMind[ch.dataset.mind]||0)+1; }
       else ch.classList.add("cold");
     });
     MINDS.forEach(function(m){
       var n=perMind[m.n]||0, node=document.querySelector('[data-hits="'+m.n+'"]');
-      if(node && n>0){ node.hidden=false; node.textContent=n; }
+      if(node&&n>0){node.hidden=false;node.textContent=n;}
     });
-    var covered=Object.keys(perMind).length;
-    var thin=MINDS.filter(function(m){return !perMind[m.n];}).map(function(m){return m.n;});
-    var cov = total===0 ? T(UI.covNone)
-      : total+" "+T(total===1?UI.covEntry:UI.covEntries)+" "+covered+" "+T(covered===1?UI.covMind:UI.covMinds)+(thin.length?"  ·  "+T(UI.covThin)+" "+thin.join(", "):"");
+    (meta.lead||[]).forEach(function(id){
+      var h=document.querySelector('.b-head[data-mind="'+id+'"]'); if(h) h.classList.add("lead");
+    });
+    var support=MINDS.filter(function(m){return perMind[m.n]&&(meta.lead||[]).indexOf(m.n)<0;}).map(function(m){return m.n;});
+    var gap=(meta.lead||[]).filter(function(id){return !perMind[id];});
+    var cov;
+    if(meta.all){ cov=T(UI.qAll); }
+    else {
+      cov=total+" "+T(total===1?UI.covEntry:UI.covEntries)+
+        "  ·  "+T(UI.qLead)+" "+(meta.lead||[]).join(", ")+
+        (support.length?"  ·  "+T(UI.qSupport)+" "+support.join(", "):"")+
+        (gap.length?"  ·  "+T(UI.covGap)+" "+gap.join(", "):"");
+    }
     banner.hidden=false;
-    banner.innerHTML='<span class="tag">'+activeQ.toUpperCase()+'</span><span class="txt">'+T(QTEXT[activeQ])+'</span>'+
+    banner.innerHTML='<span class="tag">'+activeQ.toUpperCase()+'</span><span class="txt">'+T(meta.t)+'</span>'+
       '<span class="cov">'+cov+'</span><button class="x" id="clrQ">'+T(UI.clearQ)+'</button>';
     document.getElementById("clrQ").addEventListener("click",function(){setQuestion(activeQ);});
     return;
@@ -1294,9 +1456,7 @@ function setQuestion(id){
   activeThread=null;
   activeQ=(activeQ===id)?null:id;
   renderQuestions(); applyHighlight();
-  if(activeQ){
-    document.getElementById("boardShell").scrollIntoView({behavior:"smooth",block:"nearest"});
-  }
+  if(activeQ) document.getElementById("boardShell").scrollIntoView({behavior:"smooth",block:"nearest"});
 }
 
 function renderQuestions(){
@@ -1307,9 +1467,9 @@ function renderQuestions(){
     function mkList(qs){
       var ul=el("ul","qlist");
       qs.forEach(function(q){
-        var n=countQ(q.id);
         var li=document.createElement("li");
-        var btn=el("button","qbtn",'<span class="qid">'+q.id.toUpperCase()+'</span><span>'+T(q.t)+'</span><span class="qn">'+n+'</span>');
+        var lead=(q.lead||[]).join(" ");
+        var btn=el("button","qbtn",'<span class="qid">'+q.id.toUpperCase()+'</span><span>'+T(q.t)+'</span><span class="qn">'+lead+'</span>');
         btn.setAttribute("aria-pressed",String(activeQ===q.id));
         btn.addEventListener("click",function(){setQuestion(q.id);});
         li.appendChild(btn); ul.appendChild(li);
@@ -1322,21 +1482,14 @@ function renderQuestions(){
     }
     if(set.groups){
       set.groups.forEach(function(grp){
-        var s=el("div","qset");
-        s.appendChild(el("div","setname",'<span>'+T(grp.name)+'</span><span class="n">'+grp.qs.length+'</span>'));
-        s.appendChild(mkList(grp.qs)); panel.appendChild(s);
+        var s2=el("div","qset");
+        s2.appendChild(el("div","setname",'<span>'+T(grp.name)+'</span><span class="n">'+grp.qs.length+'</span>'));
+        s2.appendChild(mkList(grp.qs)); panel.appendChild(s2);
       });
       panel.appendChild(el("div","qnote",T(UI.qNoteAward)));
     }
     g.appendChild(panel);
   });
-}
-function countQ(id){
-  var n=0;
-  MINDS.forEach(function(m){["hp","wet","dry"].forEach(function(r){
-    m[r].forEach(function(i){ if(i.q.indexOf(id)>=0) n++; });
-  });});
-  return n;
 }
 
 /* dossier */
@@ -1365,25 +1518,19 @@ function closeDossier(){scrim.hidden=true;openMind=null;document.body.style.over
 scrim.addEventListener("click",function(e){if(e.target===scrim)closeDossier();});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!scrim.hidden)closeDossier();});
 
-function renderSeams(){
-  var g=document.getElementById("seamGrid"); g.innerHTML="";
-  SEAMS.forEach(function(s){
-    var d=el("div","seam");
-    d.style.setProperty("--pa","var("+s.av+")"); d.style.setProperty("--pb","var("+s.bv+")");
-    d.innerHTML='<div class="pair"><span class="a">'+s.a+'</span><span class="j">———</span><span class="b">'+s.b+'</span></div>'+
-      '<h4>'+T(s.t)+'</h4><p>'+T(s.d)+'</p><div class="unit">'+T(s.u)+'</div>';
-    g.appendChild(d);
-  });
-}
-function renderGaps(){
-  var g=document.getElementById("gapTable"); g.innerHTML="";
-  var SEV={critical:t("CRITICAL","關鍵"),high:t("HIGH","高"),medium:t("MEDIUM","中")};
-  GAPS.forEach(function(x){
-    var d=el("div","gap");
-    d.innerHTML='<div class="sev sev-'+x.sev+'">'+T(SEV[x.sev])+'</div>'+
-      '<div class="body"><h4>'+T(x.t)+'</h4><p>'+T(x.d)+'</p><div class="ev">'+x.ev+'</div></div>'+
-      '<div class="owner">'+x.own.map(function(o){var m=byN[o];
-        return '<span class="o" style="color:'+(m?"var("+m.v+")":"var(--ink-2)")+'">'+o+(m?" · "+T(m.nm):"")+'</span>';}).join("")+'</div>';
+function renderTodo(){
+  var g=document.getElementById("todoList"); g.innerHTML="";
+  var PRI={now:UI.todoNow,next:UI.todoNext,later:UI.todoLater};
+  TODO.forEach(function(x){
+    var d=el("div","todo");
+    d.innerHTML='<div class="pri pri-'+x.pri+'">'+T(PRI[x.pri])+'</div>'+
+      '<div class="body"><h4>'+T(x.t)+'</h4>'+
+        '<p class="st"><span>'+T(UI.todoState)+'</span>'+T(x.now)+'</p>'+
+        '<p class="do"><span>'+T(UI.todoDo)+'</span>'+T(x.next)+'</p>'+
+        '<div class="ev">'+x.ev+'</div></div>'+
+      '<div class="owner"><div class="mv">'+x.own.map(function(o){var m=byN[o];
+        return '<span class="o" style="color:var('+m.v+')">'+o+' · '+T(m.nm)+'</span>';}).join("")+'</div>'+
+        '<div class="unl"><span>'+T(UI.todoUnlocks)+'</span>'+T(x.unlocks)+'</div></div>';
     g.appendChild(d);
   });
 }
@@ -1401,9 +1548,8 @@ function renderContra(){
 
 function renderAll(){
   renderStatic(); renderRubric(); renderBoard(); renderQuestions();
-  if(!activeQ && !activeThread) showIdle();
-  renderSeams(); renderGaps(); renderContra();
-  applyHighlight();
+  if(!activeQ&&!activeThread) showIdle();
+  renderTodo(); renderContra(); applyHighlight();
   if(openMind) openDossier(byN[openMind.n]);
 }
 
