@@ -1092,7 +1092,9 @@ var UI={
  qNoteP9:t("Question 9 is the only one you cannot prepare evidence for. It is scored on the session itself, which is what the cold questions in each dossier are for.","第 9 題是唯一無法事前備妥證據的一題。它評的是現場本身，這也正是每份檔案裡那五道不看稿題目的用途。"),
  qNoteAward:t("A weak third nomination is a direct Gold risk this year, not only a lost award. Model was dropped from the shortlist, so modelling work now has to score inside project question 4.","今年第三個提名選得弱，就是直接的金牌風險，不只是少拿一個獎。模型獎已從入選名單移除，因此模型工作現在必須在專案第 4 題裡拿分。"),
  covLights:t("lights","亮起"),
+ covEntry:t("entry across","個項目，分布於"),
  covEntries:t("entries across","個項目，分布於"),
+ covMind:t("mind","顆腦袋"),
  covMinds:t("minds","顆腦袋"),
  covNone:t("No entry is tagged to this question yet. That is a gap worth closing.","目前沒有任何項目對應到這一題。這是一個值得補的缺口。"),
  covThin:t("Thin coverage:","覆蓋薄弱："),
@@ -1279,7 +1281,7 @@ function applyHighlight(){
     var covered=Object.keys(perMind).length;
     var thin=MINDS.filter(function(m){return !perMind[m.n];}).map(function(m){return m.n;});
     var cov = total===0 ? T(UI.covNone)
-      : total+" "+T(UI.covEntries)+" "+covered+" "+T(UI.covMinds)+(thin.length?"  ·  "+T(UI.covThin)+" "+thin.join(", "):"");
+      : total+" "+T(total===1?UI.covEntry:UI.covEntries)+" "+covered+" "+T(covered===1?UI.covMind:UI.covMinds)+(thin.length?"  ·  "+T(UI.covThin)+" "+thin.join(", "):"");
     banner.hidden=false;
     banner.innerHTML='<span class="tag">'+activeQ.toUpperCase()+'</span><span class="txt">'+T(QTEXT[activeQ])+'</span>'+
       '<span class="cov">'+cov+'</span><button class="x" id="clrQ">'+T(UI.clearQ)+'</button>';
