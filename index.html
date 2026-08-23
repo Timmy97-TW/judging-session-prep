@@ -418,6 +418,7 @@ footer{margin-top:var(--s8);padding-top:var(--s4);border-top:1px solid var(--rul
       <div class="board-bar">
         <span class="lbl" id="tRubric"></span>
         <div class="rubricwrap" id="rubricPills"></div>
+        <button class="ctl" id="xlsxBtn" style="flex:0 0 auto"></button>
         <button class="ctl" id="fsBtn" style="flex:0 0 auto"></button>
       </div>
       <div class="qbanner" id="qbanner" hidden></div>
@@ -462,12 +463,14 @@ function c(ke,kz,de,dz,se,sz,th,q){ return {k:{e:ke,z:kz},d:{e:de,z:dz},s:{e:se,
 var THREADS={
  light:{n:t("Light dose","光劑量"),d:t("535 nm green and 670 nm red are the control input and a measured quantity at once. Every mind that touches light quotes the same units.","535 nm 綠光與 670 nm 紅光既是控制輸入，也是可量測的物理量。凡碰到光的人，單位必須一致。")},
  mwco:{n:t("Weight against cut-off","分子量對膜孔徑"),d:t("The protectant must pass the membrane and the bacterium must not. If this number is wrong, nothing downstream survives.","保護劑必須穿過膜，細菌不能。這個數字錯了，後面全部站不住。")},
- threshold:{n:t("Trigger threshold","觸發閾值"),d:t("An ethical position, a forecast model, and the stress level that actually damages the plant all resolve into one number.","一個倫理立場、一個預測模型、以及真正傷害植物的逆境強度，最後全部收斂成一個數字。")},
+ threshold:{n:t("Trigger threshold","觸發閾值"),d:t("An ethical position, a forecast model, and the stress level that damages the plant all resolve into one number.","一個倫理立場、一個預測模型、以及真正傷害植物的逆境強度，最後全部收斂成一個數字。")},
  containment:{n:t("Containment evidence","圍阻證據"),d:t("Three independent layers: the genetic kill switch, the membrane, and the housing. The evidence that they hold is also the regulatory argument.","三道獨立防線：基因自殺開關、膜、外殼。證明它們有效的證據，同時就是法規論證。")},
  timing:{n:t("Priming against rescue","預先誘導 vs 事後挽救"),d:t("Protectants work best before stress arrives. A reactive device is late unless the forecast buys back the lead time.","保護劑在逆境前施用效果最好。反應式裝置一定慢半拍，除非預測補回前置時間。")},
  crop:{n:t("Crop and stress choice","作物與逆境選擇"),d:t("Arabidopsis for proof of concept, heat and drought over salinity, tomato and lettuce next. Chosen, not inherited.","阿拉伯芥做概念驗證，熱與乾旱優先於鹽害，下一步是番茄與萵苣。這是選出來的，不是撿到的。")},
  burden:{n:t("Metabolic burden","代謝負擔"),d:t("How hard you can push B. subtilis before growth, foaming and secretion start fighting each other.","在生長、起泡、分泌互相打架之前，枯草桿菌能被逼到什麼程度。")},
  claims:{n:t("What you claim it does","你宣稱它能做什麼"),d:t("Abiotic stress tolerance goes through the Fertilizer Management Act. A disease-control claim moves the same product to the Pesticide Management Act. The wording decides the pathway.","非生物逆境耐受性走肥料管理法。同一個產品只要宣稱病害防治，就落入農藥管理法。措辭決定路徑。")},
+ gis:{n:t("Map into numbers","把地圖變成數字"),d:t("The geospatial surface earns its place once it becomes a count: regions, farms, activations per season, devices. Both the model and the business plan draw on that count.","地理曲面要變成可計數的東西才算數：區域、農戶、每季啟動次數、裝置台數。模型與商業計畫都取用這個數字。")},
+ economics:{n:t("Device and cartridge","機器與卡匣"),d:t("Build cost, cartridge interval and activation frequency are one chain. Hardware produces those numbers and the business model spends them.","製造成本、卡匣更換週期、啟動頻率是同一條鏈。硬體產出這些數字，商業模式花用它們。")},
  controls:{n:t("Controls and calibration","對照與校正"),d:t("Every number the team quotes needs a control beside it and a unit under it. This is what the Measurement award is actually scored on.","團隊講的每一個數字，旁邊要有對照、底下要有單位。量測獎真正在評的就是這個。")}
 };
 
@@ -638,8 +641,12 @@ var MINDS=[
     "Under field conditions the two stresses occur together and compound cellular damage in ways neither produces alone. A weakened plant then becomes vulnerable to pathogens, which is why a single heat event can start a disease outbreak.",
     "在田間，兩種逆境會同時發生，並以任一種單獨都做不到的方式疊加細胞損傷。受逆境削弱的植株隨後容易被病原侵襲，這也是為什麼單一次熱事件就能引發病害爆發。",
     "Business plan §1.1.1","商業計畫 §1.1.1",["crop"],["p1","p3","p2"]),
+  c("Trigger frequency by region","各區域的觸發頻率",
+    "The climate-volatility surface says how often a region crosses the stress threshold in a season. That count turns a laboratory threshold into a duty cycle, and the duty cycle is what the cartridge and the business model get sized against.",
+    "氣候波動曲面能算出某個區域一季內越過逆境閾值幾次。這個次數把實驗室閾值變成工作週期，而卡匣與商業模式都照這個週期估算。",
+    "Geospatial × model","地理分析 × 模型",["gis","threshold","economics"],["p3","p4","hp2","p1"]),
   c("Replicates and statistical power","重複數與統計檢定力",
-    "How many biological replicates the rescue claim rests on, and what effect size the design can actually detect.",
+    "How many biological replicates the rescue claim rests on, and what effect size the design can detect.",
     "挽救宣稱建立在幾個生物重複上，以及這個設計實際上偵測得到多大的效應量。",
     "Design","實驗設計",["controls"],["p2","ms4","p8"])
  ],
@@ -656,7 +663,7 @@ var MINDS=[
   {q:t("Your protectant arrives after the stress. The literature says priming works before it.","你的保護劑在逆境之後才到。文獻說預先誘導要在逆境之前。"),
    a:t("Name the tension, then answer with the threshold and the forecast. The reactor triggers on an acute crisis, and the weather model moves release ahead of the event. 黃介辰 raised this and it changed the architecture; say that.","先承認這個張力，再用閾值與預測回答。反應器在急性危機時觸發，天氣模型把釋放提到事件之前。這是黃介辰提出的，而且它改了架構，要講出來。")}
  ],
- handoff:t("You hand <b>M2</b> the dose the plant actually needs and the ceiling it must stay under. You hand <b>M4</b> the stress level the device has to detect. If your rescue dose and M4's secretion rate do not meet, the system is a demonstration rather than a product.","你把植物真正需要的劑量、以及不能超過的上限交給 <b>M2</b>；把裝置必須偵測到的逆境強度交給 <b>M4</b>。如果你的挽救劑量與 M4 的分泌速率對不上，這套系統就只是展示品，不是產品。")
+ handoff:t("You hand <b>M2</b> the dose the plant needs and the ceiling it must stay under. You hand <b>M4</b> the stress level the device has to detect. If your rescue dose and M4's secretion rate do not meet, the system is a demonstration rather than a product.","你把植物真正需要的劑量、以及不能超過的上限交給 <b>M2</b>；把裝置必須偵測到的逆境強度交給 <b>M4</b>。如果你的挽救劑量與 M4 的分泌速率對不上，這套系統就只是展示品，不是產品。")
 },
 {
  key:"m2",n:"M2",v:"--m2",soft:"--m2s",
@@ -701,7 +708,7 @@ var MINDS=[
     "在 Jamboree 前，用純化或帶標籤的 LEA 胜肽對 CFMDI 膜做測試。若通過率太低，就改用較大的截留門檻，同時仍要排除細菌。這個實驗把整個架構從假設變成結果。",
     "Business plan §6.1","商業計畫 §6.1",["mwco"],["p2","hw3","ms4","p4"]),
   c("Secretion check in supernatant","上清液分泌檢測",
-    "Western blot or fluorescence on culture supernatant against the cell pellet, to separate what was made from what was actually exported.",
+    "Western blot or fluorescence on culture supernatant against the cell pellet, to separate what was made from what left the cell.",
     "對培養上清液與菌體沉澱做西方墨點或螢光比對，區分「做出來的」與「真的送出去的」。",
     "Wet lab","濕實驗",["burden"],["p2","ms4","p4"]),
   c("MW confirmation against cut-off","分子量對截留門檻確認",
@@ -829,7 +836,7 @@ var MINDS=[
     "在合併成 AND 閘之前，先分別測定每個啟動子並在體外調整閾值，之後再在模擬的高溫高濕條件下測試啟動。跳過這一步，正是 AND 閘提早、延遲或不穩定啟動的原因。",
     "Business plan §6.1","商業計畫 §6.1",["controls"],["p4","ms1","ms4","p2"]),
   c("AND-gate truth table","AND 閘真值表",
-    "The two inputs, the four states, and what was actually measured in each rather than what the design intended.",
+    "The two inputs, the four states, and what was measured in each rather than what the design intended.",
     "兩個輸入、四種狀態，以及每一種實際量到什麼，而不是設計上打算做什麼。",
     "Wet lab","濕實驗",[],["p2","p4","p7"])
  ],
@@ -915,7 +922,7 @@ var MINDS=[
   c("Growth, death, cartridge interval","生長、死亡、卡匣更換週期",
     "The B. subtilis lifecycle inside the device, and therefore how often a farmer replaces the cartridge. This number drives the business model as much as the biology.",
     "裝置內枯草桿菌的生命週期，也就是農民多久換一次卡匣。這個數字對商業模式的影響不亞於對生物學的影響。",
-    "Hardware × wet","硬體 × 濕實驗",["burden"],["p3","hw3","p2"]),
+    "Hardware × wet","硬體 × 濕實驗",["burden","economics"],["p3","hw3","p2"]),
   c("Foaming and resting-cell operation","起泡與靜置細胞操作",
     "Surfactant foaming measured under working aeration, and whether resting cells suppress it while keeping secretion viable.",
     "在工作曝氣條件下量測界面活性劑起泡，以及靜置細胞能否在維持分泌的同時抑制起泡。",
@@ -939,7 +946,7 @@ var MINDS=[
  ],
  dry:[
   c("Hollow fibre: 0.22 µm and MWCO","中空纖維：0.22 µm 與截留分子量",
-    "Pore size for cell retention, molecular weight cut-off for protein passage, and the flux you actually achieve. Prof Chang asked for this argument in as many words.",
+    "Pore size for cell retention, molecular weight cut-off for protein passage, and the flux you achieve. Prof Chang asked for this argument in as many words.",
     "孔徑決定細胞截留，截留分子量決定蛋白通過，還有你實際達到的通量。張老師原話就是要你把這個論證講出來。",
     "Design × 張嘉修","設計 × 張嘉修",["mwco","containment"],["hw1","hw3","p4"]),
   c("Valve pressure across the membrane","跨膜閥壓",
@@ -981,7 +988,11 @@ var MINDS=[
   c("Build files: BOM, firmware, enclosure","製作檔案：物料表、韌體、外殼",
     "A bill of materials with suppliers, the Arduino firmware, the enclosure files and an assembly guide. The Hardware rubric scores whether another team could rebuild this, and this entry is the whole answer.",
     "含供應商的物料清單、Arduino 韌體、外殼檔案與組裝說明。硬體評分表評的是「別的團隊能不能重建這台」，而這一項就是完整答案。",
-    "Hardware","硬體",[],["hw4","p8","ms2","p6"]),
+    "Hardware","硬體",["economics"],["hw4","p8","ms2","p6"]),
+  c("What the reactor costs to build","反應器的製造成本",
+    "Unit cost from the bill of materials, split into the parts a farmer buys once and the parts they replace. The printer-and-ink model is built on this number, and only the hardware team can produce it.",
+    "從物料清單算出的單位成本，並區分農民只買一次的零件與需要更換的零件。印表機與墨水模式就建立在這個數字上，而只有硬體組做得出來。",
+    "BOM × business plan","物料清單 × 商業計畫",["economics"],["p3","hw4","p6","p1"]),
   c("What the team built against bought","自製與外購的分界",
     "The photometer, the LPA and the reactor housing were built in-house. Plate reading, sequencing and strain supply came from outside. Being able to draw that line quickly is what the attribution question is asking for.",
     "光度計、LPA 與反應器外殼是自製的；盤讀、定序與菌株供應來自外部。能迅速畫出這條線，正是歸屬問題在問的東西。",
@@ -1034,6 +1045,10 @@ var MINDS=[
     "Heat and drought carry the greatest market need in Taiwan. Consider the legal regulations before designing the experiment, not after. Positioning against chemical pesticides, and which farms in Taiwan run field trials.",
     "在台灣，熱與乾旱的市場需求最大。法規要在設計實驗之前考慮，不是之後。面對化學農藥的定位，以及台灣由哪些農場執行田間試驗。",
     "7/9 正瀚生技","7/9 正瀚生技",["claims"],["p3","p5","hp1","hp2"]),
+  c("正瀚 · law expert briefing","正瀚 · 法規專家簡報",
+    "A regulation specialist at the company walked the team through Taiwan's agricultural input structures in person. Before that session the split between the Fertilizer Management Act and the Pesticide Management Act was a statute to read. After it, the split was a decision about what the product is allowed to claim.",
+    "該公司的法規專家當面帶團隊走過台灣農業資材的管理架構。在那一場之前，肥料管理法與農藥管理法的分界只是條文；那一場之後，它是「產品被允許宣稱什麼」的決策。",
+    "7/9 正瀚生技","7/9 正瀚生技",["claims"],["p5","hp1","hp2","hp4","p3"]),
   c("源鮮 · two customer segments","源鮮 · 兩種客層",
     "Smallholders want stress protection for staple crops. Large companies want growth speed and protection for high-value crops such as spices and salad vegetables. One product, two propositions.",
     "小農要的是主食作物的逆境保護。大型企業要的是生長速度，以及香辛料、生菜等高價作物的保護。一個產品，兩套價值主張。",
@@ -1077,11 +1092,19 @@ var MINDS=[
   c("Farm size against climate volatility","農地面積對氣候波動",
     "Parcel-level farm-size data overlaid on an interpolated climate-volatility surface built from national weather-station records, identifying where the smallest farms meet the least predictable climate.",
     "以地籍層級的農地面積資料，疊上由全國氣象站紀錄內插而成的氣候波動曲面，找出最小的農地與最難預測的氣候相遇的地方。",
-    "Geospatial","地理空間分析",[],["p1","p3","hp2","hp6","hp5"]),
+    "Geospatial","地理空間分析",["gis"],["p1","p3","hp2","hp6","hp5"]),
   c("Interpolation method and uncertainty","內插方法與不確定度",
     "The method used, the station density behind it, and the uncertainty you are prepared to state out loud. A modelling judge will ask for all three.",
     "使用的方法、背後的測站密度，以及你願意公開講的不確定度。模型組評審這三樣都會問。",
-    "Geospatial","地理空間分析",[],["p8","hp2","ms2","hp5"]),
+    "Geospatial","地理空間分析",["gis"],["p8","hp2","ms2","hp5"]),
+  c("Map to addressable market","從地圖到可服務市場",
+    "Turn the overlap surface into countable things: hectares inside the high-overlap regions, farms under one hectare within them, and how many devices that implies at the phase-two density. This is the step that makes the geospatial work pay for itself inside the business plan.",
+    "把交會曲面換成可以計數的東西：高重疊區內的公頃數、其中一公頃以下的農戶數，以及在第二階段密度下代表多少台裝置。這一步讓地理分析在商業計畫裡真正發揮作用。",
+    "Geospatial × business plan","地理分析 × 商業計畫",["gis","economics"],["p1","p3","hp2","hp6"]),
+  c("Device cheap, cartridge recurring","機器便宜、卡匣持續",
+    "The reactor's build cost sets the hardware price and the cartridge interval sets the revenue clock. Both numbers come from M4, so the business model cannot be written without the hardware team in the room.",
+    "反應器的製造成本決定硬體售價，卡匣更換週期決定收入節奏。兩個數字都來自 M4，因此沒有硬體組在場，商業模式寫不出來。",
+    "陳文亮 × hardware","陳文亮 × 硬體",["economics"],["p3","hp1","p1"]),
   c("Fertilizer Act against Pesticide Act","肥料管理法對農藥管理法",
     "Abiotic stress falls under the Fertilizer Management Act via the Agriculture and Food Agency. Biotic stress falls under the Pesticide Management Act via APHIA, formerly BAPHIQ. The claim decides the statute.",
     "非生物逆境走肥料管理法，主管機關為農糧署。生物逆境走農藥管理法，主管機關為動植物防疫檢疫署（原防檢局）。宣稱決定適用哪一部法。",
@@ -1105,7 +1128,7 @@ var MINDS=[
   c("Cartridge against seasonal fungicide","卡匣成本對一季殺菌劑",
     "One season of cartridges must cost no more than a farmer's current seasonal fungicide spend. The financial model runs a sensitivity analysis at plus or minus 20 percent on cost and on price.",
     "一季的卡匣費用不能高於農民目前一季的殺菌劑支出。財務模型對成本與售價各做正負 20% 的敏感度分析。",
-    "Business plan §6.1","商業計畫 §6.1",[],["p3","hp3"]),
+    "Business plan §6.1","商業計畫 §6.1",["economics"],["p3","hp3"]),
   c("Attribution: students against collaborators","歸屬：學生與外部協助的分界",
     "The Attributions form must separate project idea, design and execution, and name what each collaborator did. Judges check whether every field including specific tasks is filled and whether it matches what the team achieved.",
     "貢獻歸屬表必須把專案構想、設計、執行分開列出，並具名說明每位協助者做了什麼。評審會檢查是否每個欄位（含具體任務）都填了，以及是否與團隊的實際成果相符。",
@@ -1125,7 +1148,7 @@ var MINDS=[
   c("Deployment ramp","部署擴張路徑",
     "20 to 50 pilot units reaching 20 to 70 farmers, then 150 to 400 across cooperatives, then 500 to 1500 across two to three countries. Bundle A is hardware with cartridges; Bundle B is hardware with an API and universal media.",
     "先 20 至 50 台試點、觸及 20 至 70 位農民，再擴到合作社的 150 至 400 台，最後在兩到三個國家達到 500 至 1500 台。方案 A 是硬體加卡匣，方案 B 是硬體加 API 與通用培養基。",
-    "Business plan §3.4","商業計畫 §3.4",[],["p3","p1"])
+    "Business plan §3.4","商業計畫 §3.4",["economics"],["p3","p1"])
  ],
  cold:[
   t("What did the map show, and did the farmers confirm it or complicate it?","地圖顯示了什麼？農民是證實了它，還是把它變複雜了？"),
@@ -1277,7 +1300,33 @@ var UI={
  wallStat2:t("of the five minds draw on all three subteams","顆腦袋同時取用三個子團隊"),
  wallStat3:t("named stakeholders whose advice changed a design","改變過設計的具名利害關係人"),
  boardH:t("What each mind equips","每顆腦袋要裝的東西"),
- boardP:t("Rows are the three subteams, columns are the five minds. Hover a column header to see it cut through all three rows. Hover or click an entry to read it in full below. Click a judging question further down to light the entries that answer it.","橫列是三個子團隊，直欄是五顆腦袋。滑過欄位標題，可以看見它切過三列。滑過或點選任一項目，下方會顯示完整內容。點選下方的評審問題，可亮出回答它的項目。"),
+ boardP:t("Rows are the three subteams, columns are the five minds. Hover a column header to see it cut through all three rows. Hover or click an entry to read it in full below. Click a judging question further down to light the entries that answer it, or download the whole board as a four-sheet spreadsheet.","橫列是三個子團隊，直欄是五顆腦袋。滑過欄位標題，可以看見它切過三列。滑過或點選任一項目，下方會顯示完整內容。點選下方的評審問題可亮出回答它的項目，也可以把整張板子下載成四個工作表的試算表。"),
+  xlBtn:t("Download .xlsx","下載 .xlsx"),
+ xlDone:t("Saved","已下載"),
+ xlFail:t("Blocked here","此處無法下載"),
+ xlS1:t("Matrix","矩陣"),
+ xlS2:t("Judge questions","評審問題"),
+ xlS3:t("Build next","接下來要做"),
+ xlS4:t("Coverage","分佈"),
+ xlMind:t("Mind","腦袋"),
+ xlMindName:t("Mind name","名稱"),
+ xlLink:t("Chain link","因果鏈環節"),
+ xlSubteam:t("Subteam","子團隊"),
+ xlEntry:t("Entry","項目"),
+ xlDetail:t("Detail","說明"),
+ xlSource:t("Source","來源"),
+ xlThreads:t("Threads","共用線索"),
+ xlQs:t("Judge questions","評審問題"),
+ xlQid:t("ID","代號"),
+ xlSet:t("Set","類別"),
+ xlQuestion:t("Question","問題"),
+ xlLead:t("Lead minds","主答腦袋"),
+ xlEntryCount:t("Entries","項目數"),
+ xlPriority:t("Priority","優先"),
+ xlTask:t("Task","工作"),
+ xlOwners:t("Owners","負責"),
+ xlEvidence:t("Evidence","出處"),
+ xlTotal:t("Total","合計"),
  rubricLbl:t("Rubric","評分項目"),
  allAreas:t("All","全部"),
  fsOn:t("Full screen","全螢幕"),
@@ -1342,6 +1391,124 @@ var UI={
  clearThread:t("Clear thread","清除線索")
 };
 
+
+/* ── xlsx export: store-only zip + inline-string SpreadsheetML ── */
+var CRCT=(function(){var t=new Uint32Array(256);for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0;}return t;})();
+function crc32(b){var c=0xFFFFFFFF;for(var i=0;i<b.length;i++)c=CRCT[(c^b[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function utf8(str){return new TextEncoder().encode(str);}
+function zipStore(files){
+  var parts=[],central=[],off=0;
+  function u16(v){return [v&255,(v>>8)&255];}
+  function u32(v){return [v&255,(v>>8)&255,(v>>16)&255,(v>>>24)&255];}
+  files.forEach(function(f){
+    var name=utf8(f.name), data=f.data, crc=crc32(data);
+    var lh=[].concat([80,75,3,4],u16(20),u16(0x0800),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0));
+    var head=new Uint8Array(lh);
+    parts.push(head,name,data);
+    central.push({name:name,crc:crc,len:data.length,off:off});
+    off+=head.length+name.length+data.length;
+  });
+  var cd=[],cdLen=0;
+  central.forEach(function(e){
+    var h=[].concat([80,75,1,2],u16(20),u16(20),u16(0x0800),u16(0),u16(0),u16(0),u32(e.crc),u32(e.len),u32(e.len),
+      u16(e.name.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(e.off));
+    var hb=new Uint8Array(h);
+    cd.push(hb,e.name); cdLen+=hb.length+e.name.length;
+  });
+  var eocd=new Uint8Array([].concat([80,75,5,6],u16(0),u16(0),u16(central.length),u16(central.length),u32(cdLen),u32(off),u16(0)));
+  var all=parts.concat(cd,[eocd]),total=0;
+  all.forEach(function(a){total+=a.length;});
+  var out=new Uint8Array(total),q=0;
+  all.forEach(function(a){out.set(a,q);q+=a.length;});
+  return out;
+}
+function xesc(v){return String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g,"");}
+function colRef(i){var s="";i++;while(i>0){var m=(i-1)%26;s=String.fromCharCode(65+m)+s;i=Math.floor((i-1)/26);}return s;}
+function sheetXml(rows){
+  var out=['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
+    '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>'];
+  rows.forEach(function(r,ri){
+    out.push('<row r="'+(ri+1)+'">');
+    r.forEach(function(v,ci){
+      out.push('<c r="'+colRef(ci)+(ri+1)+'" t="inlineStr"><is><t xml:space="preserve">'+xesc(v)+'</t></is></c>');
+    });
+    out.push('</row>');
+  });
+  out.push('</sheetData></worksheet>');
+  return out.join("");
+}
+function buildWorkbook(sheets){
+  var ct=['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
+    '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">',
+    '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>',
+    '<Default Extension="xml" ContentType="application/xml"/>'];
+  var wb=['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
+    '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'];
+  var wr=['<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',
+    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'];
+  var files=[];
+  sheets.forEach(function(sh,i){
+    var n=i+1;
+    ct.push('<Override PartName="/xl/worksheets/sheet'+n+'.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>');
+    wb.push('<sheet name="'+xesc(sh.name)+'" sheetId="'+n+'" r:id="rId'+n+'"/>');
+    wr.push('<Relationship Id="rId'+n+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet'+n+'.xml"/>');
+    files.push({name:"xl/worksheets/sheet"+n+".xml",data:utf8(sheetXml(sh.rows))});
+  });
+  ct.push('<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/></Types>');
+  wb.push('</sheets></workbook>'); wr.push('</Relationships>');
+  return zipStore([
+    {name:"[Content_Types].xml",data:utf8(ct.join(""))},
+    {name:"_rels/.rels",data:utf8('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>')},
+    {name:"xl/workbook.xml",data:utf8(wb.join(""))},
+    {name:"xl/_rels/workbook.xml.rels",data:utf8(wr.join(""))}
+  ].concat(files));
+}
+function countQ(id){
+  var n=0;
+  MINDS.forEach(function(m){["hp","wet","dry"].forEach(function(r){
+    m[r].forEach(function(i){ if(i.q.indexOf(id)>=0) n++; });
+  });});
+  return n;
+}
+function matrixSheets(){
+  var ROWNAME={hp:T(UI.rowHP.n),wet:T(UI.rowWet.n),dry:T(UI.rowDry.n)};
+  var m1=[[T(UI.xlMind),T(UI.xlMindName),T(UI.xlLink),T(UI.xlSubteam),T(UI.xlEntry),T(UI.xlDetail),T(UI.xlSource),T(UI.xlThreads),T(UI.xlQs)]];
+  MINDS.forEach(function(m){
+    ["hp","wet","dry"].forEach(function(rk){
+      m[rk].forEach(function(i){
+        m1.push([m.n,T(m.nm),T(m.lk),ROWNAME[rk],T(i.k),T(i.d),T(i.s),
+          i.th.map(function(k){return T(THREADS[k].n);}).join(" · "),
+          i.q.map(function(q){return q.toUpperCase();}).join(" ")]);
+      });
+    });
+  });
+  var m2=[[T(UI.xlQid),T(UI.xlSet),T(UI.xlQuestion),T(UI.xlLead),T(UI.xlEntryCount)]];
+  QSETS.forEach(function(set){
+    (set.qs||[]).forEach(function(q){ m2.push([q.id.toUpperCase(),T(set.name),T(q.t),(q.lead||[]).join(" "),countQ(q.id)]); });
+    (set.groups||[]).forEach(function(g){ g.qs.forEach(function(q){ m2.push([q.id.toUpperCase(),T(g.name),T(q.t),(q.lead||[]).join(" "),countQ(q.id)]); }); });
+  });
+  var m3=[[T(UI.xlPriority),T(UI.xlTask),T(UI.todoState),T(UI.todoDo),T(UI.xlOwners),T(UI.todoUnlocks),T(UI.xlEvidence)]];
+  var PRI={now:UI.todoNow,next:UI.todoNext,later:UI.todoLater};
+  TODO.forEach(function(x){ m3.push([T(PRI[x.pri]),T(x.t),T(x.now),T(x.next),x.own.join(" "),T(x.unlocks),x.ev]); });
+  var m4=[[T(UI.xlMind),T(UI.xlMindName),ROWNAME.hp,ROWNAME.wet,ROWNAME.dry,T(UI.xlTotal)]];
+  MINDS.forEach(function(m){ m4.push([m.n,T(m.nm),m.hp.length,m.wet.length,m.dry.length,m.hp.length+m.wet.length+m.dry.length]); });
+  return [{name:T(UI.xlS1),rows:m1},{name:T(UI.xlS4),rows:m4},{name:T(UI.xlS2),rows:m2},{name:T(UI.xlS3),rows:m3}];
+}
+function downloadXlsx(){
+  var btn=document.getElementById("xlsxBtn");
+  try{
+    var bytes=buildWorkbook(matrixSheets());
+    var blob=new Blob([bytes],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement("a");
+    a.href=url; a.download="releaf-five-minds-"+(lang==="z"?"zh":"en")+".xlsx";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},4000);
+    btn.textContent=T(UI.xlDone);
+    setTimeout(function(){btn.textContent=T(UI.xlBtn);},2600);
+  }catch(e){ btn.textContent=T(UI.xlFail); if(window.console)console.error("xlsx",e && (e.stack||e.message||e)); }
+}
+
 /* ── render ─────────────────────────────────────── */
 var byN={}; MINDS.forEach(function(m){byN[m.n]=m;});
 function el(tag,cls,html){var e=document.createElement(tag); if(cls)e.className=cls; if(html!==undefined)e.innerHTML=html; return e;}
@@ -1360,6 +1527,7 @@ function renderStatic(){
   setText("tPraH",UI.praH); setText("tPraP",UI.praP);
   setText("tFoot1",UI.foot1); setText("tFoot2",UI.foot2);
   document.getElementById("fsBtn").textContent = document.fullscreenElement?T(UI.fsOff):T(UI.fsOn);
+  document.getElementById("xlsxBtn").textContent = T(UI.xlBtn);
 
   setText("tHeroKick",UI.heroKick); setText("tHeroCap",UI.heroCap);
   var hero=document.getElementById("hero"), shot=document.getElementById("heroShot");
@@ -1790,6 +1958,7 @@ document.getElementById("themebtn").addEventListener("click",function(){
   document.documentElement.setAttribute("data-theme", now==="dark"?"light":"dark");
 });
 var shell=document.getElementById("boardShell");
+document.getElementById("xlsxBtn").addEventListener("click",downloadXlsx);
 document.getElementById("fsBtn").addEventListener("click",function(){
   if(document.fullscreenElement) document.exitFullscreen();
   else if(shell.requestFullscreen) shell.requestFullscreen();

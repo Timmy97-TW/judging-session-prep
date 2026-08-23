@@ -22,6 +22,10 @@ cross-cutting question.
 | M4 | Bioreactor & Hardware | Reactor DBTL, hollow fibre, photometer, LPA, containment |
 | M5 | Deployment & Human Practices | Geospatial, farmers, education, regulation, business |
 
+Two chains run sideways through the board. **Map into numbers** takes the geospatial surface through the
+stress model to a device count and a market size. **Device and cartridge** takes the reactor's build cost
+and cartridge interval into the business model. Trace either from any entry that carries it.
+
 All five columns are populated in all three subteam rows. That is the point: no one on the podium gets to be
 only a wet lab person, only a dry lab person, or only an HP person. Each mind needs a bench result, a
 calculation and a conversation with an outside expert in the same head.
@@ -33,6 +37,10 @@ calculation and a conversation with an outside expert in the same head.
 - **Click a judging question** to light the entries that answer it, with a coverage count per
   mind and a warning where coverage is thin.
 - **Hover a column header** to watch one mind cut through all three subteam rows.
+- **Download .xlsx** builds a four-sheet workbook from whatever is on screen, in the language you are
+  reading. Pre-built copies sit in this repo as
+  [`releaf-five-minds-en.xlsx`](releaf-five-minds-en.xlsx) and
+  [`releaf-five-minds-zh.xlsx`](releaf-five-minds-zh.xlsx).
 - **Full screen** puts the whole board on one screen for team review.
 - **EN / 中文** toggles the entire page, English by default.
 
@@ -45,6 +53,12 @@ so a weak third nomination is a Gold risk rather than only a lost award.
 
 Question text is taken from the iGEM 2026 Judge Handbook (project questions p.31,
 Hardware p.57, Integrated Human Practices p.65, Measurement p.68).
+
+## The spreadsheet
+
+Four sheets: the full matrix one row per entry, a per-mind coverage table, the 23 judge questions with
+their lead minds, and the build list. Written client-side with no dependencies, so the file always
+matches the page.
 
 ## Sources
 
