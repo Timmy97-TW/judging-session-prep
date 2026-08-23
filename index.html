@@ -1302,8 +1302,9 @@ var UI={
  boardH:t("What each mind equips","每顆腦袋要裝的東西"),
  boardP:t("Rows are the three subteams, columns are the five minds. Hover a column header to see it cut through all three rows. Hover or click an entry to read it in full below. Click a judging question further down to light the entries that answer it, or download the whole board as a four-sheet spreadsheet.","橫列是三個子團隊，直欄是五顆腦袋。滑過欄位標題，可以看見它切過三列。滑過或點選任一項目，下方會顯示完整內容。點選下方的評審問題可亮出回答它的項目，也可以把整張板子下載成四個工作表的試算表。"),
   xlBtn:t("Download .xlsx","下載 .xlsx"),
- xlDone:t("Saved","已下載"),
- xlFail:t("Blocked here","此處無法下載"),
+ xlDone:t("Saved .xlsx","已下載 .xlsx"),
+ xlDoneCsv:t("Saved .csv","已下載 .csv"),
+ xlFail:t("Could not save","無法儲存"),
  xlS1:t("Matrix","矩陣"),
  xlS2:t("Judge questions","評審問題"),
  xlS3:t("Build next","接下來要做"),
@@ -1494,19 +1495,56 @@ function matrixSheets(){
   MINDS.forEach(function(m){ m4.push([m.n,T(m.nm),m.hp.length,m.wet.length,m.dry.length,m.hp.length+m.wet.length+m.dry.length]); });
   return [{name:T(UI.xlS1),rows:m1},{name:T(UI.xlS4),rows:m4},{name:T(UI.xlS2),rows:m2},{name:T(UI.xlS3),rows:m3}];
 }
-function downloadXlsx(){
+function csvOf(rows){
+  return rows.map(function(r){
+    return r.map(function(v){
+      var t=String(v==null?"":v);
+      return /[",\n]/.test(t) ? '"'+t.replace(/"/g,'""')+'"' : t;
+    }).join(",");
+  }).join("\r\n");
+}
+function saveViaAnchor(bytes,name){
+  var blob=new Blob([bytes],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement("a");
+  a.href=url; a.download=name+".xlsx";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){URL.revokeObjectURL(url);},4000);
+}
+function flashBtn(msg){
   var btn=document.getElementById("xlsxBtn");
+  btn.textContent=msg;
+  setTimeout(function(){btn.textContent=T(UI.xlBtn);},2800);
+}
+function downloadXlsx(){
+  var sheets, bytes, name;
   try{
-    var bytes=buildWorkbook(matrixSheets());
-    var blob=new Blob([bytes],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-    var url=URL.createObjectURL(blob);
-    var a=document.createElement("a");
-    a.href=url; a.download="releaf-five-minds-"+(lang==="z"?"zh":"en")+".xlsx";
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(function(){URL.revokeObjectURL(url);},4000);
-    btn.textContent=T(UI.xlDone);
-    setTimeout(function(){btn.textContent=T(UI.xlBtn);},2600);
-  }catch(e){ btn.textContent=T(UI.xlFail); if(window.console)console.error("xlsx",e && (e.stack||e.message||e)); }
+    sheets=matrixSheets();
+    bytes=buildWorkbook(sheets);
+    name="releaf-five-minds-"+(lang==="z"?"zh":"en");
+  }catch(e){
+    if(window.console) console.error("xlsx build",e);
+    flashBtn(T(UI.xlFail)); return;
+  }
+  var host = (window.claude && typeof claude.use==="function") ? claude.use("downloads") : Promise.resolve(null);
+  host.then(function(d){
+    if(!d){ saveViaAnchor(bytes,name); flashBtn(T(UI.xlDone)); return; }
+    return d.save({filename:name+".xlsx", data:new Blob([bytes])})
+      .then(function(){ flashBtn(T(UI.xlDone)); })
+      .catch(function(err){
+        var code=err && err.code;
+        if(code==="declined"||code==="rate_limited"){ flashBtn(T(UI.xlBtn)); return; }
+        return d.save({filename:name+".csv", data:"﻿"+csvOf(sheets[0].rows)})
+          .then(function(){ flashBtn(T(UI.xlDoneCsv)); })
+          .catch(function(e2){
+            if(e2 && e2.code==="declined"){ flashBtn(T(UI.xlBtn)); return; }
+            flashBtn(T(UI.xlFail));
+          });
+      });
+  }).catch(function(e){
+    if(window.console) console.error("xlsx save",e);
+    try{ saveViaAnchor(bytes,name); flashBtn(T(UI.xlDone)); }catch(_){ flashBtn(T(UI.xlFail)); }
+  });
 }
 
 /* ── render ─────────────────────────────────────── */
