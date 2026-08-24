@@ -9,7 +9,7 @@ An interactive board for iGEM 2026 Team ReLeaf, built for the 20-minute judging 
 The scores are already in when the session starts. Those twenty minutes decide whether a
 judge confirms what they read or starts doubting it, and the podium holds five people.
 
-This board divides the whole project across five minds. The split follows the causal chain
+This board divides the whole project across six minds. The split follows the causal chain
 of the system rather than the wet / dry / human-practices subteams, because judges walk the
 chain and stop where the logic thins. Splitting by subteam guarantees a silent pause on any
 cross-cutting question.
@@ -20,11 +20,18 @@ cross-cutting question.
 | M2 | Protectant Design | LEA 14 and ACC deaminase, peptide design, MD, molecular weight cut-off |
 | M3 | Gene Circuit & Cloning | MoClo, ccaS/ccaR, promoters, electroporation, Registry parts |
 | M4 | Bioreactor & Hardware | Reactor DBTL, hollow fibre, photometer, LPA, containment |
-| M5 | Deployment & Human Practices | Geospatial, farmers, education, regulation, business |
+| M5 | Human Practices & Regulation | Geospatial, farmers, education, regulation, ethics |
+| M6 | Business & Entrepreneurship | Unit economics, market sizing, cost of goods, IP and freedom to operate, funding |
 
-Two chains run sideways through the board. **Map into numbers** takes the geospatial surface through the
+M6 is the mind that puts a unit on what the others produce: the map becomes an addressable market, the
+model becomes a value per device per season, the reactor becomes a cost of goods, and the cloning design
+becomes a platform argument and a freedom-to-operate question. Entrepreneurship carries no rubric of its
+own this year, so that work is scored inside project questions 1 and 3 and has to arrive as numbers.
+
+Three chains run sideways through the board. **Map into numbers** takes the geospatial surface through the
 stress model to a device count and a market size. **Device and cartridge** takes the reactor's build cost
-and cartridge interval into the business model. Trace either from any entry that carries it.
+and cartridge interval into the business model. **One chassis, many products** takes the swappable
+cassette from a cloning decision to a product line. Trace any of them from an entry that carries it.
 
 All five columns are populated in all three subteam rows. That is the point: no one on the podium gets to be
 only a wet lab person, only a dry lab person, or only an HP person. Each mind needs a bench result, a
@@ -39,8 +46,8 @@ calculation and a conversation with an outside expert in the same head.
 - **Hover a column header** to watch one mind cut through all three subteam rows.
 - **Download .xlsx** builds a four-sheet workbook from whatever is on screen, in the language you are
   reading. Pre-built copies sit in this repo as
-  [`releaf-five-minds-en.xlsx`](releaf-five-minds-en.xlsx) and
-  [`releaf-five-minds-zh.xlsx`](releaf-five-minds-zh.xlsx).
+  [`releaf-six-minds-en.xlsx`](releaf-six-minds-en.xlsx) and
+  [`releaf-six-minds-zh.xlsx`](releaf-six-minds-zh.xlsx).
 - **Full screen** puts the whole board on one screen for team review.
 - **EN / 中文** toggles the entire page, English by default.
 

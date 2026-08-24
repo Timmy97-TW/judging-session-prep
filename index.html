@@ -20,8 +20,8 @@
   --danger:#8F4436; --danger-soft:#F0E2DE;
   --warn:#7E6420; --warn-soft:#EFE8D6;
 
-  --m1:#4F6B54; --m2:#4A6272; --m3:#6A5C7A; --m4:#8A6A3E; --m5:#8A5450;
-  --m1s:#E4EAE4; --m2s:#E2E8EC; --m3s:#E9E5EE; --m4s:#F0E8DA; --m5s:#F0E1DF;
+  --m1:#4F6B54; --m2:#3E6B72; --m3:#4C5E80; --m4:#6A5C7A; --m5:#8A5450; --m6:#8A6A3E;
+  --m1s:#E4EAE4; --m2s:#DEE9EB; --m3s:#E2E6EE; --m4s:#E9E5EE; --m5s:#F0E1DF; --m6s:#F0E8DA;
 
   --sans:"IBM Plex Sans","Noto Sans TC",ui-sans-serif,system-ui,-apple-system,Arial,sans-serif;
   --serif:"Newsreader","Noto Serif TC",ui-serif,Georgia,"Times New Roman",serif;
@@ -44,8 +44,8 @@
     --mark:#2B2718; --mark-line:#B49B62;
     --danger:#C98570; --danger-soft:#2E1D18;
     --warn:#C0A055; --warn-soft:#2B2413;
-    --m1:#7FA588; --m2:#7B9DAE; --m3:#A091B4; --m4:#C3A067; --m5:#C48B84;
-    --m1s:#1D2A20; --m2s:#182730; --m3s:#241F2E; --m4s:#2E2716; --m5s:#2E1E1B;
+    --m1:#7FA588; --m2:#6FA5AC; --m3:#8B9DC0; --m4:#A091B4; --m5:#C48B84; --m6:#C3A067;
+    --m1s:#1D2A20; --m2s:#16282B; --m3s:#1B2230; --m4s:#241F2E; --m5s:#2E1E1B; --m6s:#2E2716;
     --shadow:0 1px 2px rgba(0,0,0,.44), 0 8px 22px -14px rgba(0,0,0,.64);
     --shadow-lg:0 2px 6px rgba(0,0,0,.5), 0 26px 52px -22px rgba(0,0,0,.78);
   }
@@ -59,8 +59,8 @@
   --mark:#2B2718; --mark-line:#B49B62;
   --danger:#C98570; --danger-soft:#2E1D18;
   --warn:#C0A055; --warn-soft:#2B2413;
-  --m1:#7FA588; --m2:#7B9DAE; --m3:#A091B4; --m4:#C3A067; --m5:#C48B84;
-  --m1s:#1D2A20; --m2s:#182730; --m3s:#241F2E; --m4s:#2E2716; --m5s:#2E1E1B;
+  --m1:#7FA588; --m2:#6FA5AC; --m3:#8B9DC0; --m4:#A091B4; --m5:#C48B84; --m6:#C3A067;
+  --m1s:#1D2A20; --m2s:#16282B; --m3s:#1B2230; --m4s:#241F2E; --m5s:#2E1E1B; --m6s:#2E2716;
   --shadow:0 1px 2px rgba(0,0,0,.44), 0 8px 22px -14px rgba(0,0,0,.64);
   --shadow-lg:0 2px 6px rgba(0,0,0,.5), 0 26px 52px -22px rgba(0,0,0,.78);
 }
@@ -143,17 +143,17 @@ section{margin-top:var(--s7);scroll-margin-top:var(--s5)}
 .qbanner .x{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);text-decoration:underline}
 
 .board-scroll{flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain}
-.board{display:grid;grid-template-columns:82px repeat(5,minmax(0,1fr));grid-template-rows:auto minmax(0,1fr) minmax(0,1fr) minmax(0,1.12fr);min-width:1220px;height:100%}
+.board{display:grid;grid-template-columns:78px repeat(6,minmax(0,1fr));grid-template-rows:auto minmax(0,1fr) minmax(0,1fr) minmax(0,1.12fr);min-width:1420px;height:100%}
 
 .b-corner{position:sticky;left:0;top:0;z-index:9;background:var(--surface);border-right:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2);display:flex;flex-direction:column;justify-content:flex-end;gap:2px;padding:var(--s2) var(--s2) var(--s3)}
 .b-corner span{font-family:var(--mono);font-size:8.4px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);line-height:1.3}
 .b-corner span b{color:var(--ink-2);font-weight:600}
 
 .b-head{position:sticky;top:0;z-index:6;background:var(--surface);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule-2);padding:7px var(--s3) 9px;display:flex;flex-direction:column;gap:2px;transition:background var(--dur-fast) var(--ease-out)}
-.b-head:nth-child(6){border-right:none}
+.b-head:nth-child(7){border-right:none}
 .b-head:hover{background:var(--surface-2)}
 .b-head::after{content:"";position:absolute;right:-5px;top:8px;width:9px;height:9px;border-top:1.5px solid var(--rule-2);border-right:1.5px solid var(--rule-2);transform:rotate(45deg);background:var(--surface);z-index:8;border-radius:1px}
-.b-head:nth-child(6)::after{content:none}
+.b-head:nth-child(7)::after{content:none}
 .b-head .rail{height:3px;border-radius:2px;background:var(--mc);margin-bottom:var(--s1)}
 .b-head .id{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;font-weight:600;color:var(--mc)}
 .b-head .nm{font-family:var(--serif);font-size:19px;line-height:1.08}
@@ -168,7 +168,7 @@ section{margin-top:var(--s7);scroll-margin-top:var(--s5)}
 .b-rowlab .rd{font-size:9.8px;color:var(--ink-3);margin-top:3px;line-height:1.32}
 
 .b-cell{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule-2);padding:8px 6px;display:flex;flex-direction:column;gap:1px;overflow-y:auto;min-height:0;transition:opacity var(--dur-mid) var(--ease-out)}
-.b-cell:nth-child(6n+6){border-right:none}
+.b-cell:nth-child(7n+7){border-right:none}
 .b-cell.last{border-bottom:none}
 .b-cell.dim{opacity:.2}
 .b-cell.colhot{background:var(--mcs)}
@@ -470,6 +470,7 @@ var THREADS={
  burden:{n:t("Metabolic burden","代謝負擔"),d:t("How hard you can push B. subtilis before growth, foaming and secretion start fighting each other.","在生長、起泡、分泌互相打架之前，枯草桿菌能被逼到什麼程度。")},
  claims:{n:t("What you claim it does","你宣稱它能做什麼"),d:t("Abiotic stress tolerance goes through the Fertilizer Management Act. A disease-control claim moves the same product to the Pesticide Management Act. The wording decides the pathway.","非生物逆境耐受性走肥料管理法。同一個產品只要宣稱病害防治，就落入農藥管理法。措辭決定路徑。")},
  gis:{n:t("Map into numbers","把地圖變成數字"),d:t("The geospatial surface earns its place once it becomes a count: regions, farms, activations per season, devices. Both the model and the business plan draw on that count.","地理曲面要變成可計數的東西才算數：區域、農戶、每季啟動次數、裝置台數。模型與商業計畫都取用這個數字。")},
+ platform:{n:t("One chassis, many products","一個機體、多種產品"),d:t("Swappable expression cassettes are a cloning decision with a commercial consequence: a second protectant needs a new cassette rather than a new company, and the parts list decides what is ownable.","可抽換的表現卡匣是一個選殖決策，卻有商業後果：第二種保護劑只需要新卡匣，不需要新公司；而零件清單決定哪些是可以擁有的。")},
  economics:{n:t("Device and cartridge","機器與卡匣"),d:t("Build cost, cartridge interval and activation frequency are one chain. Hardware produces those numbers and the business model spends them.","製造成本、卡匣更換週期、啟動頻率是同一條鏈。硬體產出這些數字，商業模式花用它們。")},
  controls:{n:t("Controls and calibration","對照與校正"),d:t("Every number the team quotes needs a control beside it and a unit under it. This is what the Measurement award is actually scored on.","團隊講的每一個數字，旁邊要有對照、底下要有單位。量測獎真正在評的就是這個。")}
 };
@@ -482,9 +483,9 @@ var QSETS=[
   name:t("Project score","專案分數"),
   sub:t("Nine questions. Weighted with Wiki and Presentation into Grand Prize, Finalist and Village Award rankings.","九題。與 Wiki、簡報加權後決定大獎、決賽入圍與村獎排名。"),
   qs:[
-   {id:"p1",lead:["M4","M5"],t:t("How impressive is this project?","這個專案有多令人印象深刻？")},
+   {id:"p1",lead:["M4","M6"],t:t("How impressive is this project?","這個專案有多令人印象深刻？")},
    {id:"p2",lead:["M1","M3"],t:t("Did the project work, or is it likely to work?","專案成功了嗎？或看起來會成功嗎？")},
-   {id:"p3",lead:["M5"],t:t("Is the project likely to have an impact?","這個專案可能產生影響嗎？")},
+   {id:"p3",lead:["M5","M6"],t:t("Is the project likely to have an impact?","這個專案可能產生影響嗎？")},
    {id:"p4",lead:["M3","M4"],t:t("How well were engineering principles used?","工程原則運用得如何？")},
    {id:"p5",lead:["M5"],t:t("How thoughtful and thorough was the human practices work?","人本實踐的思考有多周延？")},
    {id:"p6",lead:["M3","M4"],t:t("How much of the work did the team do themselves?","有多少工作是團隊自己做的？")},
@@ -1019,11 +1020,11 @@ var MINDS=[
 },
 {
  key:"m5",n:"M5",v:"--m5",soft:"--m5s",
- nm:t("Deployment & Human Practices","落地與人本實踐"),
- lk:t("Working device → a farmer who can legally buy it and wants to","可運作的裝置 → 一位買得合法、也真的想買的農民"),
- tags:[t("Geospatial","地理資訊"),t("Farmers","農民訪談"),t("Education","教育推廣"),t("Regulation","法規"),t("Business","商業模式")],
- rubric:[6,9,8,7,0],
- mission:t("You own <b>Integrated Human Practices</b>, the third nomination, plus the reason the project exists and the reason it can be sold. You hold the map that says where the problem is, the farmers who confirmed it, the law that shapes every experiment upstream, and the numbers that decide whether anyone can afford it.","你擁有<b>整合式人本實踐</b>這第三個提名，加上這個專案存在的理由與它能被賣出去的理由。指出問題在哪裡的地圖、確認過它的農民、形塑上游每一個實驗的法規，以及決定誰買得起的數字，都在你手上。"),
+ nm:t("Human Practices & Regulation","人本實踐與法規"),
+ lk:t("A working device → a use the law allows and the community accepts","可運作的裝置 → 法律允許、社群也接受的用途"),
+ tags:[t("Geospatial","地理資訊"),t("Farmers","農民訪談"),t("Education","教育推廣"),t("Regulation","法規"),t("Ethics","技術倫理")],
+ rubric:[6,7,10,8],
+ mission:t("You own <b>Integrated Human Practices</b>, the third nomination, and the law that shapes every experiment upstream. You hold the map that says where the problem is, the farmers who confirmed it, the ethical ceiling the device is built under, and the statute that decides what the product may claim.","你擁有<b>整合式人本實踐</b>這第三個提名，以及形塑上游每一個實驗的法規。指出問題在哪裡的地圖、確認過它的農民、裝置所遵守的倫理上限，以及決定產品能宣稱什麼的法條，都在你手上。"),
  hp:[
   c("Geospatial field validation","地理分析的田野驗證",
     "Interviews with smallholders inside the identified high-overlap regions, covering climate stress, adaptive practice, and access to existing agricultural technology. This is what turns a map into a claim about lived experience.",
@@ -1037,22 +1038,10 @@ var MINDS=[
     "Target sustainable farmers rather than organic ones: organic growers reject GMO involvement outright and certification is closed to this product. Biotic stress is hard to sense reliably, whereas heat changes often and can be responded to.",
     "目標客群設為永續農民而非有機農民：有機農民對基改一律排斥，認證這條路也是關著的。生物性逆境難以可靠感測，而熱逆境變化頻繁且可以被回應。",
     "5/22 世界蔬菜中心","5/22 世界蔬菜中心",["crop","claims"],["p3","p5","hp1","hp4"]),
-  c("陳文亮 · printer and ink","陳文亮 · 印表機與墨水",
-    "Model the business on cheap hardware and expensive consumable. Identify who pays rather than who uses. B2C is difficult and needs consultation and trust. Do not compete with cheap chemical fertiliser on price, and consider starting in foreign markets before local expansion.",
-    "商業模式參照便宜機器、昂貴耗材。先確認誰付錢，而不是誰使用。B2C 很難做，需要諮詢與信任。不要在價格上跟便宜的化學肥料硬碰，並考慮先做國外市場再回頭擴張本地。",
-    "4/10 AgriTalk","4/10 AgriTalk",[],["p3","p5","hp1"]),
-  c("正瀚 · positioning and regulation","正瀚 · 定位與法規",
-    "Heat and drought carry the greatest market need in Taiwan. Consider the legal regulations before designing the experiment, not after. Positioning against chemical pesticides, and which farms in Taiwan run field trials.",
-    "在台灣，熱與乾旱的市場需求最大。法規要在設計實驗之前考慮，不是之後。面對化學農藥的定位，以及台灣由哪些農場執行田間試驗。",
-    "7/9 正瀚生技","7/9 正瀚生技",["claims"],["p3","p5","hp1","hp2"]),
   c("正瀚 · law expert briefing","正瀚 · 法規專家簡報",
     "A regulation specialist at the company walked the team through Taiwan's agricultural input structures in person. Before that session the split between the Fertilizer Management Act and the Pesticide Management Act was a statute to read. After it, the split was a decision about what the product is allowed to claim.",
     "該公司的法規專家當面帶團隊走過台灣農業資材的管理架構。在那一場之前，肥料管理法與農藥管理法的分界只是條文；那一場之後，它是「產品被允許宣稱什麼」的決策。",
     "7/9 正瀚生技","7/9 正瀚生技",["claims"],["p5","hp1","hp2","hp4","p3"]),
-  c("源鮮 · two customer segments","源鮮 · 兩種客層",
-    "Smallholders want stress protection for staple crops. Large companies want growth speed and protection for high-value crops such as spices and salad vegetables. One product, two propositions.",
-    "小農要的是主食作物的逆境保護。大型企業要的是生長速度，以及香辛料、生菜等高價作物的保護。一個產品，兩套價值主張。",
-    "8/11 源鮮智慧農場","8/11 源鮮智慧農場",[],["p3","p5","hp1","hp4"]),
   c("Green Media · the subsidy trap","綠媒體 · 補貼陷阱",
     "The agricultural sector is not treating climate change seriously; governments subsidise and farmers collect when crops die. Solving upstream is the sustainable route. The public forum was redesigned as a result, with discussion time raised from 10 to 30 minutes.",
     "農業界並未認真面對氣候變遷；政府補貼，作物死了農民就領補貼。從上游解決才是可持續的路。公共論壇因此改版，討論時間從 10 分鐘拉到 30 分鐘。",
@@ -1097,14 +1086,6 @@ var MINDS=[
     "The method used, the station density behind it, and the uncertainty you are prepared to state out loud. A modelling judge will ask for all three.",
     "使用的方法、背後的測站密度，以及你願意公開講的不確定度。模型組評審這三樣都會問。",
     "Geospatial","地理空間分析",["gis"],["p8","hp2","ms2","hp5"]),
-  c("Map to addressable market","從地圖到可服務市場",
-    "Turn the overlap surface into countable things: hectares inside the high-overlap regions, farms under one hectare within them, and how many devices that implies at the phase-two density. This is the step that makes the geospatial work pay for itself inside the business plan.",
-    "把交會曲面換成可以計數的東西：高重疊區內的公頃數、其中一公頃以下的農戶數，以及在第二階段密度下代表多少台裝置。這一步讓地理分析在商業計畫裡真正發揮作用。",
-    "Geospatial × business plan","地理分析 × 商業計畫",["gis","economics"],["p1","p3","hp2","hp6"]),
-  c("Device cheap, cartridge recurring","機器便宜、卡匣持續",
-    "The reactor's build cost sets the hardware price and the cartridge interval sets the revenue clock. Both numbers come from M4, so the business model cannot be written without the hardware team in the room.",
-    "反應器的製造成本決定硬體售價，卡匣更換週期決定收入節奏。兩個數字都來自 M4，因此沒有硬體組在場，商業模式寫不出來。",
-    "陳文亮 × hardware","陳文亮 × 硬體",["economics"],["p3","hp1","p1"]),
   c("Fertilizer Act against Pesticide Act","肥料管理法對農藥管理法",
     "Abiotic stress falls under the Fertilizer Management Act via the Agriculture and Food Agency. Biotic stress falls under the Pesticide Management Act via APHIA, formerly BAPHIQ. The claim decides the statute.",
     "非生物逆境走肥料管理法，主管機關為農糧署。生物逆境走農藥管理法，主管機關為動植物防疫檢疫署（原防檢局）。宣稱決定適用哪一部法。",
@@ -1117,18 +1098,6 @@ var MINDS=[
     "The engineered B. subtilis stays sealed and only non-living metabolic byproducts are discharged, which is the argument for staying outside the GM environmental-release framework. Containment must be proven to regulators, not asserted.",
     "改造枯草桿菌全程封閉，只排出非活體代謝產物，這是主張不落入基改環境釋出架構的論證。圍阻必須向主管機關證明，不能只是聲稱。",
     "Business plan §6.2","商業計畫 §6.2",["containment"],["hp3","p3"]),
-  c("Market sequence and its reasons","市場順序及其理由",
-    "Philippines first under the NCBP contained-use guidelines. Vietnam second under Decree 43/2026/ND-CP with the Mekong salinity problem. Taiwan for closed validation. EU is long horizon only under the precautionary principle.",
-    "首站菲律賓，依 NCBP 封閉使用指引。次站越南，依 43/2026/ND-CP 號法令，加上湄公河鹽化問題。台灣做封閉驗證。歐盟因預防原則只列為長期。",
-    "Business plan §6.2","商業計畫 §6.2",[],["p3","hp2"]),
-  c("Patent against trade secret","專利對營業秘密",
-    "Patent the AND-gate circuit design, the CFMDI membrane design and the dual-module architecture. Keep promoter sequences and signal-peptide combinations as trade secrets. Note the tension with iGEM's open publication requirement.",
-    "AND 閘迴路設計、CFMDI 膜設計、雙模組架構走專利。啟動子序列與訊號胜肽組合留作營業秘密。要注意這與 iGEM 公開發表要求之間的張力。",
-    "Business plan §6.2","商業計畫 §6.2",[],["p3","hp3"]),
-  c("Cartridge against seasonal fungicide","卡匣成本對一季殺菌劑",
-    "One season of cartridges must cost no more than a farmer's current seasonal fungicide spend. The financial model runs a sensitivity analysis at plus or minus 20 percent on cost and on price.",
-    "一季的卡匣費用不能高於農民目前一季的殺菌劑支出。財務模型對成本與售價各做正負 20% 的敏感度分析。",
-    "Business plan §6.1","商業計畫 §6.1",["economics"],["p3","hp3"]),
   c("Attribution: students against collaborators","歸屬：學生與外部協助的分界",
     "The Attributions form must separate project idea, design and execution, and name what each collaborator did. Judges check whether every field including specific tasks is filled and whether it matches what the team achieved.",
     "貢獻歸屬表必須把專案構想、設計、執行分開列出，並具名說明每位協助者做了什麼。評審會檢查是否每個欄位（含具體任務）都填了，以及是否與團隊的實際成果相符。",
@@ -1137,18 +1106,10 @@ var MINDS=[
     "Each medal criterion and each Special Award has a fixed wiki URL. Judges are directed there from the ballot and are not required to hunt elsewhere, and content on external sites cannot be judged at all.",
     "每一項獎牌條件與每一個特殊獎項都有固定的 wiki 網址。評審由選票直接連過去，沒有義務到別處找；放在 iGEM 伺服器以外的內容完全不能被評分。",
     "Handbook p.29","評審手冊 p.29",[],["p8","hp5"]),
-  c("Pilot success metrics","試點成功指標",
-    "20 to 30 percent fewer fungicide applications per season, 10 to 15 percent crop-loss reduction under climate stress, across 20 to 50 devices and 20 to 70 farmers. Name these as targets rather than results.",
-    "每季殺菌劑施用次數減少 20 至 30%，氣候逆境下作物損失減少 10 至 15%，涵蓋 20 至 50 台裝置、20 至 70 位農民。要把這些講成目標，不是結果。",
-    "Business plan §3.4","商業計畫 §3.4",[],["p3","hp2","hp3"]),
   c("Written guidance from BAPHIQ","向防檢署取得書面意見",
     "Seek written guidance before any field or greenhouse deployment, because the agency may still classify secreted compounds from engineered bacteria as requiring GMO approval. Until that is clarified, all testing stays contained and lab-based.",
     "在任何田間或溫室部署前先取得書面意見，因為主管機關仍可能把改造細菌分泌的化合物歸類為需要基改核准。在釐清之前，所有測試都維持在封閉的實驗室內。",
     "Business plan §6.1","商業計畫 §6.1",["containment","claims"],["hp3","p3","hp2"]),
-  c("Deployment ramp","部署擴張路徑",
-    "20 to 50 pilot units reaching 20 to 70 farmers, then 150 to 400 across cooperatives, then 500 to 1500 across two to three countries. Bundle A is hardware with cartridges; Bundle B is hardware with an API and universal media.",
-    "先 20 至 50 台試點、觸及 20 至 70 位農民，再擴到合作社的 150 至 400 台，最後在兩到三個國家達到 500 至 1500 台。方案 A 是硬體加卡匣，方案 B 是硬體加 API 與通用培養基。",
-    "Business plan §3.4","商業計畫 §3.4",["economics"],["p3","p1"])
  ],
  cold:[
   t("What did the map show, and did the farmers confirm it or complicate it?","地圖顯示了什麼？農民是證實了它，還是把它變複雜了？"),
@@ -1163,13 +1124,125 @@ var MINDS=[
   {q:t("iGEM requires open publication. Your IP plan says disclosure before filing destroys European patentability.","iGEM 要求公開發表。你的智財計畫說申請前的公開會摧毀歐洲專利性。"),
    a:t("Name the tension honestly. Either file provisionally before the wiki freeze, or accept open science and compete on manufacturing, distribution and trust. Judges respect a stated position far more than an unexamined one.","誠實把這個張力講出來。要嘛在 wiki 凍結前送臨時申請，要嘛接受開放科學、改以製造、通路與信任競爭。評審對「有立場」的尊重遠高於「沒想過」。")}
  ],
- handoff:t("You depend on <b>M4</b> for containment evidence and on <b>M2</b> for the exact efficacy wording. Your break-even and yield claims are only as real as <b>M1</b>'s plant data. If M1 has no ACCD result, the 10 to 15 percent yield improvement is a projection and you must call it one.","你依賴 <b>M4</b> 提供圍阻證據、依賴 <b>M2</b> 提供精確的效力措辭。你的損益兩平與產量宣稱，只能和 <b>M1</b> 的植物數據一樣真。如果 M1 沒有 ACCD 結果，那 10 至 15% 的產量提升就是推估，你必須把它講成推估。")
+ handoff:t("You depend on <b>M4</b> for containment evidence, because that evidence is the contained-use argument. You hand <b>M6</b> the statute the product has to be sold under and the regions the map identified. You hand <b>M2</b> the wording limit: no disease claim survives the fertiliser pathway.","你依賴 <b>M4</b> 提供圍阻證據，因為那份證據就是封閉使用論證。你把產品必須依循的法條、以及地圖指認出的區域交給 <b>M6</b>。你把措辭上限交給 <b>M2</b>：走肥料路徑就容不下任何病害宣稱。")
+},
+{
+ key:"m6",n:"M6",v:"--m6",soft:"--m6s",
+ nm:t("Business & Entrepreneurship","商業模式與創業"),
+ lk:t("A working device → a product with a price, a buyer and a margin","可運作的裝置 → 有定價、有買家、有毛利的產品"),
+ tags:[t("Unit economics","單位經濟"),t("Market sizing","市場規模"),t("Cost of goods","製造成本"),t("IP & FTO","智財與實施自由"),t("Funding","募資")],
+ rubric:[9,8,0],
+ mission:t("You own <b>Entrepreneurship</b>, and this year it carries no rubric of its own: the three nominations are Measurement, Hardware and Integrated Human Practices. Your work is scored inside project questions 1 and 3 instead, which means it has to arrive as numbers rather than as a pitch. Every other mind produces a fact. Your job is to put a unit on it.","你擁有<b>創業</b>，而今年它沒有自己的評分表：三個提名是量測、硬體、整合式人本實踐。你的工作改在專案第 1 題與第 3 題裡拿分，所以它必須以數字出現，而不是一段推銷。其他每顆腦袋產出一個事實，你的工作是替它加上單位。"),
+ hp:[
+  c("陳文亮 · printer and ink","陳文亮 · 印表機與墨水",
+    "Model the business on cheap hardware and expensive consumable. Identify who pays rather than who uses. B2C is difficult and needs consultation and trust. Do not compete with cheap chemical fertiliser on price, and consider starting in foreign markets before local expansion.",
+    "商業模式參照便宜機器、昂貴耗材。先確認誰付錢，而不是誰使用。B2C 很難做，需要諮詢與信任。不要在價格上跟便宜的化學肥料硬碰，並考慮先做國外市場再回頭擴張本地。",
+    "4/10 AgriTalk","4/10 AgriTalk",[],["p3","p5","hp1"]),
+  c("正瀚 · positioning and regulation","正瀚 · 定位與法規",
+    "Heat and drought carry the greatest market need in Taiwan. Consider the legal regulations before designing the experiment, not after. Positioning against chemical pesticides, and which farms in Taiwan run field trials.",
+    "在台灣，熱與乾旱的市場需求最大。法規要在設計實驗之前考慮，不是之後。面對化學農藥的定位，以及台灣由哪些農場執行田間試驗。",
+    "7/9 正瀚生技","7/9 正瀚生技",["claims"],["p3","p5","hp1","hp2"]),
+  c("源鮮 · two customer segments","源鮮 · 兩種客層",
+    "Smallholders want stress protection for staple crops. Large companies want growth speed and protection for high-value crops such as spices and salad vegetables. One product, two propositions.",
+    "小農要的是主食作物的逆境保護。大型企業要的是生長速度，以及香辛料、生菜等高價作物的保護。一個產品，兩套價值主張。",
+    "8/11 源鮮智慧農場","8/11 源鮮智慧農場",[],["p3","p5","hp1","hp4"]),
+  c("Biotech Expo · headline metrics","生技展 · 標題數字",
+    "Competitors anchored their booths on one or two numbers, usually yield or emissions, and reviewers repeated those numbers back. Pick the one to three figures this project will be remembered by and put them everywhere, rather than describing the mechanism and hoping the number is inferred.",
+    "競爭對手的攤位都錨定在一兩個數字上，通常是產量或排放，而審查者也會把那些數字複述回來。挑出這個專案要被記住的一到三個數字，讓它們出現在每個地方，而不是描述機制、期待別人自己推算。",
+    "7/18 南港展覽館","7/18 南港展覽館",["economics"],["p1","p3","p5","hp1"])
+ ],
+ wet:[
+  c("Yield per cartridge run","每次卡匣運轉的產量",
+    "How much protectant one cartridge produces across its life, in milligrams. This is the unit that gets sold, and until the number exists the price is a guess.",
+    "一個卡匣在其生命週期內能產出多少保護劑，以毫克計。這是拿去賣的單位；在這個數字出現之前，定價只是猜測。",
+    "M4 reactor run","M4 反應器運轉",["economics"],["p2","p3","ms4"]),
+  c("Cartridge lifetime under load","負載下的卡匣壽命",
+    "Days of continuous operation before output falls below the useful dose. The replacement interval is the revenue clock, so this experiment sets recurring income as directly as it sets maintenance.",
+    "在產出降到有效劑量以下之前，能連續運轉幾天。更換週期就是收入的節奏，因此這個實驗決定經常性收入的程度，不亞於它決定維護頻率。",
+    "M4 × business plan","M4 × 商業計畫",["economics","burden"],["p3","hw3","p2"]),
+  c("Strain shelf stability","菌株保存穩定性",
+    "Whether a cartridge survives storage and shipping at ambient temperature, and for how long. A consumable that needs cold chain has a different cost structure and a much smaller market.",
+    "卡匣在常溫下能否撐過儲存與運輸，以及能撐多久。需要冷鏈的耗材，成本結構完全不同，市場也小得多。",
+    "正瀚 × wet lab","正瀚 × 濕實驗",["economics"],["p3","p2"])
+ ],
+ dry:[
+  c("Map to addressable market","從地圖到可服務市場",
+    "Turn the overlap surface into countable things: hectares inside the high-overlap regions, farms under one hectare within them, and how many devices that implies at the phase-two density. This is the step that makes the geospatial work pay for itself inside the business plan.",
+    "把交會曲面換成可以計數的東西：高重疊區內的公頃數、其中一公頃以下的農戶數，以及在第二階段密度下代表多少台裝置。這一步讓地理分析在商業計畫裡真正發揮作用。",
+    "Geospatial × business plan","地理分析 × 商業計畫",["gis","economics"],["p1","p3","hp2","hp6"]),
+  c("Device cheap, cartridge recurring","機器便宜、卡匣持續",
+    "The reactor's build cost sets the hardware price and the cartridge interval sets the revenue clock. Both numbers come from M4, so the business model cannot be written without the hardware team in the room.",
+    "反應器的製造成本決定硬體售價，卡匣更換週期決定收入節奏。兩個數字都來自 M4，因此沒有硬體組在場，商業模式寫不出來。",
+    "陳文亮 × hardware","陳文亮 × 硬體",["economics"],["p3","hp1","p1"]),
+  c("Market sequence and its reasons","市場順序及其理由",
+    "Philippines first under the NCBP contained-use guidelines. Vietnam second under Decree 43/2026/ND-CP with the Mekong salinity problem. Taiwan for closed validation. EU is long horizon only under the precautionary principle.",
+    "首站菲律賓，依 NCBP 封閉使用指引。次站越南，依 43/2026/ND-CP 號法令，加上湄公河鹽化問題。台灣做封閉驗證。歐盟因預防原則只列為長期。",
+    "Business plan §6.2","商業計畫 §6.2",[],["p3","hp2"]),
+  c("Patent against trade secret","專利對營業秘密",
+    "Patent the AND-gate circuit design, the CFMDI membrane design and the dual-module architecture. Keep promoter sequences and signal-peptide combinations as trade secrets. Note the tension with iGEM's open publication requirement.",
+    "AND 閘迴路設計、CFMDI 膜設計、雙模組架構走專利。啟動子序列與訊號胜肽組合留作營業秘密。要注意這與 iGEM 公開發表要求之間的張力。",
+    "Business plan §6.2","商業計畫 §6.2",[],["p3","hp3"]),
+  c("Cartridge against seasonal fungicide","卡匣成本對一季殺菌劑",
+    "One season of cartridges must cost no more than a farmer's current seasonal fungicide spend. The financial model runs a sensitivity analysis at plus or minus 20 percent on cost and on price.",
+    "一季的卡匣費用不能高於農民目前一季的殺菌劑支出。財務模型對成本與售價各做正負 20% 的敏感度分析。",
+    "Business plan §6.1","商業計畫 §6.1",["economics"],["p3","hp3"]),
+  c("Pilot success metrics","試點成功指標",
+    "20 to 30 percent fewer fungicide applications per season, 10 to 15 percent crop-loss reduction under climate stress, across 20 to 50 devices and 20 to 70 farmers. Name these as targets rather than results.",
+    "每季殺菌劑施用次數減少 20 至 30%，氣候逆境下作物損失減少 10 至 15%，涵蓋 20 至 50 台裝置、20 至 70 位農民。要把這些講成目標，不是結果。",
+    "Business plan §3.4","商業計畫 §3.4",[],["p3","hp2","hp3"]),
+  c("Deployment ramp","部署擴張路徑",
+    "20 to 50 pilot units reaching 20 to 70 farmers, then 150 to 400 across cooperatives, then 500 to 1500 across two to three countries. Bundle A is hardware with cartridges; Bundle B is hardware with an API and universal media.",
+    "先 20 至 50 台試點、觸及 20 至 70 位農民，再擴到合作社的 150 至 400 台，最後在兩到三個國家達到 500 至 1500 台。方案 A 是硬體加卡匣，方案 B 是硬體加 API 與通用培養基。",
+    "Business plan §3.4","商業計畫 §3.4",["economics"],["p3","p1"]),
+  c("Value per device per season","每台每季的價值",
+    "The model runs from stress frequency through protectant dose to plant benefit. Multiply the benefit by the crop price and you have what one device is worth to one farmer in one season, which is the ceiling on what anyone will pay.",
+    "模型從逆境頻率走到保護劑劑量、再走到植物效益。把效益乘上作物價格，就得到一台裝置在一季內對一位農民的價值，那就是任何人願意付的上限。",
+    "Model × business plan","模型 × 商業計畫",["economics","gis"],["p3","p4","p1"]),
+  c("Cost of goods per cartridge","每卡匣製造成本",
+    "Media, strain production, the membrane cartridge and the fill. Set against the reactor build cost from M4, this is the pair of numbers the printer-and-ink model stands or falls on.",
+    "培養基、菌株生產、膜卡匣與充填。對上 M4 給的反應器製造成本，這一組數字決定印表機與墨水模式成不成立。",
+    "BOM × fermentation","物料清單 × 發酵",["economics"],["p3","hw4","p6"]),
+  c("Gross margin and the price floor","毛利與價格下限",
+    "Cartridge cost against cartridge price gives the margin; a farmer's current seasonal fungicide spend gives the ceiling. If the two do not leave a gap, the model needs a different payer rather than a different price.",
+    "卡匣成本對卡匣售價得出毛利；農民目前一季的殺菌劑支出則是天花板。若兩者之間沒有空間，該換的是付款方，不是價格。",
+    "Business plan §6.1, §7.1","商業計畫 §6.1、§7.1",["economics"],["p3","p1"]),
+  c("Modular cassette as a platform","模組化卡匣即平台",
+    "One chassis, swappable expression cassettes. The cloning design is why a second protectant does not need a second company, and it is what Bundle B sells: hardware plus an API, with the customer culturing their own locally isolated strain.",
+    "同一個機體，可抽換的表現卡匣。選殖設計正是「第二種保護劑不需要第二家公司」的原因，也是方案 B 在賣的東西：硬體加 API，讓客戶培養自己在地分離的菌株。",
+    "M3 × business plan","M3 × 商業計畫",["platform"],["p1","p3","p7"]),
+  c("Freedom to operate on the parts","零件的實施自由",
+    "The CcaS-CcaR system, the MoClo standard and the shuttle backbone all came from somewhere. Before any filing, check what is encumbered, what is licensed for commercial use, and what is genuinely ours to claim.",
+    "CcaS-CcaR 系統、MoClo 標準與穿梭骨架都有來源。在任何申請之前，先釐清哪些有權利負擔、哪些已授權商業使用、哪些真的是我們可以主張的。",
+    "M3 × legal","M3 × 法務",["platform","claims"],["p3","p7","p8"]),
+  c("Funding stages and their evidence","募資階段與所需證據",
+    "Three rounds with different burdens of proof: to the Jamboree on expression and secretion data, post-Jamboree on crop trials and cost feasibility, first pilot on field data and a regulatory pathway. Naming what each funder needs to see is more convincing than naming an amount.",
+    "三個階段各有不同的舉證責任：到 Jamboree 靠表現與分泌數據，Jamboree 後靠作物試驗與成本可行性，首次試點靠田間數據與法規路徑。說清楚每一類出資者要看到什麼，比說出金額更有說服力。",
+    "Business plan §7.2","商業計畫 §7.2",["economics"],["p3","hp2"]),
+  c("Competitors and the gap we sit in","競爭者與我們所在的空隙",
+    "Chemical fungicides are cheaper and work now. Commercial biostimulants such as CH Biotech's peptides are shelf-stable and already sold. Neither adapts when a heatwave turns into an outbreak, and that gap is the only ground worth claiming.",
+    "化學殺菌劑更便宜、現在就有效。CH Biotech 等商業生物刺激素可常溫保存、也已經在賣。兩者都無法在熱浪轉成病害爆發時即時調整，而那個空隙是唯一值得主張的位置。",
+    "Business plan §4.3","商業計畫 §4.3",["economics"],["p1","p3"])
+ ],
+ cold:[
+  t("Who writes the cheque, and have you spoken to them?","誰簽支票？你跟他們談過嗎？"),
+  t("What does one cartridge cost you, and what will you charge for it?","一個卡匣的成本多少？你要賣多少？"),
+  t("How many farms are inside your addressable market, and how did you count them?","可服務市場裡有多少農戶？你怎麼數出來的？"),
+  t("What is one device worth to one farmer in one season?","一台裝置對一位農民、一季值多少錢？"),
+  t("Which parts of this are ownable, and which did you borrow?","這裡面哪些是你們能擁有的？哪些是借來的？")
+ ],
+ kill:[
+  {q:t("Your financial tables are empty. What are you actually asking us to believe?","你的財務表格是空的。那你到底要我們相信什麼？"),
+   a:t("Do not defend the blanks. Give the two numbers you can defend today, the reactor build cost and the cartridge interval, show the arithmetic between them, and name the date the rest lands. A costed fragment beats a full table of invented figures.","不要替空白辯護。給出今天就守得住的兩個數字：反應器製造成本與卡匣更換週期，把兩者之間的算式攤開，並說出其餘數字何時補上。一份算得出來的片段，勝過一整張編造的表。")},
+  {q:t("A farmer can buy fungicide today for less. Why would they buy this?","農民今天就能用更低的價格買到殺菌劑。他們為什麼要買這個？"),
+   a:t("Not on price. On the events fungicide cannot reach: the stress that arrives before anyone sprays, and the spray days removed from the season. Put a number on both, from M1's rescue data and the pilot metrics, or the answer stays an opinion.","不是靠價格，而是靠殺菌劑碰不到的那些事件：在有人噴藥之前就到達的逆境，以及一季裡被省下的噴藥次數。用 M1 的挽救數據與試點指標替兩者各給一個數字，否則這個回答只是意見。")}
+ ],
+ handoff:t("You take a number from nearly everyone: the addressable market from <b>M5</b>'s map, the value per season from <b>M1</b>'s rescue data and the model, the build cost and cartridge interval from <b>M4</b>, and what is ownable from <b>M3</b>. If any of those four refuse to give you a figure, say so out loud rather than inventing one.","你幾乎向每個人要一個數字：可服務市場來自 <b>M5</b> 的地圖，每季價值來自 <b>M1</b> 的挽救數據與模型，製造成本與卡匣週期來自 <b>M4</b>，可擁有的部分來自 <b>M3</b>。若這四者之中有人給不出數字，就直說，不要自己編。")
 }
 ];
 
 /* ── what to build next ───────────────────────── */
 var TODO=[
- {pri:"now",own:["M1","M5"],img:"t01",cap:t("Agar Arabidopsis planting, 12 Apr","洋菜阿拉伯芥種植，4/12"),ev:"Business plan §3.2, §3.4",
+ {pri:"now",own:["M1","M6"],img:"t01",cap:t("Agar Arabidopsis planting, 12 Apr","洋菜阿拉伯芥種植，4/12"),ev:"Business plan §3.2, §3.4",
   t:t("Get ACC deaminase onto a plant","把 ACC 去氨酶做到植物上"),
   now:t("LEA 14 has a salinity rescue result. ACCD has enzyme activity in the supernatant and nothing on a plant, yet the SWOT, the product description and the development plan all treat it as delivered.","LEA 14 有鹽逆境挽救結果。ACCD 只有上清液的酵素活性，植物端一片空白，但 SWOT、產品說明與開發計畫都當它已經交付。"),
   next:t("Run the ACCD arm of the existing rescue assay with the four control arms already defined. One dose, one stress, one readout is enough to convert a claim into a result.","用已經定義好的四組對照，把現有挽救試驗的 ACCD 組跑起來。一個劑量、一種逆境、一個讀值，就足以把宣稱變成結果。"),
@@ -1184,7 +1257,7 @@ var TODO=[
   now:t("The Hardware rubric scores whether another team could rebuild the device from your documentation. The BOM, the LPA and photometer calibration protocols, the firmware and the enclosure files are not yet on the wiki.","硬體評分表評的是「別的團隊能不能靠你的文件重建裝置」。物料清單、LPA 與光度計校正流程、韌體與外殼檔案都還沒放上 wiki。"),
   next:t("Publish a bill of materials with suppliers and prices, the Arduino sketch, the enclosure files, and a step-by-step assembly guide with photographs.","發布含供應商與價格的物料清單、Arduino 程式、外殼檔案，以及附照片的逐步組裝說明。"),
   unlocks:t("HW4 · P8 · MS2","HW4 · P8 · MS2")},
- {pri:"now",own:["M5"],img:"t04",cap:t("正瀚 protectant product line, 9 Jul","正瀚保護劑產品線，7/9"),ev:"Business plan §7.1, §2.1",
+ {pri:"now",own:["M6"],img:"t04",cap:t("正瀚 protectant product line, 9 Jul","正瀚保護劑產品線，7/9"),ev:"Business plan §7.1, §2.1",
   t:t("Fill the empty tables","把空表格填起來"),
   now:t("Fixed cost, variable cost, selling price, break-even point and break-even sales are blank. So are name, form, volume, price, molecular weight, structure and storage in the product table.","固定成本、變動成本、售價、損益兩平點與損益兩平銷售額全是空白。產品表的名稱、劑型、容量、價格、分子量、結構與保存條件也是。"),
   next:t("Cost the current build from the BOM, price one season of cartridges against a farmer's fungicide spend, and state the measured molecular weight and membrane cut-off once, publicly, in the product table.","用物料清單計算現有版本的成本，把一季卡匣價格對上農民的殺菌劑支出，並在產品表公開寫下一次實測分子量與膜截留門檻。"),
@@ -1219,7 +1292,7 @@ var TODO=[
   now:t("144 students across six sessions is real reach, and the log records attendance rather than learning.","六場、144 名學生是實在的觸及，但紀錄只有出席人數，沒有學習成效。"),
   next:t("One short pre and post instrument on the next session, five questions, same before and after. That converts a list of schools into evidence.","下一場加一份簡短的前後測，五題，前後相同。這會把學校清單轉成證據。"),
   unlocks:t("HP5 · HP6 · Education","HP5 · HP6 · 教育")},
- {pri:"later",own:["M5"],img:"t11",cap:t("Advisor Neo on Git and wiki editing, 2 Jul","Neo 顧問講 Git 與 wiki 編輯，7/2"),ev:"Business plan §6.2, EPC Art. 54",
+ {pri:"later",own:["M6","M5"],img:"t11",cap:t("Advisor Neo on Git and wiki editing, 2 Jul","Neo 顧問講 Git 與 wiki 編輯，7/2"),ev:"Business plan §6.2, EPC Art. 54",
   t:t("Decide the open-science position","決定開放科學的立場"),
   now:t("iGEM requires public disclosure and the IP section says disclosure before filing destroys European patentability. The team has not chosen.","iGEM 要求公開，而智財章節說申請前的公開會摧毀歐洲專利性。團隊尚未做出選擇。"),
   next:t("File provisionally before the wiki freeze, or write one paragraph committing to open science and competing on manufacturing, distribution and trust. Either is defensible; silence is not.","要嘛在 wiki 凍結前送臨時申請，要嘛寫一段話承諾走開放科學，改以製造、通路與信任競爭。兩者都站得住，沉默不行。"),
@@ -1248,7 +1321,7 @@ var CONTRA=[
   q:t("Your device is sealed, but BAPHIQ may still call the secretions a GMO product. Then what?","你的裝置是封閉的，但防檢署仍可能把分泌物視為基改產品。那怎麼辦？"),
   why:t("The risk register lists this as a live regulatory uncertainty, and the whole 30-day biostimulant pathway depends on the contained-use argument being accepted.","風險登錄把這列為尚未解決的法規不確定性，而整條 30 天的生物刺激素路徑，都建立在封閉使用論證被接受之上。"),
   shape:t("Say you have not assumed the answer. All testing stays contained and lab-based until BAPHIQ gives written guidance, and the fallback is the longer pathway with a slower timeline. Showing you costed the downside is worth more than asserting the upside.","說你沒有預設答案。在防檢署給出書面意見前，所有測試都維持在封閉的實驗室內；備案是走比較長的路徑、接受較慢的時程。展示你算過壞情況，比斷言好情況更有價值。")},
- {minds:["M2","M5"],
+ {minds:["M2","M6"],
   q:t("Your plan projects a 10 to 15 percent yield improvement. On what data?","你的計畫推估 10 至 15% 的產量提升。根據什麼數據？"),
   why:t("Phase 2 targets 10 to 15 percent crop-loss reduction and 20 to 30 percent fewer fungicide applications. The plant evidence available is one salinity rescue with LEA 14.","第二階段的目標是減少 10 至 15% 的作物損失，並減少 20 至 30% 的殺菌劑施用次數。目前手上的植物證據是 LEA 14 的一次鹽逆境挽救。"),
   shape:t("Call it a projection and show the assumption chain. Then name the experiment that would replace the assumption with a measurement. A projection that knows it is a projection reads as competence.","把它講成推估，並攤開假設鏈。接著點名哪一個實驗能把假設換成量測。知道自己是推估的推估，聽起來就是能力。")},
@@ -1257,6 +1330,11 @@ var CONTRA=[
   why:t("Project question 6 asks how much the team did themselves, and the Hardware rubric asks for user testing and iteration. Both are answered by the same story, told badly or told well.","專案第 6 題問團隊自己做了多少，硬體評分表問使用者測試與迭代。兩者由同一個故事回答，差別只在講得好不好。"),
   shape:t("Name the students, name the cycle that failed, and name what the next build changed. A team that can only describe the working version sounds like it inherited the device rather than made it.","講出學生的名字、講出失敗的那一輪、講出下一版改了什麼。只講得出可運作版本的團隊，聽起來像是繼承了這台裝置，不是做出來的。")}
 ];
+
+CONTRA.push({minds:["M6","M5"],
+  q:t("Who is your first paying customer, and have you asked them?","你的第一個付費客戶是誰？你問過他們了嗎？"),
+  why:t("The plan names smallholders, cooperatives, distributors, NGOs and large agricultural companies at different points. Judges read that as a team that has not chosen.","計畫在不同段落分別點名小農、合作社、經銷商、NGO 與大型農企業。評審會把這讀成一個還沒做出選擇的團隊。"),
+  shape:t("Name one, and name the conversation. 陳文亮 said to identify who pays rather than who uses, and 源鮮 split the market into smallholder staple crops and corporate high-value crops. Pick the segment you have actually spoken to, say why the others come later, and let the pilot decide.","選一個，並講出那場對話。陳文亮說要先確認誰付錢而不是誰使用，源鮮則把市場分成小農主食作物與企業高價作物。挑你真的談過的那一群，說明其他為什麼排在後面，然後讓試點來決定。")});
 
 var UI={
  eyebrow:t("iGEM 2026 · Team ReLeaf · Judging session prep","iGEM 2026 · ReLeaf 團隊 · 評審場次備戰"),
@@ -1267,8 +1345,8 @@ var UI={
   {x:49,y:74,side:"l",t:t("wiki and video already read","wiki 與影片已經看過")},
   {x:76,y:44,side:"l",t:t("6 judges · 20 minutes of questions","6 位評審 · 20 分鐘提問")}
  ],
- title:t("Five minds, twenty minutes","五顆腦袋，二十分鐘"),
- deck:t("The scores are already in when the session starts. These twenty minutes decide whether a judge confirms what they read or starts doubting it, and the podium holds five people. Nobody on it gets to be a wet lab person, or a dry lab person, or an HP person. Each of the five owns one link of the system and carries all three subteams' evidence for that link.","場次開始時，分數已經打完了。這二十分鐘決定的是評審確認他讀到的東西，還是開始懷疑它，而講台只站得下五個人。站上去的人，沒有誰還能只是「濕實驗的」「乾實驗的」或「人本的」。這五顆腦袋各自負責系統的一個環節，並扛起該環節在三個子團隊裡的全部證據。"),
+ title:t("Six minds, twenty minutes","六顆腦袋，二十分鐘"),
+ deck:t("The scores are already in when the session starts. These twenty minutes decide whether a judge confirms what they read or starts doubting it, and the podium holds six people. Nobody on it gets to be a wet lab person, or a dry lab person, or an HP person. Each of the six owns one link of the system and carries all three subteams' evidence for that link.","場次開始時，分數已經打完了。這二十分鐘決定的是評審確認他讀到的東西，還是開始懷疑它，而講台只站得下六個人。站上去的人，沒有誰還能只是「濕實驗的」「乾實驗的」或「人本的」。這六顆腦袋各自負責系統的一個環節，並扛起該環節在三個子團隊裡的全部證據。"),
  facts:[
   {k:t("Format","形式"),v:t("5 min summary + 20 min Q&A","5 分鐘摘要 + 20 分鐘問答")},
   {k:t("Judges","評審"),v:t("6 per team, ballots mostly pre-filled","每隊 6 位，選票多已預填")},
@@ -1282,7 +1360,7 @@ var UI={
   {n:t("How it is scheduled","工作如何排程"),
    cap:t("Three subteam bands with a wall between each one. A task is assigned inside a band and stops at its edge.","三條子團隊帶，每兩條之間有一道牆。任務在一條帶裡被指派，到邊界就停住。")},
   {n:t("How it is judged","專案如何被評"),
-   cap:t("The walls are gone. Five minds run top to bottom, and the number in each cell is how many entries that mind carries from that subteam.","牆不見了。五顆腦袋由上貫穿到下，每一格的數字是那顆腦袋要從該子團隊扛的項目數。")},
+   cap:t("The walls are gone. Six minds run top to bottom, and the number in each cell is how many entries that mind carries from that subteam.","牆不見了。六顆腦袋由上貫穿到下，每一格的數字是那顆腦袋要從該子團隊扛的項目數。")},
   {n:t("One question","一道問題"),
    cap:t("Pick a judge question. The cells that answer it light up, and they never sit inside a single band.","選一道評審問題。回答它的格子會亮起來，而它們從來不會只落在同一條帶裡。")}
  ],
@@ -1297,10 +1375,10 @@ var UI={
  wReadD:t("bands and","條帶與"),
  wReadE:t("minds","顆腦袋"),
  wallStat1:t("entries on this board","這張板子上的項目"),
- wallStat2:t("of the five minds draw on all three subteams","顆腦袋同時取用三個子團隊"),
+ wallStat2:t("of the minds draw on all three subteams","顆腦袋同時取用三個子團隊"),
  wallStat3:t("named stakeholders whose advice changed a design","改變過設計的具名利害關係人"),
  boardH:t("What each mind equips","每顆腦袋要裝的東西"),
- boardP:t("Rows are the three subteams, columns are the five minds. Hover a column header to see it cut through all three rows. Hover or click an entry to read it in full below. Click a judging question further down to light the entries that answer it, or download the whole board as a four-sheet spreadsheet.","橫列是三個子團隊，直欄是五顆腦袋。滑過欄位標題，可以看見它切過三列。滑過或點選任一項目，下方會顯示完整內容。點選下方的評審問題可亮出回答它的項目，也可以把整張板子下載成四個工作表的試算表。"),
+ boardP:t("Rows are the three subteams, columns are the six minds. Hover a column header to see it cut through all three rows. Hover or click an entry to read it in full below. Click a judging question further down to light the entries that answer it, or download the whole board as a four-sheet spreadsheet.","橫列是三個子團隊，直欄是六顆腦袋。滑過欄位標題，可以看見它切過三列。滑過或點選任一項目，下方會顯示完整內容。點選下方的評審問題可亮出回答它的項目，也可以把整張板子下載成四個工作表的試算表。"),
   xlBtn:t("Download .xlsx","下載 .xlsx"),
  xlDone:t("Saved .xlsx","已下載 .xlsx"),
  xlDoneCsv:t("Saved .csv","已下載 .csv"),
@@ -1368,14 +1446,14 @@ var UI={
  conP:t("Real contradictions sitting inside the stakeholder log and the business plan right now. Each is a question a sharp judge will find, and each one needs two or three minds answering together. The shape of the answer matters more than the answer.","此刻就存在於利害關係人紀錄與商業計畫裡的真實矛盾。每一個都是敏銳評審會找到的問題，而且每一個都需要兩三顆腦袋一起回答。答案的形狀比答案本身更重要。"),
  answerShape:t("Answer shape","答案的形狀"),
  praH:t("How this changes what you write","這會改變你怎麼寫"),
- praP:t("The five minds are not only a podium plan. They are the unit of work for the wiki and the video.","五顆腦袋不只是講台上的分工，也是 wiki 與影片的工作單位。"),
+ praP:t("The six minds are not only a podium plan. They are the unit of work for the wiki and the video.","六顆腦袋不只是講台上的分工，也是 wiki 與影片的工作單位。"),
  practice:[
   {n:t("Wiki","Wiki"),h:t("Write threads, not pages","寫線索，不要寫頁面"),
    p:t("A mind is a thread that surfaces on several pages at once. M2's protectant thread runs through Description, Design, Results, Proof of Concept and Human Practices as one story with one set of numbers.","一顆腦袋是一條同時浮現在多個頁面上的線索。M2 的保護劑線索貫穿 Description、Design、Results、Proof of Concept 與 Human Practices，是同一個故事、同一組數字。"),
    l:[t("Before writing a page, ask which mind owns it.","動筆前先問：這一頁屬於哪顆腦袋。"),
       t("Every design claim cites the stakeholder who caused it.","每個設計主張都要引用促成它的那位利害關係人。"),
       t("Parts documentation lives on the Registry. Judges score only the Registry.","零件文件放在 Registry。評審只採計 Registry。")]},
-  {n:t("Video","影片"),h:t("Five beats, one chain","五個節拍，一條鏈"),
+  {n:t("Video","影片"),h:t("Six beats, one chain","六個節拍，一條鏈"),
    p:t("The presentation video walks the chain in order. Each mind gets one beat and hands the next a specific object: a dose, a molecular weight, a wavelength, a threshold. Never a topic change.","簡報影片依序走完這條鏈。每顆腦袋一個節拍，並交給下一顆一個具體物件：一個劑量、一個分子量、一個波長、一個閾值。絕不是換一個主題。"),
    l:[t("Open on the plant and the farmer, not the plasmid.","從植物與農民開場，不是質體。"),
       t("Every handover names a number both minds agree on.","每一次交棒都要講出兩顆腦袋都同意的一個數字。"),
@@ -1387,7 +1465,7 @@ var UI={
       t("Nobody says \"that is not my part.\"","沒有人可以說「那不是我負責的」。")]}
  ],
  foot1:t("Built from the ReLeaf stakeholder engagement log, education log and business plan draft, against the iGEM 2026 Judge Handbook.","資料來源：ReLeaf 利害關係人互動紀錄、教育活動紀錄、商業計畫草稿，並對照 iGEM 2026 評審手冊。"),
- foot2:t("5 MINDS · 3 SUBTEAMS · 23 JUDGE QUESTIONS · 20 MINUTES","5 顆腦袋 · 3 個子團隊 · 23 道評審問題 · 20 分鐘"),
+ foot2:t("6 MINDS · 3 SUBTEAMS · 23 JUDGE QUESTIONS · 20 MINUTES","6 顆腦袋 · 3 個子團隊 · 23 道評審問題 · 20 分鐘"),
  threadLabel:t("Trace","追蹤"),
  clearThread:t("Clear thread","清除線索")
 };
@@ -1521,7 +1599,7 @@ function downloadXlsx(){
   try{
     sheets=matrixSheets();
     bytes=buildWorkbook(sheets);
-    name="releaf-five-minds-"+(lang==="z"?"zh":"en");
+    name="releaf-six-minds-"+(lang==="z"?"zh":"en");
   }catch(e){
     if(window.console) console.error("xlsx build",e);
     flashBtn(T(UI.xlFail)); return;
@@ -1611,7 +1689,7 @@ function wallCounts(qid){
 function renderWall(){
   var host=document.getElementById("wallFig"); if(!host) return;
   var rowNames=[T(UI.rowHP.n),T(UI.rowWet.n),T(UI.rowDry.n)], rowKeys=["hp","wet","dry"];
-  var W=900,H=288,padL=118,padR=14,padT=48,slot=(H-padT-16)/3,bh=slot-10,colW=(W-padL-padR)/5;
+  var W=900,H=288,padL=118,padR=14,padT=48,slot=(H-padT-16)/3,bh=slot-10,colW=(W-padL-padR)/MINDS.length;
   var p=['<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+T(UI.wallH)+'" preserveAspectRatio="xMidYMid meet">'];
 
   p.push('<text class="w-chain" x="'+padL+'" y="11" font-family="var(--mono)" font-size="9" letter-spacing="0.5" fill="var(--ink-3)">'+T(UI.wChain)+'</text>');
@@ -1644,7 +1722,7 @@ function renderWall(){
     var x=padL+i*colW+4, w=colW-8;
     p.push('<g class="w-mind" data-mind="'+m.n+'" style="transition-delay:'+(i*55)+'ms">');
     p.push('<rect class="w-col" x="'+x+'" y="'+(padT-16)+'" width="'+w+'" height="'+(H-padT+2)+'" rx="3" fill="var('+m.soft+')" stroke="var('+m.v+')" stroke-width="1.3"/>');
-    p.push('<text class="w-mid" x="'+(x+w/2)+'" y="'+(padT-22)+'" text-anchor="middle" font-family="var(--mono)" font-size="10" font-weight="600" fill="var('+m.v+')">'+m.n+'</text>');
+    p.push('<text class="w-mid" x="'+(x+w/2)+'" y="'+(padT-22)+'" text-anchor="middle" font-family="var(--mono)" font-size="9.4" font-weight="600" fill="var('+m.v+')">'+m.n+'</text>');
     rowKeys.forEach(function(rk,ri){
       var cy=padT+ri*slot+bh/2, hits=q.per[m.n+"-"+rk];
       if(hits) p.push('<rect class="w-hit" x="'+(x+5)+'" y="'+(padT+ri*slot+4)+'" width="'+(w-10)+'" height="'+(bh-8)+'" rx="2" fill="var(--mark)" stroke="var(--mark-line)" stroke-width="1.2"/>');
@@ -1711,7 +1789,7 @@ function renderWallChrome(){
     m.hp.forEach(function(i){ people[T(i.k).split(" · ")[0]]=1; });
   });
   var st=document.getElementById("wallStats"); st.innerHTML="";
-  [[total,UI.wallStat1],[crossing+" / 5",UI.wallStat2],[Object.keys(people).length,UI.wallStat3]].forEach(function(pair){
+  [[total,UI.wallStat1],[crossing+" / "+MINDS.length,UI.wallStat2],[Object.keys(people).length,UI.wallStat3]].forEach(function(pair){
     st.appendChild(el("div","wstat",'<div class="v">'+pair[0]+'</div><div class="l">'+T(pair[1])+'</div>'));
   });
 }
