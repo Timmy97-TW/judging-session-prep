@@ -50,19 +50,37 @@ calculation and a conversation with an outside expert in the same head.
 
 ## Using it
 
-- **Hover or click an entry** to read it in full in the strip below the board.
-- **Trace a thread** to light the entries that share one number or decision across columns.
+The board is a **rack of six cards**, one per mind. Inside each card the three subteam bands
+stack in order, so a single mind reads top to bottom on its own — which is how one person has to
+hold it in the room. Scroll the rack sideways, or use the pager underneath.
+
+- **Hover or click an entry** to read it in full in the strip below the rack.
+- **Trace a thread** to light the entries that share one number or decision across cards.
 - **Click a judging question** to light the entries that answer it, with a coverage count per
   mind and a warning where coverage is thin.
-- **Hover a column header** to watch one mind cut through all three subteam rows.
+- **Click a card's header** to open that mind's full dossier.
 - **Download .xlsx** builds a four-sheet workbook from whatever is on screen, in the language you are
   reading. Pre-built copies sit in this repo as
   [`releaf-six-minds-en.xlsx`](releaf-six-minds-en.xlsx) and
   [`releaf-six-minds-zh.xlsx`](releaf-six-minds-zh.xlsx).
-- **Drill** opens a 55-question quiz in three decks: the judge handbook, project detail, and how the
-  pieces connect. Answers come back as keywords rather than prose. Toggle a deck off to drill one area.
-- **Full screen** puts the whole board on one screen for team review.
+- **Full screen** puts the whole rack on one screen for team review.
 - **EN / 中文** toggles the entire page, English by default.
+
+## The drill
+
+Fifty-five cards in three decks — the judge handbook, project detail, and how the pieces connect.
+Every card carries **a photograph from the season**: the room, the bench or the meeting where that
+answer was actually made. The photo starts as a riso duotone and develops to full colour when you
+hover it, tap it, or reveal the answer.
+
+Answers come back as keywords rather than prose. After the reveal you say whether you **had it** or
+**missed it**; the misses collect, and the run ends on a score with a mosaic of the frames you
+dropped, so you can run just those again.
+
+- Deck cards sit on the page under **Pick a deck and get asked** — click one to start there.
+- **Drill** in the masthead opens the deck chooser.
+- Keyboard: `space` reveals, `1` had it, `2` missed, `→` skips, `Esc` closes.
+- Deep link a deck for the team: `#drill=hb`, `#drill=pr`, `#drill=ln`, or `#drill=all`.
 
 ## Judging questions
 
@@ -89,7 +107,18 @@ judge does.
 
 Every one of the 23 judge questions maps to a designed combination of entries, with the lead minds named.
 
+## Photographs
+
+Sixty-four frames from the team album are inlined in the page as small WebP data URIs, drawn from
+`iGEM2026_Images` and captioned bilingually with the date they were taken. They appear on the drill
+cards, the deck covers, the build list and the end-of-run mosaic. Nothing is stock: every photograph
+is the team's own.
+
 ## Development
 
-A single self-contained `index.html`. No build step and no dependencies beyond Google Fonts.
-Open it directly in a browser to work on it.
+A single self-contained `index.html`, about 1 MB with the photographs inlined. No build step and no
+dependencies beyond Google Fonts. Open it directly in a browser to work on it.
+
+Design: Hallmark, macrostructure *Catalogue*, theme *Riso* — warm peach paper, risograph-bold
+display (Bricolage Grotesque), fluorescent pink and press green as the two inks, halftone fields and
+hard-offset shadows. Light and dark both ship; the Theme button overrides the system setting.
