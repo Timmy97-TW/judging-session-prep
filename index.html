@@ -85,6 +85,14 @@ button{font:inherit;color:inherit;background:none;border:none;padding:0;cursor:p
 .topbar .grow{flex:1 1 auto}
 .ctl{border:1px solid var(--rule);background:var(--surface);color:var(--ink-2);border-radius:99px;padding:6px 13px;font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap;transition:color var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out)}
 .ctl:hover{color:var(--ink);border-color:var(--rule-2)}
+#drillBtn{display:inline-flex;align-items:center;gap:7px;padding-left:10px;border-color:var(--accent);color:var(--accent);background:var(--accent-soft);font-weight:600}
+#drillBtn:hover{color:var(--paper);background:var(--accent);border-color:var(--accent)}
+#drillBtn:hover .dot{background:var(--paper)!important;opacity:.9}
+#drillBtn .dots{display:inline-flex;gap:2px}
+#drillBtn .dot{width:5px;height:5px;border-radius:99px;display:block;transition:background var(--dur-fast) var(--ease-out),transform var(--dur-fast) var(--ease-out)}
+#drillBtn:hover .dot:nth-child(1){transform:translateY(-2px)}
+#drillBtn:hover .dot:nth-child(3){transform:translateY(-2px)}
+#drillBtn:hover .dot:nth-child(5){transform:translateY(-2px)}
 .langset{display:flex;border:1px solid var(--rule);border-radius:99px;overflow:hidden;background:var(--surface)}
 .langset button{padding:6px 13px;font-family:var(--mono);font-size:10px;letter-spacing:.09em;color:var(--ink-3);transition:background var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out)}
 .langset button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
@@ -375,12 +383,19 @@ section{margin-top:var(--s8);scroll-margin-top:var(--s5)}
 .scrim.drill{align-items:center}
 .drillcard{width:min(660px,100%);background:var(--surface);border:1px solid var(--rule);border-top:3px solid var(--mc);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:var(--s6) var(--s6) var(--s5)}
 @media(max-width:640px){.drillcard{padding:var(--s5) var(--s4)}}
-.drillcard .meta{display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap;font-family:var(--mono);font-size:9.4px;letter-spacing:.1em;text-transform:uppercase}
+.drillcard .meta{display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap;font-family:var(--mono);font-size:9.4px;letter-spacing:.11em;text-transform:uppercase}
 .drillcard .who{color:var(--mc);font-weight:600}
 .drillcard .kind{color:var(--ink-3)}
 .drillcard .tally{margin-left:auto;color:var(--ink-3);font-variant-numeric:tabular-nums;text-transform:none;letter-spacing:.04em}
 .drillcard .qq{font-family:var(--serif);font-size:clamp(21px,3vw,29px);line-height:1.2;letter-spacing:-.015em;margin-top:var(--s4);color:var(--ink)}
-.drillcard .ans{margin-top:var(--s4);padding-top:var(--s4);border-top:1px solid var(--rule);font-size:13.4px;line-height:1.5;color:var(--ink-2)}
+.drillcard .ans{margin:var(--s4) 0 0;padding:var(--s4) 0 0;border-top:1px solid var(--rule);list-style:none;display:flex;flex-direction:column;gap:7px}
+.drillcard .ans li{position:relative;padding-left:16px;font-size:13.6px;line-height:1.45;color:var(--ink)}
+.drillcard .ans li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:99px;background:var(--mc)}
+.dcats{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:var(--s4)}
+.dcat{border:1px solid var(--rule);border-radius:99px;padding:3px 11px;font-size:11.4px;color:var(--ink-3);transition:all var(--dur-fast) var(--ease-out)}
+.dcat b{font-family:var(--mono);font-size:9.2px;font-weight:600;opacity:.65}
+.dcat:hover{border-color:var(--rule-2);color:var(--ink-2)}
+.dcat.on{border-color:var(--cc);color:var(--cc);box-shadow:inset 0 0 0 1px var(--cc)}
 .drillcard .ans[hidden]{display:none}
 .drillcard .acts{display:flex;gap:var(--s2);margin-top:var(--s5);flex-wrap:wrap}
 .drillcard .acts .primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
@@ -1482,12 +1497,9 @@ var UI={
  dosDry:t("Dry lab you carry","你要扛的乾實驗"),
  drill:t("Drill","抽考"),
  drillNext:t("Another","再一題"),
- drillShow:t("Show the answer shape","看答案的形狀"),
+ drillShow:t("Show answer","看答案"),
  drillClose:t("Done","結束"),
- drillCold:t("answer cold","不看稿要答出"),
- drillKill:t("this one can hurt","這題會傷到你"),
- drillJudge:t("judge question","評審問題"),
- drillLead:t("lead","主答"),
+ drillEmpty:t("Pick at least one deck.","至少選一組題庫。"),
  dosLines:t("The five lines the plan stands on","計畫所依靠的五條線"),
  dosFrom:t("from","來自"),
  dosRubric:t("Rubric areas this mind answers","這顆腦袋負責的評分項目"),
@@ -1694,6 +1706,178 @@ function downloadXlsx(){
   });
 }
 
+/* ── drill bank: handbook, project, connections ── */
+function d(c,qe,qz,ae,az){return {c:c,q:{e:qe,z:qz},a:ae.map(function(x,i){return {e:x,z:az[i]};})};}
+var DRILL=[
+ d("hb","How long is the judging session, and how is it split?","評審場次多長？怎麼分配？",
+   ["5 min project summary","20 min questions and discussion","judges confer 10 min after you leave"],
+   ["5 分鐘專案摘要","20 分鐘提問與討論","你離開後評審再討論 10 分鐘"]),
+ d("hb","How many judges score your team?","有幾位評審為你的隊伍評分？",
+   ["6 per team","conflicts of interest removed","mixed across teams for range of background"],
+   ["每隊 6 位","已排除利益衝突","跨隊混編以涵蓋不同背景"]),
+ d("hb","When are the ballots actually filled in?","選票實際上是什麼時候填的？",
+   ["mostly before the Jamboree","from the wiki and the presentation video","the session only confirms or shifts it"],
+   ["大多在 Jamboree 之前","依據 wiki 與簡報影片","現場只是確認或修正"]),
+ d("hb","How is a medal criterion decided?","獎牌條件如何判定？",
+   ["majority of the 6 judges","ties are ruled in favour of the team","you get the highest medal where every criterion is met"],
+   ["6 位評審多數決","平手時判給隊伍","所有條件都達成的最高一級才拿得到"]),
+ d("hb","How is a Special Award decided?","特殊獎項如何決定？",
+   ["highest average score","in that award's own rubric category"],
+   ["該獎項評分表的平均分最高","以該類別自己的評分表計算"]),
+ d("hb","What decides Finalists and Village Awards?","決賽入圍與村獎由什麼決定？",
+   ["weighted average of three sections","Project, Presentation, Wiki"],
+   ["三個區塊的加權平均","專案、簡報、Wiki"]),
+ d("hb","How many finalists are chosen?","總共選出幾組決賽隊伍？",
+   ["3 undergraduate","2 overgraduate","2 high school"],
+   ["大學組 3 隊","研究生組 2 隊","高中組 2 隊"]),
+ d("hb","Which Village group are high school teams like ours judged in?","像我們這樣的高中隊伍在哪個村組被評分？",
+   ["Group 3","Agriculture, Food & Nutrition, Fashion & Cosmetics, Art & Design","one award to the highest-scoring team in the group"],
+   ["第 3 組","農業、食品與營養、時尚與化妝品、藝術與設計","該組最高分隊伍獲一個獎"]),
+ d("hb","How many questions build the project score?","專案分數由幾道題構成？",
+   ["9 questions","question 9 is scored on the session itself"],
+   ["9 題","第 9 題評的是現場表現"]),
+ d("hb","Where must Parts documentation live?","零件文件必須放在哪裡？",
+   ["the Registry, not the wiki","judges score only what is on the Registry","sequence features, topology, host, rationale, experiments, characterisation"],
+   ["Registry，不是 wiki","評審只採計 Registry 上的內容","序列特徵、拓撲、宿主、設計理由、實驗、特性分析"]),
+ d("hb","Which assembly standards count for medals and awards?","哪些組裝標準能用於獎牌與獎項？",
+   ["RFC 10 BioBrick","RFC 1000 iGEM Type IIS","screened automatically, result shown on the ballot"],
+   ["RFC 10 BioBrick","RFC 1000 iGEM Type IIS","系統自動篩檢，結果顯示在評分表上"]),
+ d("hb","What is a Standard Page?","什麼是標準頁面？",
+   ["fixed wiki URL per medal criterion and award","judges are linked straight there","they are not required to hunt elsewhere"],
+   ["每個獎牌條件與獎項各有固定 wiki 網址","評審由連結直接前往","他們沒有義務到別處尋找"]),
+ d("hb","Can judges score work hosted outside iGEM?","放在 iGEM 以外的內容能被評分嗎？",
+   ["no","external sites are outside the competition","not covered by the wiki freeze or the archive"],
+   ["不能","外部網站不在競賽範圍內","不受 wiki 凍結與封存機制涵蓋"]),
+ d("hb","What are the three dimensions of Human Practices?","人本實踐的三個面向是什麼？",
+   ["Reflective","Responsible","Responsive"],
+   ["反思","負責","回應"]),
+ d("hb","Name the four aspects of the Measurement rubric.","說出量測評分表的四個面向。",
+   ["repeatable by other teams","protocol well described","useful to other projects","controls used, units calibrated"],
+   ["其他團隊能重現","流程描述清楚","對其他專案有用","有用對照、單位已校正"]),
+ d("hb","Name the four aspects of the Hardware rubric.","說出硬體評分表的四個面向。",
+   ["addresses a need in synthetic biology","user testing and learning from feedback","utility shown in a proof of concept","documentation good enough to reproduce"],
+   ["解決合成生物學的實際需求","做過使用者測試並從回饋學習","概念驗證展示了實用性","文件足以讓人重現"]),
+ d("hb","Name the six aspects of the Integrated HP rubric.","說出整合式人本實踐評分表的六個面向。",
+   ["integrated throughout","thoughtfully implemented, context and prior work","responsible and good for the world","incorporates different stakeholder views","documented so others can build on it","inspiring to others"],
+   ["全程整合","執行細緻、有脈絡與既有研究","負責且對世界有益","納入不同利害關係人觀點","文件足以讓他人接續","對他人具啟發性"]),
+ d("hb","What limits a high school team's biology?","高中隊伍的生物操作受什麼限制？",
+   ["the iGEM Whitelist","no BSL-2 or higher","no animals, no human samples","no most sporulating fungi"],
+   ["iGEM 白名單","不得使用 BSL-2 以上","不得使用動物或人體檢體","多數產孢真菌不得使用"]),
+ d("hb","Where can a judge read our safety form?","評審在哪裡看得到我們的安全表單？",
+   ["the team dashboard","reviewed by the Safety & Security Committee","publicly visible"],
+   ["團隊儀表板","由安全與生物保防委員會審查","公開可見"]),
+ d("hb","What changed about attribution in 2026?","2026 年貢獻歸屬有什麼改變？",
+   ["displayed directly on the team page","judges access it from there","every field including specific tasks should be filled"],
+   ["直接顯示在團隊頁面上","評審由該處取得","每個欄位（含具體任務）都應填寫"]),
+
+ d("pr","What is our chassis, and why that one?","我們的宿主是什麼？為什麼選它？",
+   ["Bacillus subtilis","secretes protein natively","sits inside the iGEM Whitelist","黃姿碧 advised native signal peptides"],
+   ["枯草桿菌","天生會分泌蛋白","在 iGEM 白名單內","黃姿碧建議用原生訊號胜肽"]),
+ d("pr","What are the two control wavelengths?","兩個控制波長是多少？",
+   ["535 nm green","670 nm red"],
+   ["535 nm 綠光","670 nm 紅光"]),
+ d("pr","Name the three circuit modules.","說出三個迴路模組。",
+   ["PCB, phycocyanobilin synthesis","LSM, ccaS m10 light sensor","TOM, ccaR transcriptional output"],
+   ["PCB，藻藍膽素合成","LSM，ccaS m10 光感測器","TOM，ccaR 轉錄輸出"]),
+ d("pr","Which vector, and to which standard?","用哪個載體？符合什麼標準？",
+   ["pNW33N-L2 with sfGFP","modular shuttle vector","validated to MoClo 2.0"],
+   ["pNW33N-L2 帶 sfGFP","模組化穿梭載體","依 MoClo 2.0 標準驗證"]),
+ d("pr","Where does the optogenetic system come from?","光遺傳系統的來源是什麼？",
+   ["CcaS-CcaR two-component system","Castillo-Hair et al. 2019","decouples biomass growth from protein production"],
+   ["CcaS-CcaR 雙組分系統","Castillo-Hair 等人 2019","把生物量生長與蛋白生產解耦"]),
+ d("pr","Which protectants are live, and which was dropped?","哪些保護劑還在？哪個拿掉了？",
+   ["LEA 14","ACC deaminase","NaD1 dropped, and the antifungal wording must go with it"],
+   ["LEA 14","ACC 去氨酶","NaD1 已拿掉，抗真菌措辭也要一起清掉"]),
+ d("pr","What is LEA 14 and how big is it?","LEA 14 是什麼？多大？",
+   ["Late Embryogenesis Abundant protein","about 10 to 30 kDa","hydrophilic, resists aggregation","shields membranes and proteins under dehydration"],
+   ["晚期胚胎豐富蛋白","約 10 至 30 kDa","親水、抗聚集","在脫水下保護膜與蛋白質"]),
+ d("pr","What is the membrane, and what is the pore size?","膜是什麼？孔徑多少？",
+   ["CFMDI hollow fibre","0.22 µm","protectant passes, B. subtilis does not"],
+   ["CFMDI 中空纖維膜","0.22 µm","保護劑通過，枯草桿菌不通過"]),
+ d("pr","What heat stress do we apply, and when?","我們施加什麼熱逆境？什麼時候？",
+   ["33 to 35 °C","about 14 days after transfer","moderate enough not to kill the plant"],
+   ["33 至 35°C","移植後約 14 天","強度適中，不致死"]),
+ d("pr","What salt window shows a rescue?","哪個鹽濃度區間看得到挽救效果？",
+   ["100 to 150 mM NaCl","scored against untreated controls"],
+   ["100 至 150 mM NaCl","與未處理對照相比"]),
+ d("pr","How do we read stress on a plant?","我們怎麼判讀植物的逆境？",
+   ["germination rate, root length","fresh and dry weight","ROS staining with NBT and DAB"],
+   ["發芽率、根長","鮮重與乾重","以 NBT 與 DAB 做 ROS 染色"]),
+ d("pr","Name the stress marker genes.","說出逆境標記基因。",
+   ["RD29A and RD29B","COR15A and COR15B","SOD and CAT"],
+   ["RD29A、RD29B","COR15A、COR15B","SOD、CAT"]),
+ d("pr","What are the three containment layers?","三道圍阻防線是什麼？",
+   ["genetic kill switch","CFMDI membrane","physical housing","no single failure means release"],
+   ["基因自殺開關","CFMDI 膜","實體外殼","任一層失效都不等於釋出"]),
+ d("pr","Which two statutes are in play in Taiwan?","在台灣涉及哪兩部法？",
+   ["Fertilizer Management Act, Agriculture and Food Agency","Pesticide Management Act, APHIA","abiotic claim keeps us in the first"],
+   ["肥料管理法，農糧署","農藥管理法，動植物防疫檢疫署","非生物逆境宣稱讓我們留在前者"]),
+ d("pr","How long does each regulatory path take?","兩條法規路徑各要多久？",
+   ["fertiliser registration about 30 days","20-day spec report plus 7-day review","microbial biopesticide takes years"],
+   ["肥料登記約 30 天","20 天規格報告加 7 天審查","微生物農藥要好幾年"]),
+ d("pr","What is the market sequence, and why?","市場順序是什麼？為什麼？",
+   ["Philippines first, NCBP contained-use guidance","Vietnam second, Decree 43/2026/ND-CP","Taiwan for closed validation","EU long horizon, precautionary principle"],
+   ["首站菲律賓，NCBP 封閉使用指引","次站越南，43/2026/ND-CP 號法令","台灣做封閉驗證","歐盟因預防原則列為長期"]),
+ d("pr","Which three special awards did we nominate?","我們提名了哪三個特殊獎項？",
+   ["Measurement","Hardware","Integrated Human Practices","Model was dropped, so modelling scores inside project question 4"],
+   ["量測","硬體","整合式人本實踐","模型獎已放棄，模型工作改在專案第 4 題計分"]),
+ d("pr","What is our education reach?","我們的教育推廣觸及多少？",
+   ["144 students","elementary, middle and high school","six-part arc from Kahoot to planting","debate format for middle school"],
+   ["144 名學生","國小、國中、高中","六段式流程，從 Kahoot 到種植","國中場採辯論形式"]),
+ d("pr","Which two instruments did we build ourselves?","哪兩台儀器是我們自己做的？",
+   ["the photometer","the LPA light plate apparatus","both across several DBTL cycles"],
+   ["光度計","LPA 光板裝置","兩者都跑過數輪 DBTL"]),
+ d("pr","What did 張嘉修 say the reactor was missing?","張嘉修說反應器少了什麼？",
+   ["no mechanism to push protectant out","add a valve after the hollow fibre","also: foaming, resting cells, smaller fibre"],
+   ["沒有把保護劑推出去的機制","在中空纖維膜之後加閥門","另外：起泡、靜置細胞、更小的纖維"]),
+
+ d("ln","Why is the input light rather than a stress-responsive promoter?","為什麼輸入是光，而不是逆境反應型啟動子？",
+   ["Cello found no promoter for our stress","Brophy confirmed it","light decouples sensing from actuation","the payload stays swappable"],
+   ["Cello 找不到對應我們逆境的啟動子","Brophy 也證實","光把感測與致動解耦","酬載因此可以替換"]),
+ d("ln","Which single number links M2 and M4?","哪一個數字連起 M2 與 M4？",
+   ["molecular weight against membrane cut-off","LEA 14 passes","B. subtilis does not","measure it, do not predict it"],
+   ["分子量對膜截留門檻","LEA 14 通過","枯草桿菌不通過","要實測，不要用預測值"]),
+ d("ln","How does containment evidence reach the business plan?","圍阻證據如何一路影響到商業計畫？",
+   ["no colonies outside the membrane","= contained use, not environmental release","= fertiliser pathway","= 30 days instead of years"],
+   ["膜外沒有菌落","＝封閉使用，不是環境釋出","＝走肥料路徑","＝ 30 天而不是好幾年"]),
+ d("ln","How does the GIS work reach the cartridge?","地理分析怎麼一路影響到卡匣？",
+   ["climate volatility surface","trigger frequency per region per season","duty cycle","cartridge interval and recurring revenue"],
+   ["氣候波動曲面","各區域每季的觸發頻率","工作週期","卡匣更換週期與經常性收入"]),
+ d("ln","What does the spec floor set?","規格下限決定了什麼？",
+   ["minimum effective enzyme activity","required titre per run","fermentation volume and media","bill of materials and unit cost"],
+   ["最低有效酵素活性","每次運轉所需效價","發酵體積與培養基","物料清單與單位成本"]),
+ d("ln","Which conversation set the trigger threshold?","哪一場對話決定了觸發閾值？",
+   ["陳惠雯, 7/21","do not over-protect the plant","threshold-triggered, not continuous","intervene at acute crises only"],
+   ["陳惠雯，7/21","不要過度保護植物","閾值觸發，不是連續運轉","只在急性危機時介入"]),
+ d("ln","Who moved release ahead of the stress, and how?","誰把釋放提到逆境之前？用什麼方法？",
+   ["黃介辰, 7/28","priming works before the event","sensors plus weather forecasting","threshold tuned per crop behind one switch"],
+   ["黃介辰，7/28","預先誘導要在事件前","感測器加天氣預報","各作物閾值在後台調，對外只留一個開關"]),
+ d("ln","Which two minds share codon optimisation?","哪兩顆腦袋共用密碼子最佳化？",
+   ["M2 Protectant Design","M3 Gene Circuit & Cloning","one sequence, one file, one owner"],
+   ["M2 保護劑設計","M3 基因迴路與選殖","一條序列、一個檔案、一個負責人"]),
+ d("ln","Where must M3 and M4 agree exactly?","M3 與 M4 必須在哪裡完全一致？",
+   ["light units","nm, µmol·m⁻²·s⁻¹, duration","LPA calibrates, the circuit responds","otherwise the model has no input"],
+   ["光學單位","nm、µmol·m⁻²·s⁻¹、時間","LPA 校正，迴路反應","否則模型沒有輸入"]),
+ d("ln","Why did the plant assay move off hydroponics?","植物試驗為什麼不用水耕？",
+   ["鄭梅君, 3/27","hydroponics unstable for Arabidopsis","agar first, then careful transfer","transfer itself is a stressor"],
+   ["鄭梅君，3/27","水耕對阿拉伯芥不穩定","先洋菜，再小心移植","移植本身就是一種逆境"]),
+ d("ln","What did Sattely change?","Sattely 改變了什麼？",
+   ["peptides over large proteins","one stress done very well","test the purified molecule directly on the plant"],
+   ["選胜肽而非大蛋白","一種逆境做到很好","把純化分子直接施用在植物上測試"]),
+ d("ln","What did Verslue change?","Verslue 改變了什麼？",
+   ["no exogenous proline","risk of suppressing the plant's own P5CS1","supply precursors or signals instead","apply before stress, not after"],
+   ["不要外源脯胺酸","有抑制植物自身 P5CS1 的風險","改為提供前驅物或訊號","在逆境前施用，不是之後"]),
+ d("ln","Which five data lines carry the business plan?","商業計畫由哪五條數據線撐著？",
+   ["1 LPA curve and plant rescue, M1","2 spec floor, M1 and M2","3 unit cost, M4","4 impact number, M5 and M1","5 pathway and market, M5"],
+   ["1 LPA 曲線與植物挽救，M1","2 規格下限，M1 與 M2","3 單位成本，M4","4 影響數字，M5 與 M1","5 法規路徑與市場，M5"]),
+ d("ln","What does the cassette design buy us commercially?","卡匣設計在商業上換到什麼？",
+   ["one chassis, swappable cassettes","a second protectant needs no second company","Bundle B: hardware plus API","customer cultures their own local strain"],
+   ["一個機體、可抽換卡匣","第二種保護劑不需要第二家公司","方案 B：硬體加 API","客戶培養自己在地的菌株"]),
+ d("ln","Which single missing result would most strengthen the plan?","補上哪一個結果，計畫會最明顯變強？",
+   ["ACC deaminase on a plant","turns the yield claim from projection into measurement","the four control arms are already defined"],
+   ["ACC 去氨酶做到植物上","把產量宣稱從推估變成量測","四組對照已經定義好了"])
+];
+
 /* ── render ─────────────────────────────────────── */
 var byN={}; MINDS.forEach(function(m){byN[m.n]=m;});
 function el(tag,cls,html){var e=document.createElement(tag); if(cls)e.className=cls; if(html!==undefined)e.innerHTML=html; return e;}
@@ -1712,7 +1896,8 @@ function renderStatic(){
   setText("tPraH",UI.praH); setText("tPraP",UI.praP);
   setText("tFoot1",UI.foot1); setText("tFoot2",UI.foot2);
   document.getElementById("fsBtn").textContent = document.fullscreenElement?T(UI.fsOff):T(UI.fsOn);
-  document.getElementById("drillBtn").textContent = T(UI.drill);
+  document.getElementById("drillBtn").innerHTML =
+    '<span class="dots">'+MINDS.map(function(m){return '<i class="dot" style="background:var('+m.v+')"></i>';}).join("")+'</span>'+T(UI.drill);
   document.getElementById("xlsxBtn").textContent = T(UI.xlBtn);
 
   setText("tHeroKick",UI.heroKick); setText("tHeroCap",UI.heroCap);
@@ -2115,42 +2300,50 @@ function renderContra(){
   });
 }
 
-var drillPool=null, drillSeen=0;
-function buildDrill(){
-  var pool=[];
-  MINDS.forEach(function(m){
-    m.cold.forEach(function(q){ pool.push({mind:m,kind:"cold",q:q}); });
-    m.kill.forEach(function(k){ pool.push({mind:m,kind:"kill",q:k.q,a:k.a}); });
-  });
-  QSETS.forEach(function(set){
-    function add(q){ pool.push({kind:"judge",q:q.t,lead:(q.lead||[]).join(" ")}); }
-    (set.qs||[]).forEach(add);
-    (set.groups||[]).forEach(function(g){ g.qs.forEach(add); });
-  });
-  return pool;
+var drillPool=null, drillSeen=0, drillCats={hb:1,pr:1,ln:1};
+var DCAT={hb:{n:t("Handbook","評審手冊"),v:"--m3"},pr:{n:t("Project","專案細節"),v:"--m1"},ln:{n:t("Connection","跨組連結"),v:"--m4"}};
+function drillDeck(){
+  return DRILL.filter(function(x){return drillCats[x.c];}).slice().sort(function(){return Math.random()-0.5;});
 }
 function drawDrill(){
-  if(!drillPool||!drillPool.length) drillPool=buildDrill().sort(function(){return Math.random()-0.5;});
-  var item=drillPool.pop(); drillSeen++;
+  if(!drillPool||!drillPool.length) drillPool=drillDeck();
   var card=document.getElementById("drillCard");
-  var mc = item.mind ? "var("+item.mind.v+")" : "var(--mark-line)";
-  card.style.setProperty("--mc",mc);
-  var who = item.mind ? item.mind.n+" · "+T(item.mind.nm) : T(UI.drillLead)+" "+(item.lead||"");
-  var kind = item.kind==="cold"?T(UI.drillCold):item.kind==="kill"?T(UI.drillKill):T(UI.drillJudge);
-  card.innerHTML='<div class="meta"><span class="who">'+who+'</span><span class="kind">'+kind+'</span>'+
-    '<span class="tally">'+drillSeen+'</span></div>'+
+  if(!drillPool.length){ card.innerHTML='<div class="qq">'+T(UI.drillEmpty)+'</div>'+catRow()+
+    '<div class="acts"><button class="ctl" id="drillDone">'+T(UI.drillClose)+'</button></div>';
+    document.getElementById("drillDone").addEventListener("click",closeDrill); bindCats(); return; }
+  var item=drillPool.pop(); drillSeen++;
+  var cat=DCAT[item.c];
+  card.style.setProperty("--mc","var("+cat.v+")");
+  card.innerHTML=catRow()+
+    '<div class="meta"><span class="who">'+T(cat.n)+'</span><span class="tally">'+drillSeen+'</span></div>'+
     '<div class="qq">'+T(item.q)+'</div>'+
-    (item.a?'<div class="ans" id="drillAns" hidden>'+T(item.a)+'</div>':'')+
-    '<div class="acts">'+(item.a?'<button class="ctl" id="drillReveal">'+T(UI.drillShow)+'</button>':'')+
+    '<ul class="ans" id="drillAns" hidden>'+item.a.map(function(a){return "<li>"+T(a)+"</li>";}).join("")+'</ul>'+
+    '<div class="acts"><button class="ctl" id="drillReveal">'+T(UI.drillShow)+'</button>'+
       '<button class="ctl primary" id="drillMore">'+T(UI.drillNext)+'</button>'+
       '<button class="ctl" id="drillDone">'+T(UI.drillClose)+'</button></div>';
-  var rv=document.getElementById("drillReveal");
-  if(rv) rv.addEventListener("click",function(){document.getElementById("drillAns").hidden=false;rv.remove();});
+  document.getElementById("drillReveal").addEventListener("click",function(){
+    document.getElementById("drillAns").hidden=false; this.remove(); });
   document.getElementById("drillMore").addEventListener("click",drawDrill);
   document.getElementById("drillDone").addEventListener("click",closeDrill);
+  bindCats();
+}
+function catRow(){
+  return '<div class="dcats">'+Object.keys(DCAT).map(function(k){
+    var n=DRILL.filter(function(x){return x.c===k;}).length;
+    return '<button class="dcat'+(drillCats[k]?" on":"")+'" data-cat="'+k+'" style="--cc:var('+DCAT[k].v+')">'+T(DCAT[k].n)+' <b>'+n+'</b></button>';
+  }).join("")+'</div>';
+}
+function bindCats(){
+  document.querySelectorAll(".dcat").forEach(function(b){
+    b.addEventListener("click",function(){
+      var k=b.dataset.cat, on=Object.keys(drillCats).filter(function(x){return drillCats[x];});
+      if(drillCats[k]&&on.length===1) return;
+      drillCats[k]=!drillCats[k]; drillPool=drillDeck(); drawDrill();
+    });
+  });
 }
 var drillScrim=document.getElementById("drillScrim");
-function openDrill(){ drillScrim.hidden=false; document.body.style.overflow="hidden"; drawDrill(); }
+function openDrill(){ drillScrim.hidden=false; document.body.style.overflow="hidden"; drillPool=null; drillSeen=0; drawDrill(); }
 function closeDrill(){ drillScrim.hidden=true; document.body.style.overflow=""; }
 drillScrim.addEventListener("click",function(e){ if(e.target===drillScrim) closeDrill(); });
 document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&!drillScrim.hidden) closeDrill(); });

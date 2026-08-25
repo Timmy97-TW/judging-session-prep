@@ -59,6 +59,8 @@ calculation and a conversation with an outside expert in the same head.
   reading. Pre-built copies sit in this repo as
   [`releaf-six-minds-en.xlsx`](releaf-six-minds-en.xlsx) and
   [`releaf-six-minds-zh.xlsx`](releaf-six-minds-zh.xlsx).
+- **Drill** opens a 55-question quiz in three decks: the judge handbook, project detail, and how the
+  pieces connect. Answers come back as keywords rather than prose. Toggle a deck off to drill one area.
 - **Full screen** puts the whole board on one screen for team review.
 - **EN / 中文** toggles the entire page, English by default.
 
