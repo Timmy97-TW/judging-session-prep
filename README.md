@@ -20,13 +20,24 @@ cross-cutting question.
 | M2 | Protectant Design | LEA 14 and ACC deaminase, peptide design, MD, molecular weight cut-off |
 | M3 | Gene Circuit & Cloning | MoClo, ccaS/ccaR, promoters, electroporation, Registry parts |
 | M4 | Bioreactor & Hardware | Reactor DBTL, hollow fibre, photometer, LPA, containment |
-| M5 | Human Practices & Regulation | Geospatial, farmers, education, regulation, ethics |
-| M6 | Business & Entrepreneurship | Unit economics, market sizing, cost of goods, IP and freedom to operate, funding |
+| M5 | Human Practices & Regulation | Farmers, regulation, safety envelope, education, geospatial |
+| M6 | Business & Entrepreneurship | Unit economics, spec floor, cost of goods, impact model, Taiwan market |
 
-M6 is the mind that puts a unit on what the others produce: the map becomes an addressable market, the
-model becomes a value per device per season, the reactor becomes a cost of goods, and the cloning design
-becomes a platform argument and a freedom-to-operate question. Entrepreneurship carries no rubric of its
-own this year, so that work is scored inside project questions 1 and 3 and has to arrive as numbers.
+M5 asks whether this is responsible, legal and wanted. M6 asks whether it works, what it costs and how
+much it changes. Regulation splits along that seam: M5 owns the research and the expert relationships,
+M6 owns what the pathway costs in time and capital.
+
+The business plan stands on five lines of the team's own data rather than published figures, and each
+line comes from a different mind:
+
+1. **It works** (M1) — the LPA dose–response curve and the plant rescue against four controls
+2. **The spec floor** (M1, M2) — the lowest enzyme activity that still moves a plant readout
+3. **The unit cost** (M4) — membrane, media, consumables, power draw, replacement cycle
+4. **The impact number** (M5, M1) — the geospatial surface folded into the rescue data and the model
+5. **The pathway and the market** (M5) — which statute applies, what it costs, what farmers spend today
+
+Entrepreneurship carries no rubric of its own this year, so that work is scored inside project questions
+1 and 3 and has to arrive as numbers.
 
 Three chains run sideways through the board. **Map into numbers** takes the geospatial surface through the
 stress model to a device count and a market size. **Device and cartridge** takes the reactor's build cost
